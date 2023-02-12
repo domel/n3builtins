@@ -1516,4 +1516,4 @@ This is an example for a built-in function.
 { :Let :string ?x . } => { :result :is ?x . } .
             ```
 </div>
-
+ 
