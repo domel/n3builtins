@@ -1517,5 +1517,3 @@ This is an example for a built-in function.
             ```
 </div>            
 
-
-

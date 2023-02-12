@@ -8,7 +8,7 @@ on:
     paths: ["spec/**"]
 jobs:
   main:
-    name: Echidna Auto-publish CG-DRAFT test
+    name: Echidna Auto-publish CG-DRAFT test 2
     runs-on: ubuntu-20.04
     steps:
       - uses: w3c/spec-prod@v2
@@ -22,5 +22,3 @@ jobs:
           # W3C_WG_DECISION_URL: https://www.w3.org/2022/11/09-rch-minutes#r03
           W3C_BUILD_OVERRIDE: |
             specStatus: CG-DRAFT
-      - name: Add & Commit
-        uses: EndBug/add-and-commit@v9.1.1
