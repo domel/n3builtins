@@ -19,6 +19,3 @@ jobs:
           VALIDATE_LINKS: false
           VALIDATE_MARKUP: true
           ACTIONS_STEP_DEBUG: true
-          W3C_BUILD_OVERRIDE: |
-            specStatus: CG-DRAFT
-            shortName: n3b
