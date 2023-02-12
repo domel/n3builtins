@@ -20,3 +20,4 @@ jobs:
           VALIDATE_MARKUP: true
           ACTIONS_STEP_DEBUG: true
           GH_PAGES_BRANCH: gh-pages
+          DESTINATION: specification/index.html
