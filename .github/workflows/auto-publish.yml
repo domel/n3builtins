@@ -22,5 +22,5 @@ jobs:
           GH_PAGES_BRANCH: gh-pages
           DESTINATION: specification/index.html
           GH_PAGES_BUILD_OVERRIDE: |
-            status: w3c/WD
-            TR: https://www.w3.org/TR/my-cool-spec/
+            status: w3c/CG-DRAFT
+            TR: https://domel.github.io/n3buildins/specification/
