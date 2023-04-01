@@ -3,11 +3,13 @@ Title: N3 Builtin Functions
 Shortname: functions
 Level: 1
 Status: LD
-URL: https://w3c.github.io/N3/spec/
-TR: https://w3c.github.io/N3/spec/
-Previous Version: https://w3c.github.io/N3/spec/builtins/0.1/
+URL: https://domel.github.io/n3buildins/specification/
+TR: https://domel.github.io/n3buildins/specification/
+Previous Version: https://domel.github.io/n3buildins/specification/0.1/
 Editor: Tim Duval, [UnifyLogic](http://unifylogic.ai), tim.duval@unifylogic.ai
-Editor: William Van Woensel [somewhere in Ottawa], williamvanwoensel@gmail.com 
+Editor: William Van Woensel, [University of Ottawa](https://www.uottawa.ca/en), williamvanwoensel@gmail.com 
+Editor: Patrick Hochstenbach, [Ghent University](https://www.ugent.be/en), patrick.hochstenbach@ugent.be 
+Editor: Dominik Tomaszuk, [University of Bialystok](https://uwb.edu.pl/en/), d.tomaszuk@uwb.edu.pl
 Abstract: This document lists the recommended core set of builtin functions an N3 Reasoner needs to support. 
 Markup Shorthands: markdown yes 
 Boilerplate: conformance no, index no
@@ -114,434 +116,346 @@ Builtins {#Builtins}
 
 ## crypto ## {#crypto}
 ### crypto:sha() ### {#sha}
-The object is a SHA-1 hash of the subject.
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only if `$o` is the SHA-1 hash of `$s`.
 
 ## list ## {#list}
 ### list:append() ### {#append}
-Concatenates separate lists into a single list. 
-`true` if and only if the subject is a list of lists and the concatenation of all those lists is `$o`.
-`$o` can be calculated as a function of the subject. 
-Example: `( (1 2) (3 4) ) list:append (1 2 3 4).`
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only if `$o` is the concatenation of all lists `$s.i`.
 
 ### list:first() ### {#first}
-Extracts the first member of a list. 
-`true` if and only the subject is a list and `$o` is the first member of that list.
-`$o` can be calculated as a function of the subject.
+`true` if and only if `$` is a list and `$o` is the first member of that list.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/first.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+What is the first element of ( ("a") { :a :b :c } 42 )?
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ ( ("a") { :a :b :c } 42 ) list:first ?what . } => { :result :is ?what . } .
             ```
 </div>            
 
 ### list:in() ### {#in}
-Determines if an subject is a member of the object list or binds every member of the object list to the subject.
-`true` if and only `$o` is a list and `$s` is in that list.
-`$s` can be calculated from `$o`.
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only if `$o` is a list and `$s` is a member of that list.
 
 ### list:iterate() ### {#iterate}
-Iterates over index/value pairs of the subject list.
-Gets the matching pair of list index and list value for every member of the subject.
-If the object is a variable, it will create a solution for each member of the subject list.
-If any member of the object list is a variable, it will create a solution for all matching
-members of the subject list.
-If the object is ground and the entry at the specified index matches the specified value, 
-it evaluates to `true`; otherwise, `false`.
-Example: `( 1 2 3 ) list:iterate ($i $v).`
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only if `$s` is a list and `$o` is a list with two elements: 
+`$o.1` is a valid index in list `$s` (index starts at 0), and `$o.2` is found at that index in list `$s`.
 
 ### list:last() ### {#last}
-Extracts the first member of a list. 
-`true` if and only the subject is a list and `$o` is the last member of that list.
-`$o` can be calculated as a function of the subject.
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only if `$` is a list and `$o` is the last member of that list.
 
 ### list:length() ### {#length}
-Calculates the length of a list.
-`true` if and only the subject is a list and `$o` is integer length of that list.
-`$o` can be calculated as a function of the subject.
+`true` if and only if `$s` is a list and `$o` is the integer length of that list.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/length.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the length of the list (1 2 3 4).
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ (1 2 3 4) list:length ?length . } => { :result :is ?length . } .
             ```
 </div>            
 
 ### list:member() ### {#member}
-Determines if an object is a member of the subject list or binds every member of the subject list to the object.
-`true` if and only `$s` is a list and `o` is in that list.
-`$o` can be calculated from `$s`.
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only `$s` is a list and `o` is a member of that list.
 
 ### list:memberAt() ### {#memberAt}
-Gets the member of a list at a given position (where the position of the first element is 1).
-`true` if and only if `$s_0` has an element at position `$s_1`, and if that element and `$o` can unify.
-Note that if `$s_1` is a variable, this builtin may bind it to more than one value (e.g. `((“A” “B” “A”) ?i) list:memberAt "A"`).
-In case of a negative integer, the index will count backwards from the length of the list.
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only if `$s.0` is a list, `$s.1` is a valid index in list `$s.0`, and `$o` is found at that index in the list.
 
 ### list:remove() ### {#remove}
-Removes the second component of the subject list from the first component of that list.
-`true` if and only if the subject is a list of two lists `$s_1` and `$s_2`, `$s_2` is a subset of `$s_1` and `$o` is a list composed of the members of the `$s_1` with all members of `$s_2` removed, matching left to right.
-`$o` can be calculated as a function of the subject.
-Example: `( (1 2 3 4) (2 3) ) list:remove (1 4).`
+`true` if and only if `$s.0` is a list, and `$o` is a list composed of the members of `$s.0` with member `$s.1` removed, if it was present.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/remove.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Remove "penguin" from the list ("dog" "penguin" "cat" "penguin").
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param ("dog" "penguin" "cat" "penguin") .
+{ 
+    :let :param ?param . 
+    ( ?param "penguin" ) list:remove ?list .
+} 
+=> 
+{ 
+    :result :is ?list . 
+} .
             ```
 </div>            
 
 ## log ## {#log}
 ### log:conclusion() ### {#conclusion}
-All possible conclusions which can be drawn from a formula.
-`true` if and only if `$o` is the set of conclusions which can be drawn from `$s`, by successively applying any rules it contains to the data it contains.
-Note: this is equivalent to cwm's "--think" command line function. It does use built-ins, so it may for example indirectly invoke other documents, validate signatures, etc.
+`true` if and only if `$o` is the set of conclusions which can be drawn from `$s` (deductive closure), 
+by applying any rules it contains to the data it contains.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/conclusion.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Draw all conclusions from the formula ":Felix a :Cat . { ?X a :Cat } => { ?X :says "Meow" . }".
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+:let :param { 
+    :Felix a :Cat . 
+    { ?X a :Cat . } => { ?X :says "Meow" . } .
+} .
+
+{ 
+    :let :param ?param .
+    ?param log:conclusion ?conclusion .
+} 
+=> 
+{ 
+    :result :is ?conclusion . 
+} .
             ```
 </div>            
 
 ### log:conjunction() ### {#conjunction}
-A function to merge formulae: logical AND.
-`true` if and only if `o`, which can be generated, is a formula containing a copy of each of the formulae `$s_1 .. $s_n`.
+`true` if and only if `$o` is a quoted graph that includes the contents of each of the quoted graphs `$s.i`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/conjunction.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Merge the formulas "{ :Felix a :Cat . }" , "{ :Pluto a :Dog . }", "{ :Pingu a :Penguin . }" .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    ( { :Felix a :Cat . }
+      { :Pluto a :Dog . }  
+      { :Pingu a :Penguin . }
+    ) log:conjunction ?merged .
+} 
+=> 
+{ 
+    :result :is ?merged . 
+} .
             ```
 </div>            
 
 ### log:content() ### {#content}
-This connects a document and a string that represents it. (Cwm knows how to go get a document in order to evaluate this.)
-Note: the content-type of the information is not given and so must be known or guessed.
+`true` if and only if `$o` is a string that represents the online resource to which `$s` is dereferenced.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/content.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Fetch the content of https://www.w3.org/People/Berners-Lee/card.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    <https://www.w3.org/People/Berners-Lee/card> log:content ?content .
+} 
+=> 
+{ 
+    :result :is ?content . 
+} .
             ```
 </div>            
 
 ### log:equalTo() ### {#equalTo}
-Determines if two RDF resources are the same.
-`true` if and only if `$s` and `$o` are the same RDF node (symbol or literal).
+`true` if and only if `$s` and `$o` are the same N3 resource.
 Not to be confused with owl:sameAs.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
-
 ### log:forAllIn() ### {#forAllIn}
-Built-in for implementing a scoped universal quantification.
+`true` if and only if, for each solution for which the first clause `$s.0` is true, the second clause `$s.1` is true as well. 
+This is a scoped universal quantification.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/forAllIn.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+For each subtask of a composite task, check whether the subtask is completed. 
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+:c a :CompositeTask ;
+    :subTask :s1 , :s2 , :s3 .
+:s1 :state :Completed .
+:s2 :state :Completed . 
+:s3 :state :Completed .
+
+{
+    ?c a :CompositeTask .
+    ( { ?c :subTask ?s } { ?s :state :Completed } ) log:forAllIn _:t .
+}
+=>
+{
+    :result :is true .
+} . 
             ```
 </div>            
 
 ### log:includes() ### {#includes}
-The subject formula includes the object formula.
-`true` if and only if `s` includes `$o` if there exists some substitution which when applied to `$o` creates a formula B' such that for every statement in B' is also in `$s`, every variable universally (or existentially) quantified in B' is quantified in the same way in `$s`. 
-Variable substitution is applied recursively to nested compound terms such as formulae, lists and sets.
-Note: you can use this to peer inside nested formulae.
+`true` if and only if there exists some substitution which, when applied to `$o`, 
+creates a quoted graph `$o`' such that every statement in `$o`' is also in `$s`;
+whereby every variable, universally or existentially quantified in `$o`', is quantified in the same way in `$s`. 
+Variable substitution is applied recursively to nested compound terms such as quoted graphs ans lists.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/includes.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Check whether the formula { :Felix a :Cat } includes { ?X a :Cat }.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    { :Felix a :Cat } log:includes { ?X a :Cat } .
+} 
+=>
+{
+    :result :is ?X .
+} .
             ```
 </div>            
 
 ### log:notEqualTo() ### {#notEqualTo}
-Determines if two RDF resources are not the same.
-`true` if and only if `$s` and `$o` are not the same RDF node (symbol or literal).
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only if `$s log:equalTo $o` is false.
 
 ### log:notIncludes() ### {#notIncludes}
-The object formula is NOT a subset of subject.
-`true` if and only if `log:includes` is `false`. The converse of log:includes.
-Related: see `log:includes`.
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only if `$s log:includes $o` is `false`.
 
 ### log:outputString() ### {#outputString}
-The subject is a key and the object is a string,
-where the strings are to be output in the order of the keys.
-See cwm --strings in cwm --help.
+The concrete semantics of this builtin (e.g., which N3 resource types are supported) will depend on the N3 reasoner.
 
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/outputString.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Print the two string "This is the first line
+" , "This is the second line
+" to the output.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+_:2 log:outputString "This is the second line
+" .
+_:1 log:outputString "This is the first line
+" .
             ```
 </div>            
 
 ### log:parsedAsN3() ### {#parsedAsN3}
-The subject string, parsed as N3, gives this formula.
-`true` if and only if `$s`, parsed as N3, gives `$o`.
+`true` if and only if `$s`, when parsed as N3, gives `$o`.
 `$s` should be a syntactically valid string in N3 format.
-Related: see `log:n3String`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/parsedAsN3.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Parse the string ':Socrates a :Human .' as N3.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+:Let :param """
+@prefix : <urn:example:> .
+:Socrates a :Human .
+""" .
+
+{
+    :Let :param ?X .
+    ?X log:parsedAsN3 ?Y .
+}
+=>
+{
+    :result :is ?Y .
+} .
             ```
 </div>            
 
 ### log:rawType() ### {#rawType}
-Returns an identifier based on the type of the RDF Resource.
-`true` if the type of `$s` is the same as `$o`, or binds the type to `$o`.
-`$o` is unbound or one of `log:Formula`, `log:Literal`, `log:List`, `log:Set` or `log:Other`.
-Example: `log:semanticsOrError` returns either a formula or a string, and you can check which using `log:rawType`. 
+`true` if and only if the N3 resource type of `$s` is `$o`.
+N3 resource types include `log:Formula`, `log:Literal`, `log:List`, `log:Set` or `log:Other`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+### log:semantics() ### {#semantics}
+`true` if and only if `$o` is a quoted graph that results from parsing the string that results from dereferencing `$s`.
+
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Read the contents of the file <semantics.data> and parse it as Notation3.
+We assume <semantics.data> contains the text:
+
+  @prefix : <http://example.org/>.
+  :Socrates a :Human .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ <semantics.data> log:semantics ?semantics . } => { :result :is ?semantics } .
             ```
 </div>            
 
 ### log:semantics() ### {#semantics}
-The log:semantics of a document is the formula achieved by parsing representation of the document.
+`true` if and only if `$o` is a quoted graph that results from parsing the string that results from dereferencing `$s`.
+
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
+
+
+<div class=example>
+
+Read the contents of the file <semantics.data> and parse it as Notation3.
+We assume <semantics.data> contains the text:
+
+  @prefix : <http://example.org/>.
+  :Socrates a :Human .
+            
+```
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ <semantics.data> log:semantics ?semantics . } => { :result :is ?semantics } .
+            ```
+</div>            
+
+### log:semantics() ### {#semantics}
+The log:semantics of a document is the formula achieved by parsing the representation of the document.
 For a document in Notation3, `log:semantics` is the `log:parsedAsN3` of the `log:content` of the document.
 For a document in another RDF syntax, it is parsed according to the appropriate specification to yield an RDF formula (a subclass of N3 `log:Formula`).
 Evaluates to `false` if an unrecognized document format is retrieved.
@@ -549,971 +463,1339 @@ Aside: Philosophers will be distracted here into worrying about the meaning of m
 In as much as N3 is used as an interlingua for interoperability for different systems, this for an N3 based system is the meaning expressed by a document.
 Related: see `log:parsedAsN3` and `log:content`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Read the contents of the file <semantics.data> and parse it as Notation3.
+We assume <semantics.data> contains the text:
+
+  @prefix : <http://example.org/>.
+  :Socrates a :Human .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ <semantics.data> log:semantics ?semantics . } => { :result :is ?semantics } .
+            ```
+</div>            
+
+### log:semantics() ### {#semantics}
+The log:semantics of a document is the formula achieved by parsing the representation of the document.
+For a document in Notation3, `log:semantics` is the `log:parsedAsN3` of the `log:content` of the document.
+For a document in another RDF syntax, it is parsed according to the appropriate specification to yield an RDF formula (a subclass of N3 `log:Formula`).
+Evaluates to `false` if an unrecognized document format is retrieved.
+Aside: Philosophers will be distracted here into worrying about the meaning of meaning. At least we didn't call this function "meaning"! 
+In as much as N3 is used as an interlingua for interoperability for different systems, this for an N3 based system is the meaning expressed by a document.
+Related: see `log:parsedAsN3` and `log:content`.
+
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
+
+
+<div class=example>
+
+Read the contents of the file <semantics.data> and parse it as Notation3.
+We assume <semantics.data> contains the text:
+
+  @prefix : <http://example.org/>.
+  :Socrates a :Human .
+            
+```
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ <semantics.data> log:semantics ?semantics . } => { :result :is ?semantics } .
             ```
 </div>            
 
 ### log:semanticsOrError() ### {#semanticsOrError}
-This connects a document and either the formula it parses to, or an error message explaining what went wrong with trying.
-Related: see `log:semantics`.
+`true` if and only if (a) `$o` is a quoted graph that results from parsing the string that results from dereferencing `$s`; or (b) an error message explaining what went wrong.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semanticsOrError.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Read the contents a non existing <error.data> and parse it as Notation3 (which of course will fail).
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ <error.data> log:semantics ?semantics . } => { :result :is ?semantics } .
             ```
 </div>            
 
 ### log:skolem() ### {#skolem}
-Built-in to generate a Skolem IRI object which is a function of the arguments in the subject list
+`true` if and only if `$o` is a skolem IRI that is a function of the subject.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/skolem.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Generate a unique Skolem IRI from the list (:abc 77 "xyz") .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ (:abc 77 "xyz") log:skolem ?skolem . } => { :result :is ?skolem } .
             ```
 </div>            
 
 ## math ## {#math}
 ### math:absoluteValue() ### {#absoluteValue}
-The object is calulated as the absolute value of the subject.
+`true` if and only if `$o` is the absolute value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/absoluteValue.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the absolute value of the value -2.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param -2 .
+
+{
+    :Let :param ?param .
+    ?param math:absoluteValue ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:acos() ### {#acos}
-The object is calulated as the arc cosine value of the subject.
+`true` if and only if `$o` is the arc cosine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/acos.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the arc cosine of the value 1.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1 .
+
+{
+    :Let :param ?param .
+    ?param math:acos ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:asin() ### {#asin}
-The object is calulated as the arc sine value of the subject.
+`true` if and only if `$o` is the arc sine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/asin.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the arc sine of the value 1.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1 .
+
+{
+    :Let :param ?param .
+    ?param math:asin ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:atan() ### {#atan}
-The object is calulated as the arc tangent value of the subject.
+`true` if and only if `$o` is the arc tangent value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/atan.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the arc tangent of the value 1.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1 .
+
+{
+    :Let :param ?param .
+    ?param math:atan ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:cos() ### {#cos}
-The subject is an angle expressed in radians.
-The object is calulated as the cosine value of the subject.
+`true` if and only if `$o` is the cosine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/cos.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the cosine of the value 0.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 0 .
+
+{
+    :Let :param ?param .
+    ?param math:cos ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:cosh() ### {#cosh}
-The subject is an angle expressed in radians.
-The object is calulated as the #hyperbolic cosine value of the subject.
+`true` if and only if `$o` is the hyperbolic cosine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/cosh.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the hyperbolic cosine of the value 0.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 0 .
+
+{
+    :Let :param ?param .
+    ?param math:cosh ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:degrees() ### {#degrees}
-The subject is an angle expressed in radians.
-The object is calulated as the conversion in degrees of the value of the subject.
+`true` if and only if `$o` is the value in degrees corresponding to the radians value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/degrees.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the degrees of the radians value 1.57079632679.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1.57079632679 .
+
+{
+    :Let :param ?param .
+    ?param math:degrees ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:difference() ### {#difference}
-The subject is a pair of numbers. The object
-is calculated by subtracting the second number of the pair from the first.
+`true` if and only if `$o` is the result of subtracting `$s.2` from `$s.1`.
 
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/difference.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the value of 7 minus 2.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (7 2) .
+
+{
+    :Let :param ?param .
+    ?param math:difference ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:equalTo() ### {#equalTo}
-Checks equality of numbers.
-   
-`true` if and only if `$s` is equal to `$o`.
+`true` if and only if `$s` is the same number as `$o`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/equalTo.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Check if the numbers 42 and 42 are equal .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:equalTo ?Y .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### math:exponentiation() ### {#exponentiation}
-The subject is a pair of numbers. The object
-is calculated by raising the first number of the power of the second.
-
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only if `$o` is the result of raising `$s.1` to the power of `$s.2`
 
 ### math:greaterThan() ### {#greaterThan}
-`true` if and only if the subject is a number which is greater than the object.
+`true` if and only if `$s` is a number that is greater than `$o`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/greaterThan.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Check if 42 is greater than 41 .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 41) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:greaterThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### math:lessThan() ### {#lessThan}
-`true` if and only if the subject is a number which is LESS than a object.
+`true` if and only if `$s` is a number that is less than `$o`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/lessThan.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Check if 41 is less than 42 .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (41 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:lessThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### math:negation() ### {#negation}
-The subject or object is calculated to be the negation of the other.
+`true` if and only if `$o` is the negation of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/negation.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the negation of the value 42 .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 42 .
+
+{
+    :Let :param ?param .
+    ?param math:negation ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:notEqualTo() ### {#notEqualTo}
-`true` if and only if the subject is a number which is NOT EQUAL to a object.
+`true` if and only if `$s` is the not same number as `$o`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notEqualTo.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Check if the numbers 41 and 42 are not equal .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (41 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:notEqualTo ?Y .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### math:notGreaterThan() ### {#notGreaterThan}
-`true` if and only if the subject is a number which is NOT greater than the object.
+`true` if and only if `$s` is a number that is not greater than `$o`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notGreaterThan.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Check if 41 is not greater than 42 .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (41 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:notGreaterThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### math:notLessThan() ### {#notLessThan}
-`true` if and only if the subject is a number which is NOT LESS than a object.
+`true` if and only if `$s` is a number that is not less than `$o`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notLessThan.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Check if 42 is not less than 41 .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 41) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:notLessThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### math:product() ### {#product}
-The subject is a list of numbers.
-The object is calculated as the arithmentic product of those numbers.
-
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
-
-
-<div class=example>
-
-This is an example for a built-in function.
-            
-```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-            ```
-</div>            
+`true` if and only if `$o` is the arithmetic product of all numbers `$s.i`
 
 ### math:quotient() ### {#quotient}
-The subject is a pair of numbers. The object
-is calculated by dividing the first number of the pair by the second.
+`true` if and only if `$o` is the result of dividing `$s.1` by `$s.2`.
 
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/quotient.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the quotient of 42 and 2.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 2) .
+
+{
+    :Let :param ?param .
+    ?param math:quotient ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:remainder() ### {#remainder}
-The subject is a pair of integers. The object
-is calculated by dividing the first number of the pair by the second and taking the remainder.
+`true` if and only if `$o` is the remainder of dividing `$s.1` by `$s.2`.
 
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/remainder.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the remainder of 10 divided by 3.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (10 3) .
+
+{
+    :Let :param ?param .
+    ?param math:remainder ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:rounded() ### {#rounded}
-The object is calulated as the number with no fractional part that is closest to the subject.
-If there are two such numbers, then the one that is closest to positive infinity is returned.
+`true` if and only if `$o` is the integer that is closest to `$s`.
+If there are two such numbers, then the one closest to positive infinity is returned.
 
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/rounded.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the rounded version of 3.3.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param "3.3"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:rounded ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:sin() ### {#sin}
-The subject is an angle expressed in radians.
-The object is calulated as the sine value of the subject.
+`true` if and only if `$o` is the sine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sin.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the sin of pi/2 (1.57079632679) .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param "1.57079632679"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:sin ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:sinh() ### {#sinh}
-The subject is an angle expressed in radians.
-The object is calulated as the hyperbolic sine value of the subject.
+`true` if and only if `$o` is the hyperbolic sine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sinh.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the sinh of log(1 + sqrt(2)) (0.88137358701954302).
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param "0.88137358701954302"^^xsd:double.
+
+{
+    :Let :param ?param .
+    ?param math:sinh ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:sum() ### {#sum}
-Performs addition of numbers. 
-`true` if and only if the arithmetic sum of `$s_1, .. $s_n` equals `$o`.
+`true` if and only if `$o` is the arithmetic sum of all numbers `$s.i`
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sum.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the sum of 1,2,3,4,5,6,7,8,9,10.
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (1 2 3 4 5 6 7 8 9 10) .
+
+{
+    :Let :param ?param .
+    ?param math:sum ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:tan() ### {#tan}
-The subject is an angle expressed in radians.
-The object is calulated as the tangent value of the subject.
+`true` if and only if `$o` is the tangent value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/tan.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the tangent of the value 0.7853981633974483 .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param "0.7853981633974483"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:tan ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### math:tanh() ### {#tanh}
-The subject is an angle expressed in radians.
-The object is calulated as the hyperbolic tangent value of the subject.
+`true` if and only if `$o` is the hyperbolic tangent value of `$s`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/tanh.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the hyperbolic tanget of 0.549306 .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param "0.549306"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:tanh ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ## string ## {#string}
 ### string:concatenation() ### {#concatenation}
-Concatenates the given strings. 
-    
-`true` if and only if the string concatenation of `$s_1, .. $s_n` equals `$o`.
+`true` if and only if the string concatenation of `$s.i` equals `$o`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/concatenation.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Concatenates the string "hello", " " and "world!".
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param ( "hello" " " "world!" ) .
+
+{
+    :Let :param ?param .
+    ?param string:concatenation ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### string:contains() ### {#contains}
-True iff the subject string contains the object string.
+`true` if and only if `$s` contains `$o`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/contains.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "hello world!" contains the string "llo worl".
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "llo worl".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:contains ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:containsIgnoringCase() ### {#containsIgnoringCase}
-True iff the subject string contains the object string,
-with the comparison done ignoring the difference between upper case and
-lower case characters.
+`true` if and only if `$s` contains `$o` when ignoring case differences.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/containsIgnoringCase.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "hello world!" contains the string "lLO woRl".
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "lLO woRl".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:containsIgnoringCase ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:endsWith() ### {#endsWith}
-True iff the subject string ends with the object string.
+`true` if and only if `$s` ends with `$o`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/endsWith.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "hello world!" ends with "orld!".
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "orld!".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:endsWith ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:equalIgnoringCase() ### {#equalIgnoringCase}
-True iff the subject string is the same as object string
-ignoring differences between upper and lower case.
+`true` if and only if `$s` is the same string as `$o` when ignoring case differences.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/equalIgnoringCase.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "hello world!" is equal to "hELLo wORld!" ignoring the case .
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "hELLo wORld!" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:equalIgnoringCase ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:format() ### {#format}
-The subject is a list, whose first member is a format string,
-and whose remaining members are arguments to the format string.
-The formating string is in the style of python's % operator,
-very similar to C's sprintf().
-The object is calculated from the subject.
+`true` if and only if `$o` is the result of replacing the tags found in `$s.1` with the strings `$s.i>1`
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/format.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Calculate the result of applying the format "%s://%s/%s" to the strings "https", "w3c.github.io" and "N3/spec" .
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param ( "%s://%s/%s" "https" "w3c.github.io" "N3/spec/" ) .
+
+{
+    :Let :param ?param .
+    ?param string:format ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### string:greaterThan() ### {#greaterThan}
-True iff the string is greater than the object
-when ordered according to Unicode(tm) code order.
+`true` if and only if `$s` is greater than `$o` as per the Unicode code order.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/greaterThan.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "Pengiun" is greater than the string "Cat" .
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "Penguin" .
+:Let :param2 "Cat".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:greaterThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:lessThan() ### {#lessThan}
-True iff the string is less than the object
-when ordered according to Unicode(tm) code order.
+`true` if and only if `$s` is less than `$o` as per the Unicode code order.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/lessThan.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "Cat" is less than the string "Penguin" .
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "Cat" .
+:Let :param2 "Penguin".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:lessThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:matches() ### {#matches}
-The subject is a string;
-the object is is a regular expression in the perl, python style.
-It is true iff the string matches the regexp.
+`true` if and only if string `$s` matches the regular expression `$o`
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/matches.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "hello world!" matches the regular expression ".*(l)+o wo.*".
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 ".*(l)+o wo.*".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:matches ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:notEqualIgnoringCase() ### {#notEqualIgnoringCase}
-True iff the subject string is the NOT same as object string
-ignoring differences between upper and lower case.
+`true` if and only if `$s` is not the same string as `$o` when ignoring case differences.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notEqualIgnoringCase.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "hello world!" is not equal to "hELLo dunia!" ignorning the case .
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "hELLo dunia!" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notEqualIgnoringCase ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:notGreaterThan() ### {#notGreaterThan}
-True iff the string is NOT greater than the object
-when ordered according to Unicode(tm) code order.
+`true` if and only if `$s` is not greater than `$o` as per the Unicode code order.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notGreaterThan.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "Cat" is not greater than the string "Penguin" .
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "Cat" .
+:Let :param2 "Penguin".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notGreaterThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:notLessThan() ### {#notLessThan}
-True iff the string is NOT less than the object
-when ordered according to Unicode(tm) code order.
+`true` if and only if `$s` is not less than `$o` as per the Unicode code order.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notLessThan.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "Penguin" is not less than the string "Cat" .
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "Penguin".
+:Let :param2 "Cat" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notLessThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:notMatches() ### {#notMatches}
-The subject string;
-the object is is a regular expression in the perl, python style.
-It is true iff the string does NOT match the regexp.
+`true` if and only if string `$s` does not match the regular expression `$o`
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notMatches.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "hello world!" no matches the regular expression ".*(l)+o dunia.*".
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 ".*(l)+o dunia.*".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notMatches ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ### string:replace() ### {#replace}
-A built-in for replacing characters or sub.
-takes a list of 3 strings; the first is the
-input data, the second the old and the third the new string.
-The object is calculated as the replaced string.
-For example, ("fofof bar", "of", "baz") string:replace "fbazbaz bar".
+`true` if and only if `$o` is the result of replacing all occurrences of `$s.2` in `$s.1` with `$s.3`
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/replace.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Replace all "l"-s in the string "hello world!" with the bracket version "[l]" .
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :data "hello world!" .
+:Let :search "(l)" .
+:Let :replace "[$1]" .
+{
+    :Let :data ?data .
+    :Let :search ?search .
+    :Let :replace ?replace .
+    (?data ?search ?replace) string:replace ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### string:scrape() ### {#scrape}
-The subject is a list of two strings. The second string is
-a regular expression in the perl, python style.
-It must contain one group (a part in parentheses).  If the first string in the list matches
-the regular expression, then the object is calculated as being the
-part of the first string which matches the group.
+`true` if and only if `$o` is the first matching group when matching `$s.2` as a regular expression against `$s.1`
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/scrape.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Extract from the string "https://w3c.github.io/N3/spec/" the last path element using a regular expression .
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "https://w3c.github.io/N3/spec/" . 
+:Let :param2 ".*/([^/]+/)$" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    (?param1 ?param2) string:scrape ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### string:startsWith() ### {#startsWith}
-True iff the subject string starts with the object string.
+`true` if and only if `$s` starts with `$o`.
 
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/startsWith.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Checks whether the string "hello world!" starts with "hello" .
             
 ```
-@prefix : <:> .
+@prefix : <http://example.org/>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "hello".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:startsWith ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
             ```
 </div>            
 
 ## time ## {#time}
 ### time:day() ### {#day}
+`true` if and only if `$o` is the integer day component of `$s`.
 
-`true` if and only if $s is a `xsd:dateTime` and $o is the integer day component of the dateTime.
-$o can be calculated as a function of $s.
-
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/day.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Return the day component of the date "2023-04-01T18:06:04Z" .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:day ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### time:minute() ### {#minute}
+`true` if and only if `$o` is the integer minutes component of `$s`.
 
-`true` if and only if $s is a `xsd:dateTime` and $o is the integer minutes component of the dateTime.
-$o can be calculated as a function of $s.
-
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/minute.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Return the minute component of the date "2023-04-01T18:06:04Z" .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:minute ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### time:month() ### {#month}
+`true` if and only if `$o` is the integer month component of `$s`.
 
-`true` if and only if $s is a `xsd:dateTime` and $o is the integer month component of the dateTime.
-$o can be calculated as a function of $s.
-
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/month.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Return the month component of the date "2023-04-01T18:06:04Z" .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:month ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### time:second() ### {#second}
+`true` if and only if `$o` is the integer seconds component of `$s`.
 
-`true` if and only if $s is a `xsd:dateTime` and $o is the integer seconds component of the dateTime.
-$o can be calculated as a function of $s.
-
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/second.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Return the seconds component of the date "2023-04-01T18:06:04Z" .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:second ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### time:timeZone() ### {#timeZone}
+`true` if and only if `$o` is the timezone offset of `$s`.
 
-`true` if and only if $s is a `xsd:dateTime` and $o is the trailing timezone offset
-part, e.g.  "-05:00"..
-$o can be calculated as a function of $s.
-
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/timeZone.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Return the time zone component of the date "2023-04-01T18:06:04Z" .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:minute ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
 </div>            
 
 ### time:year() ### {#year}
+`true` if and only if `$o` is the integer year component of `$s`.
 
-`true` if and only if $s is a `xsd:dateTime` and $o is the integer year component of the dateTime.
-$o can be calculated as a function of $s.
-
-
-[Try in Notation3 Editor &#128640;](http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20)
+[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/year.n3)
 
 
 <div class=example>
 
-This is an example for a built-in function.
+Return the minute component of the date "2023-04-01T18:06:04Z" .
             
 ```
-@prefix : <:> .
-@prefix string: <http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:year ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
             ```
-</div>
+</div>            
 
