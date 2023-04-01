@@ -6,9 +6,9 @@
   <meta content="w3c/CG-DRAFT" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
-  <meta content="Bikeshed version 859efb4bd, updated Fri Jan 27 16:04:01 2023 -0800" name="generator">
+  <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
   <link href="https://domel.github.io/n3buildins/specification/" rel="canonical">
-  <meta content="e2ad37f85295c382fd196b55b2e0253e7833e11a" name="document-revision">
+  <meta content="0726c579d9170eea8f6ae32716d68f269e2c9f88" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -41,7 +41,6 @@ table th.last {
 }
 </style>
 <style>/* style-autolinks */
-
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
     font-size: inherit;
@@ -101,7 +100,8 @@ pre .property::before, pre .property::after {
 
 [data-link-type=biblio] {
     white-space: pre;
-}</style>
+}
+</style>
 <style>/* style-colors */
 
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
@@ -210,9 +210,9 @@ pre .property::before, pre .property::after {
     --outdated-shadow: red;
 
     --editedrec-bg: darkorange;
-}</style>
+}
+</style>
 <style>/* style-counters */
-
 body {
     counter-reset: example figure issue;
 }
@@ -239,9 +239,9 @@ figcaption {
 }
 figcaption:not(.no-marker)::before {
     content: "Figure " counter(figure) " ";
-}</style>
+}
+</style>
 <style>/* style-issues */
-
 a[href].issue-return {
     float: right;
     float: inline-end;
@@ -251,7 +251,6 @@ a[href].issue-return {
 }
 </style>
 <style>/* style-md-lists */
-
 /* This is a weird hack for me not yet following the commonmark spec
    regarding paragraph and lists. */
 [data-md] > :first-child {
@@ -259,7 +258,8 @@ a[href].issue-return {
 }
 [data-md] > :last-child {
     margin-bottom: 0;
-}</style>
+}
+</style>
 <style>/* style-selflinks */
 
 :root {
@@ -433,6 +433,7 @@ dfn > a.self-link::before      { content: "#"; }
        which is quite common in practice... */
     img { background: white; }
 }
+
 @media (prefers-color-scheme: dark) {
     :root {
         --selflink-text: black;
@@ -445,22 +446,24 @@ dfn > a.self-link::before      { content: "#"; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">N3 Builtin Functions</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2023-02-13">13 February 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2023-04-01">1 April 2023</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
      <dl>
       <dt>This version:
-      <dd><a class="u-url" href="https://w3c.github.io/N3/spec/">https://w3c.github.io/N3/spec/</a>
+      <dd><a class="u-url" href="https://domel.github.io/n3buildins/specification/">https://domel.github.io/n3buildins/specification/</a>
       <dt>Latest published version:
       <dd><a href="https://domel.github.io/n3buildins/specification/">https://domel.github.io/n3buildins/specification/</a>
       <dt>Previous Versions:
-      <dd><a href="https://w3c.github.io/N3/spec/builtins/0.1/" rel="prev">https://w3c.github.io/N3/spec/builtins/0.1/</a>
+      <dd><a href="https://domel.github.io/n3buildins/specification/0.1/" rel="prev">https://domel.github.io/n3buildins/specification/0.1/</a>
       <dt>Feedback:
       <dd><a href="https://github.com/domel/n3buildins/issues/">GitHub</a>
       <dt class="editor">Editors:
       <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:tim.duval@unifylogic.ai">Tim Duval</a> (<span class="p-org org"><a href="http://unifylogic.ai">UnifyLogic</a></span>)
-      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:williamvanwoensel@gmail.com">William Van Woensel [somewhere in Ottawa]</a>
+      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:williamvanwoensel@gmail.com">William Van Woensel</a> (<span class="p-org org"><a href="https://www.uottawa.ca/en">University of Ottawa</a></span>)
+      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:patrick.hochstenbach@ugent.be">Patrick Hochstenbach</a> (<span class="p-org org"><a href="https://www.ugent.be/en">Ghent University</a></span>)
+      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:d.tomaszuk@uwb.edu.pl">Dominik Tomaszuk</a> (<span class="p-org org"><a href="https://uwb.edu.pl/en/">University of Bialystok</a></span>)
      </dl>
     </div>
    </details>
@@ -520,8 +523,11 @@ dfn > a.self-link::before      { content: "#"; }
         <li><a href="#parsedAsN3"><span class="secno">5.3.10</span> <span class="content">log:parsedAsN3()</span></a>
         <li><a href="#rawType"><span class="secno">5.3.11</span> <span class="content">log:rawType()</span></a>
         <li><a href="#semantics"><span class="secno">5.3.12</span> <span class="content">log:semantics()</span></a>
-        <li><a href="#semanticsOrError"><span class="secno">5.3.13</span> <span class="content">log:semanticsOrError()</span></a>
-        <li><a href="#skolem"><span class="secno">5.3.14</span> <span class="content">log:skolem()</span></a>
+        <li><a href="#semantics①"><span class="secno">5.3.13</span> <span class="content">log:semantics()</span></a>
+        <li><a href="#semantics②"><span class="secno">5.3.14</span> <span class="content">log:semantics()</span></a>
+        <li><a href="#semantics③"><span class="secno">5.3.15</span> <span class="content">log:semantics()</span></a>
+        <li><a href="#semanticsOrError"><span class="secno">5.3.16</span> <span class="content">log:semanticsOrError()</span></a>
+        <li><a href="#skolem"><span class="secno">5.3.17</span> <span class="content">log:skolem()</span></a>
        </ol>
       <li>
        <a href="#math"><span class="secno">5.4</span> <span class="content">math</span></a>
@@ -644,934 +650,1305 @@ and notes. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words fo
    <h2 class="heading settled" data-level="5" id="Builtins"><span class="secno">5. </span><span class="content">Builtins</span><a class="self-link" href="#Builtins"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="crypto"><span class="secno">5.1. </span><span class="content">crypto</span><a class="self-link" href="#crypto"></a></h3>
    <h4 class="heading settled" data-level="5.1.1" id="sha"><span class="secno">5.1.1. </span><span class="content">crypto:sha()</span><a class="self-link" href="#sha"></a></h4>
-    The object is a SHA-1 hash of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587">
-    <a class="self-link" href="#example-7aa44587"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only if <code>$o</code> is the SHA-1 hash of <code>$s</code>. 
    <h3 class="heading settled" data-level="5.2" id="list"><span class="secno">5.2. </span><span class="content">list</span><a class="self-link" href="#list"></a></h3>
    <h4 class="heading settled" data-level="5.2.1" id="append"><span class="secno">5.2.1. </span><span class="content">list:append()</span><a class="self-link" href="#append"></a></h4>
-    Concatenates separate lists into a single list. <code>true</code> if and only if the subject is a list of lists and the concatenation of all those lists is <code>$o</code>. <code>$o</code> can be calculated as a function of the subject. 
-Example: <code>( (1 2) (3 4) ) list:append (1 2 3 4).</code> 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①">
-    <a class="self-link" href="#example-7aa44587①"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only if <code>$o</code> is the concatenation of all lists <code>$s.i</code>. 
    <h4 class="heading settled" data-level="5.2.2" id="first"><span class="secno">5.2.2. </span><span class="content">list:first()</span><a class="self-link" href="#first"></a></h4>
-    Extracts the first member of a list. <code>true</code> if and only the subject is a list and <code>$o</code> is the first member of that list. <code>$o</code> can be calculated as a function of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②">
-    <a class="self-link" href="#example-7aa44587②"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$</code> is a list and <code>$o</code> is the first member of that list. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/first.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-fbf8770a">
+    <a class="self-link" href="#example-fbf8770a"></a> 
+    <p>What is the first element of ( ("a") { :a :b :c } 42 )?</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix list: &lt;http://www.w3.org/2000/10/swap/list#> .
+
+{ ( ("a") { :a :b :c } 42 ) list:first ?what . } => { :result :is ?what . } .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.2.3" id="in"><span class="secno">5.2.3. </span><span class="content">list:in()</span><a class="self-link" href="#in"></a></h4>
-    Determines if an subject is a member of the object list or binds every member of the object list to the subject. <code>true</code> if and only <code>$o</code> is a list and <code>$s</code> is in that list. <code>$s</code> can be calculated from <code>$o</code>. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③">
-    <a class="self-link" href="#example-7aa44587③"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only if <code>$o</code> is a list and <code>$s</code> is a member of that list. 
    <h4 class="heading settled" data-level="5.2.4" id="iterate"><span class="secno">5.2.4. </span><span class="content">list:iterate()</span><a class="self-link" href="#iterate"></a></h4>
-    Iterates over index/value pairs of the subject list.
-Gets the matching pair of list index and list value for every member of the subject.
-If the object is a variable, it will create a solution for each member of the subject list.
-If any member of the object list is a variable, it will create a solution for all matching
-members of the subject list.
-If the object is ground and the entry at the specified index matches the specified value, 
-it evaluates to <code>true</code>; otherwise, <code>false</code>.
-Example: <code>( 1 2 3 ) list:iterate ($i $v).</code> 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④">
-    <a class="self-link" href="#example-7aa44587④"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only if <code>$s</code> is a list and <code>$o</code> is a list with two elements: <code>$o.1</code> is a valid index in list <code>$s</code> (index starts at 0), and <code>$o.2</code> is found at that index in list <code>$s</code>. 
    <h4 class="heading settled" data-level="5.2.5" id="last"><span class="secno">5.2.5. </span><span class="content">list:last()</span><a class="self-link" href="#last"></a></h4>
-    Extracts the first member of a list. <code>true</code> if and only the subject is a list and <code>$o</code> is the last member of that list. <code>$o</code> can be calculated as a function of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤">
-    <a class="self-link" href="#example-7aa44587⑤"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only if <code>$</code> is a list and <code>$o</code> is the last member of that list. 
    <h4 class="heading settled" data-level="5.2.6" id="length"><span class="secno">5.2.6. </span><span class="content">list:length()</span><a class="self-link" href="#length"></a></h4>
-    Calculates the length of a list. <code>true</code> if and only the subject is a list and <code>$o</code> is integer length of that list. <code>$o</code> can be calculated as a function of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥">
-    <a class="self-link" href="#example-7aa44587⑥"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$s</code> is a list and <code>$o</code> is the integer length of that list. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/length.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-3e9952be">
+    <a class="self-link" href="#example-3e9952be"></a> 
+    <p>Calculate the length of the list (1 2 3 4).</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix list: &lt;http://www.w3.org/2000/10/swap/list#> .
+
+{ (1 2 3 4) list:length ?length . } => { :result :is ?length . } .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.2.7" id="member"><span class="secno">5.2.7. </span><span class="content">list:member()</span><a class="self-link" href="#member"></a></h4>
-    Determines if an object is a member of the subject list or binds every member of the subject list to the object. <code>true</code> if and only <code>$s</code> is a list and <code>o</code> is in that list. <code>$o</code> can be calculated from <code>$s</code>. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑦">
-    <a class="self-link" href="#example-7aa44587⑦"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only <code>$s</code> is a list and <code>o</code> is a member of that list. 
    <h4 class="heading settled" data-level="5.2.8" id="memberAt"><span class="secno">5.2.8. </span><span class="content">list:memberAt()</span><a class="self-link" href="#memberAt"></a></h4>
-    Gets the member of a list at a given position (where the position of the first element is 1). <code>true</code> if and only if <code>$s_0</code> has an element at position <code>$s_1</code>, and if that element and <code>$o</code> can unify.
-Note that if <code>$s_1</code> is a variable, this builtin may bind it to more than one value (e.g. <code>((“A” “B” “A”) ?i) list:memberAt "A"</code>).
-In case of a negative integer, the index will count backwards from the length of the list. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑧">
-    <a class="self-link" href="#example-7aa44587⑧"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only if <code>$s.0</code> is a list, <code>$s.1</code> is a valid index in list <code>$s.0</code>, and <code>$o</code> is found at that index in the list. 
    <h4 class="heading settled" data-level="5.2.9" id="remove"><span class="secno">5.2.9. </span><span class="content">list:remove()</span><a class="self-link" href="#remove"></a></h4>
-    Removes the second component of the subject list from the first component of that list. <code>true</code> if and only if the subject is a list of two lists <code>$s_1</code> and <code>$s_2</code>, <code>$s_2</code> is a subset of <code>$s_1</code> and <code>$o</code> is a list composed of the members of the <code>$s_1</code> with all members of <code>$s_2</code> removed, matching left to right. <code>$o</code> can be calculated as a function of the subject.
-Example: <code>( (1 2 3 4) (2 3) ) list:remove (1 4).</code> 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑨">
-    <a class="self-link" href="#example-7aa44587⑨"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$s.0</code> is a list, and <code>$o</code> is a list composed of the members of <code>$s.0</code> with member <code>$s.1</code> removed, if it was present. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/remove.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-40b0e25c">
+    <a class="self-link" href="#example-40b0e25c"></a> 
+    <p>Remove "penguin" from the list ("dog" "penguin" "cat" "penguin").</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix list: &lt;http://www.w3.org/2000/10/swap/list#> .
+
+:let :param ("dog" "penguin" "cat" "penguin") .
+{ 
+    :let :param ?param . 
+    ( ?param "penguin" ) list:remove ?list .
+} 
+=> 
+{ 
+    :result :is ?list . 
+} .
 </pre>
    </div>
    <h3 class="heading settled" data-level="5.3" id="log"><span class="secno">5.3. </span><span class="content">log</span><a class="self-link" href="#log"></a></h3>
    <h4 class="heading settled" data-level="5.3.1" id="conclusion"><span class="secno">5.3.1. </span><span class="content">log:conclusion()</span><a class="self-link" href="#conclusion"></a></h4>
-    All possible conclusions which can be drawn from a formula. <code>true</code> if and only if <code>$o</code> is the set of conclusions which can be drawn from <code>$s</code>, by successively applying any rules it contains to the data it contains.
-Note: this is equivalent to cwm’s "--think" command line function. It does use built-ins, so it may for example indirectly invoke other documents, validate signatures, etc. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①⓪">
-    <a class="self-link" href="#example-7aa44587①⓪"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the set of conclusions which can be drawn from <code>$s</code> (deductive closure), 
+by applying any rules it contains to the data it contains. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/conclusion.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-d86d4257">
+    <a class="self-link" href="#example-d86d4257"></a> 
+    <p>Draw all conclusions from the formula ":Felix a :Cat . { ?X a :Cat } => { ?X :says "Meow" . }".</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+:let :param { 
+    :Felix a :Cat . 
+    { ?X a :Cat . } => { ?X :says "Meow" . } .
+} .
+
+{ 
+    :let :param ?param .
+    ?param log:conclusion ?conclusion .
+} 
+=> 
+{ 
+    :result :is ?conclusion . 
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.3.2" id="conjunction"><span class="secno">5.3.2. </span><span class="content">log:conjunction()</span><a class="self-link" href="#conjunction"></a></h4>
-    A function to merge formulae: logical AND. <code>true</code> if and only if <code>o</code>, which can be generated, is a formula containing a copy of each of the formulae <code>$s_1 .. $s_n</code>. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①①">
-    <a class="self-link" href="#example-7aa44587①①"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is a quoted graph that includes the contents of each of the quoted graphs <code>$s.i</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/conjunction.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-fda64e4b">
+    <a class="self-link" href="#example-fda64e4b"></a> 
+    <p>Merge the formulas "{ :Felix a :Cat . }" , "{ :Pluto a :Dog . }", "{ :Pingu a :Penguin . }" .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    ( { :Felix a :Cat . }
+      { :Pluto a :Dog . }  
+      { :Pingu a :Penguin . }
+    ) log:conjunction ?merged .
+} 
+=> 
+{ 
+    :result :is ?merged . 
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.3.3" id="content"><span class="secno">5.3.3. </span><span class="content">log:content()</span><a class="self-link" href="#content"></a></h4>
-    This connects a document and a string that represents it. (Cwm knows how to go get a document in order to evaluate this.)
-Note: the content-type of the information is not given and so must be known or guessed. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①②">
-    <a class="self-link" href="#example-7aa44587①②"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is a string that represents the online resource to which <code>$s</code> is dereferenced. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/content.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-3662bd07">
+    <a class="self-link" href="#example-3662bd07"></a> 
+    <p>Fetch the content of https://www.w3.org/People/Berners-Lee/card.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    &lt;https://www.w3.org/People/Berners-Lee/card> log:content ?content .
+} 
+=> 
+{ 
+    :result :is ?content . 
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.3.4" id="equalTo"><span class="secno">5.3.4. </span><span class="content">log:equalTo()</span><a class="self-link" href="#equalTo"></a></h4>
-    Determines if two RDF resources are the same. <code>true</code> if and only if <code>$s</code> and <code>$o</code> are the same RDF node (symbol or literal).
+    <code>true</code> if and only if <code>$s</code> and <code>$o</code> are the same N3 resource.
 Not to be confused with owl:sameAs. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①③">
-    <a class="self-link" href="#example-7aa44587①③"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
    <h4 class="heading settled" data-level="5.3.5" id="forAllIn"><span class="secno">5.3.5. </span><span class="content">log:forAllIn()</span><a class="self-link" href="#forAllIn"></a></h4>
-    Built-in for implementing a scoped universal quantification. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①④">
-    <a class="self-link" href="#example-7aa44587①④"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if, for each solution for which the first clause <code>$s.0</code> is true, the second clause <code>$s.1</code> is true as well. 
+This is a scoped universal quantification. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/forAllIn.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-b70458cd">
+    <a class="self-link" href="#example-b70458cd"></a> 
+    <p>For each subtask of a composite task, check whether the subtask is completed.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+:c a :CompositeTask ;
+    :subTask :s1 , :s2 , :s3 .
+:s1 :state :Completed .
+:s2 :state :Completed . 
+:s3 :state :Completed .
+
+{
+    ?c a :CompositeTask .
+    ( { ?c :subTask ?s } { ?s :state :Completed } ) log:forAllIn _:t .
+}
+=>
+{
+    :result :is true .
+} . 
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.3.6" id="includes"><span class="secno">5.3.6. </span><span class="content">log:includes()</span><a class="self-link" href="#includes"></a></h4>
-    The subject formula includes the object formula. <code>true</code> if and only if <code>s</code> includes <code>$o</code> if there exists some substitution which when applied to <code>$o</code> creates a formula B' such that for every statement in B' is also in <code>$s</code>, every variable universally (or existentially) quantified in B' is quantified in the same way in <code>$s</code>. 
-Variable substitution is applied recursively to nested compound terms such as formulae, lists and sets.
-Note: you can use this to peer inside nested formulae. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①⑤">
-    <a class="self-link" href="#example-7aa44587①⑤"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if there exists some substitution which, when applied to <code>$o</code>, 
+creates a quoted graph <code>$o</code>' such that every statement in <code>$o</code>' is also in <code>$s</code>;
+whereby every variable, universally or existentially quantified in <code>$o</code>', is quantified in the same way in <code>$s</code>. 
+Variable substitution is applied recursively to nested compound terms such as quoted graphs ans lists. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/includes.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-4f9dc777">
+    <a class="self-link" href="#example-4f9dc777"></a> 
+    <p>Check whether the formula { :Felix a :Cat } includes { ?X a :Cat }.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    { :Felix a :Cat } log:includes { ?X a :Cat } .
+} 
+=>
+{
+    :result :is ?X .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.3.7" id="notEqualTo"><span class="secno">5.3.7. </span><span class="content">log:notEqualTo()</span><a class="self-link" href="#notEqualTo"></a></h4>
-    Determines if two RDF resources are not the same. <code>true</code> if and only if <code>$s</code> and <code>$o</code> are not the same RDF node (symbol or literal). 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①⑥">
-    <a class="self-link" href="#example-7aa44587①⑥"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only if <code>$s log:equalTo $o</code> is false. 
    <h4 class="heading settled" data-level="5.3.8" id="notIncludes"><span class="secno">5.3.8. </span><span class="content">log:notIncludes()</span><a class="self-link" href="#notIncludes"></a></h4>
-    The object formula is NOT a subset of subject. <code>true</code> if and only if <code>log:includes</code> is <code>false</code>. The converse of log:includes.
-Related: see <code>log:includes</code>. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①⑦">
-    <a class="self-link" href="#example-7aa44587①⑦"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only if <code>$s log:includes $o</code> is <code>false</code>. 
    <h4 class="heading settled" data-level="5.3.9" id="outputString"><span class="secno">5.3.9. </span><span class="content">log:outputString()</span><a class="self-link" href="#outputString"></a></h4>
-    The subject is a key and the object is a string,
-where the strings are to be output in the order of the keys.
-See cwm --strings in cwm --help. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①⑧">
-    <a class="self-link" href="#example-7aa44587①⑧"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    The concrete semantics of this builtin (e.g., which N3 resource types are supported) will depend on the N3 reasoner. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/outputString.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-434ef9da">
+    <a class="self-link" href="#example-434ef9da"></a> 
+    <p>Print the two string "This is the first line
+" , "This is the second line
+" to the output.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+_:2 log:outputString "This is the second line
+" .
+_:1 log:outputString "This is the first line
+" .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.3.10" id="parsedAsN3"><span class="secno">5.3.10. </span><span class="content">log:parsedAsN3()</span><a class="self-link" href="#parsedAsN3"></a></h4>
-    The subject string, parsed as N3, gives this formula. <code>true</code> if and only if <code>$s</code>, parsed as N3, gives <code>$o</code>. <code>$s</code> should be a syntactically valid string in N3 format.
-Related: see <code>log:n3String</code>. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587①⑨">
-    <a class="self-link" href="#example-7aa44587①⑨"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$s</code>, when parsed as N3, gives <code>$o</code>. <code>$s</code> should be a syntactically valid string in N3 format. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/parsedAsN3.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-88397326">
+    <a class="self-link" href="#example-88397326"></a> 
+    <p>Parse the string ':Socrates a :Human .' as N3.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+:Let :param """
+@prefix : &lt;urn:example:> .
+:Socrates a :Human .
+""" .
+
+{
+    :Let :param ?X .
+    ?X log:parsedAsN3 ?Y .
+}
+=>
+{
+    :result :is ?Y .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.3.11" id="rawType"><span class="secno">5.3.11. </span><span class="content">log:rawType()</span><a class="self-link" href="#rawType"></a></h4>
-    Returns an identifier based on the type of the RDF Resource. <code>true</code> if the type of <code>$s</code> is the same as <code>$o</code>, or binds the type to <code>$o</code>. <code>$o</code> is unbound or one of <code>log:Formula</code>, <code>log:Literal</code>, <code>log:List</code>, <code>log:Set</code> or <code>log:Other</code>.
-Example: <code>log:semanticsOrError</code> returns either a formula or a string, and you can check which using <code>log:rawType</code>. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②⓪">
-    <a class="self-link" href="#example-7aa44587②⓪"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if the N3 resource type of <code>$s</code> is <code>$o</code>.
+N3 resource types include <code>log:Formula</code>, <code>log:Literal</code>, <code>log:List</code>, <code>log:Set</code> or <code>log:Other</code>. 
+   <h4 class="heading settled" data-level="5.3.12" id="semantics"><span class="secno">5.3.12. </span><span class="content">log:semantics()</span><a class="self-link" href="#semantics"></a></h4>
+    <code>true</code> if and only if <code>$o</code> is a quoted graph that results from parsing the string that results from dereferencing <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-6495a287">
+    <a class="self-link" href="#example-6495a287"></a> 
+    <p>Read the contents of the file <code>&lt;semantics.data></code> and parse it as Notation3.
+We assume <code>&lt;semantics.data></code> contains the text:</p>
+<pre>@prefix : &lt;http://example.org/>.
+:Socrates a :Human .
+</pre>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+{ &lt;semantics.data> log:semantics ?semantics . } => { :result :is ?semantics } .
 </pre>
    </div>
-   <h4 class="heading settled" data-level="5.3.12" id="semantics"><span class="secno">5.3.12. </span><span class="content">log:semantics()</span><a class="self-link" href="#semantics"></a></h4>
-    The log:semantics of a document is the formula achieved by parsing representation of the document.
+   <h4 class="heading settled" data-level="5.3.13" id="semantics①"><span class="secno">5.3.13. </span><span class="content">log:semantics()</span><a class="self-link" href="#semantics①"></a></h4>
+    <code>true</code> if and only if <code>$o</code> is a quoted graph that results from parsing the string that results from dereferencing <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-6495a287①">
+    <a class="self-link" href="#example-6495a287①"></a> 
+    <p>Read the contents of the file <code>&lt;semantics.data></code> and parse it as Notation3.
+We assume <code>&lt;semantics.data></code> contains the text:</p>
+<pre>@prefix : &lt;http://example.org/>.
+:Socrates a :Human .
+</pre>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+{ &lt;semantics.data> log:semantics ?semantics . } => { :result :is ?semantics } .
+</pre>
+   </div>
+   <h4 class="heading settled" data-level="5.3.14" id="semantics②"><span class="secno">5.3.14. </span><span class="content">log:semantics()</span><a class="self-link" href="#semantics②"></a></h4>
+    The log:semantics of a document is the formula achieved by parsing the representation of the document.
 For a document in Notation3, <code>log:semantics</code> is the <code>log:parsedAsN3</code> of the <code>log:content</code> of the document.
 For a document in another RDF syntax, it is parsed according to the appropriate specification to yield an RDF formula (a subclass of N3 <code>log:Formula</code>).
 Evaluates to <code>false</code> if an unrecognized document format is retrieved.
 Aside: Philosophers will be distracted here into worrying about the meaning of meaning. At least we didn’t call this function "meaning"! 
 In as much as N3 is used as an interlingua for interoperability for different systems, this for an N3 based system is the meaning expressed by a document.
 Related: see <code>log:parsedAsN3</code> and <code>log:content</code>. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②①">
-    <a class="self-link" href="#example-7aa44587②①"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-6495a287②">
+    <a class="self-link" href="#example-6495a287②"></a> 
+    <p>Read the contents of the file <code>&lt;semantics.data></code> and parse it as Notation3.
+We assume <code>&lt;semantics.data></code> contains the text:</p>
+<pre>@prefix : &lt;http://example.org/>.
+:Socrates a :Human .
+</pre>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+{ &lt;semantics.data> log:semantics ?semantics . } => { :result :is ?semantics } .
 </pre>
    </div>
-   <h4 class="heading settled" data-level="5.3.13" id="semanticsOrError"><span class="secno">5.3.13. </span><span class="content">log:semanticsOrError()</span><a class="self-link" href="#semanticsOrError"></a></h4>
-    This connects a document and either the formula it parses to, or an error message explaining what went wrong with trying.
-Related: see <code>log:semantics</code>. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②②">
-    <a class="self-link" href="#example-7aa44587②②"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+   <h4 class="heading settled" data-level="5.3.15" id="semantics③"><span class="secno">5.3.15. </span><span class="content">log:semantics()</span><a class="self-link" href="#semantics③"></a></h4>
+    The log:semantics of a document is the formula achieved by parsing the representation of the document.
+For a document in Notation3, <code>log:semantics</code> is the <code>log:parsedAsN3</code> of the <code>log:content</code> of the document.
+For a document in another RDF syntax, it is parsed according to the appropriate specification to yield an RDF formula (a subclass of N3 <code>log:Formula</code>).
+Evaluates to <code>false</code> if an unrecognized document format is retrieved.
+Aside: Philosophers will be distracted here into worrying about the meaning of meaning. At least we didn’t call this function "meaning"! 
+In as much as N3 is used as an interlingua for interoperability for different systems, this for an N3 based system is the meaning expressed by a document.
+Related: see <code>log:parsedAsN3</code> and <code>log:content</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-6495a287③">
+    <a class="self-link" href="#example-6495a287③"></a> 
+    <p>Read the contents of the file <code>&lt;semantics.data></code> and parse it as Notation3.
+We assume <code>&lt;semantics.data></code> contains the text:</p>
+<pre>@prefix : &lt;http://example.org/>.
+:Socrates a :Human .
+</pre>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+{ &lt;semantics.data> log:semantics ?semantics . } => { :result :is ?semantics } .
 </pre>
    </div>
-   <h4 class="heading settled" data-level="5.3.14" id="skolem"><span class="secno">5.3.14. </span><span class="content">log:skolem()</span><a class="self-link" href="#skolem"></a></h4>
-    Built-in to generate a Skolem IRI object which is a function of the arguments in the subject list 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②③">
-    <a class="self-link" href="#example-7aa44587②③"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+   <h4 class="heading settled" data-level="5.3.16" id="semanticsOrError"><span class="secno">5.3.16. </span><span class="content">log:semanticsOrError()</span><a class="self-link" href="#semanticsOrError"></a></h4>
+    <code>true</code> if and only if (a) <code>$o</code> is a quoted graph that results from parsing the string that results from dereferencing <code>$s</code>; or (b) an error message explaining what went wrong. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semanticsOrError.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-c3c2b35d">
+    <a class="self-link" href="#example-c3c2b35d"></a> 
+    <p>Read the contents a non existing <code>&lt;error.data></code> and parse it as Notation3 (which of course will fail).</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+{ &lt;error.data> log:semantics ?semantics . } => { :result :is ?semantics } .
+</pre>
+   </div>
+   <h4 class="heading settled" data-level="5.3.17" id="skolem"><span class="secno">5.3.17. </span><span class="content">log:skolem()</span><a class="self-link" href="#skolem"></a></h4>
+    <code>true</code> if and only if <code>$o</code> is a skolem IRI that is a function of the subject. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/skolem.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-ea64953c">
+    <a class="self-link" href="#example-ea64953c"></a> 
+    <p>Generate a unique Skolem IRI from the list (:abc 77 "xyz") .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix log: &lt;http://www.w3.org/2000/10/swap/log#> .
+
+{ (:abc 77 "xyz") log:skolem ?skolem . } => { :result :is ?skolem } .
 </pre>
    </div>
    <h3 class="heading settled" data-level="5.4" id="math"><span class="secno">5.4. </span><span class="content">math</span><a class="self-link" href="#math"></a></h3>
    <h4 class="heading settled" data-level="5.4.1" id="absoluteValue"><span class="secno">5.4.1. </span><span class="content">math:absoluteValue()</span><a class="self-link" href="#absoluteValue"></a></h4>
-    The object is calulated as the absolute value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②④">
-    <a class="self-link" href="#example-7aa44587②④"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the absolute value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/absoluteValue.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-63edcfc2">
+    <a class="self-link" href="#example-63edcfc2"></a> 
+    <p>Calculate the absolute value of the value -2.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param -2 .
+
+{
+    :Let :param ?param .
+    ?param math:absoluteValue ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.2" id="acos"><span class="secno">5.4.2. </span><span class="content">math:acos()</span><a class="self-link" href="#acos"></a></h4>
-    The object is calulated as the arc cosine value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②⑤">
-    <a class="self-link" href="#example-7aa44587②⑤"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the arc cosine value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/acos.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-d89f8925">
+    <a class="self-link" href="#example-d89f8925"></a> 
+    <p>Calculate the arc cosine of the value 1.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1 .
+
+{
+    :Let :param ?param .
+    ?param math:acos ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.3" id="asin"><span class="secno">5.4.3. </span><span class="content">math:asin()</span><a class="self-link" href="#asin"></a></h4>
-    The object is calulated as the arc sine value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②⑥">
-    <a class="self-link" href="#example-7aa44587②⑥"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the arc sine value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/asin.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-13a89bb2">
+    <a class="self-link" href="#example-13a89bb2"></a> 
+    <p>Calculate the arc sine of the value 1.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1 .
+
+{
+    :Let :param ?param .
+    ?param math:asin ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.4" id="atan"><span class="secno">5.4.4. </span><span class="content">math:atan()</span><a class="self-link" href="#atan"></a></h4>
-    The object is calulated as the arc tangent value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②⑦">
-    <a class="self-link" href="#example-7aa44587②⑦"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the arc tangent value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/atan.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-bf5b49f0">
+    <a class="self-link" href="#example-bf5b49f0"></a> 
+    <p>Calculate the arc tangent of the value 1.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1 .
+
+{
+    :Let :param ?param .
+    ?param math:atan ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.5" id="cos"><span class="secno">5.4.5. </span><span class="content">math:cos()</span><a class="self-link" href="#cos"></a></h4>
-    The subject is an angle expressed in radians.
-The object is calulated as the cosine value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②⑧">
-    <a class="self-link" href="#example-7aa44587②⑧"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the cosine value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/cos.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-1235db6a">
+    <a class="self-link" href="#example-1235db6a"></a> 
+    <p>Calculate the cosine of the value 0.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 0 .
+
+{
+    :Let :param ?param .
+    ?param math:cos ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.6" id="cosh"><span class="secno">5.4.6. </span><span class="content">math:cosh()</span><a class="self-link" href="#cosh"></a></h4>
-    The subject is an angle expressed in radians.
-The object is calulated as the #hyperbolic cosine value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587②⑨">
-    <a class="self-link" href="#example-7aa44587②⑨"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the hyperbolic cosine value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/cosh.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-43d28d9b">
+    <a class="self-link" href="#example-43d28d9b"></a> 
+    <p>Calculate the hyperbolic cosine of the value 0.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 0 .
+
+{
+    :Let :param ?param .
+    ?param math:cosh ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.7" id="degrees"><span class="secno">5.4.7. </span><span class="content">math:degrees()</span><a class="self-link" href="#degrees"></a></h4>
-    The subject is an angle expressed in radians.
-The object is calulated as the conversion in degrees of the value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③⓪">
-    <a class="self-link" href="#example-7aa44587③⓪"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the value in degrees corresponding to the radians value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/degrees.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-7c19a493">
+    <a class="self-link" href="#example-7c19a493"></a> 
+    <p>Calculate the degrees of the radians value 1.57079632679.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1.57079632679 .
+
+{
+    :Let :param ?param .
+    ?param math:degrees ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.8" id="difference"><span class="secno">5.4.8. </span><span class="content">math:difference()</span><a class="self-link" href="#difference"></a></h4>
-    The subject is a pair of numbers. The object
-is calculated by subtracting the second number of the pair from the first. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③①">
-    <a class="self-link" href="#example-7aa44587③①"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the result of subtracting <code>$s.2</code> from <code>$s.1</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/difference.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-2dfeb3b7">
+    <a class="self-link" href="#example-2dfeb3b7"></a> 
+    <p>Calculate the value of 7 minus 2.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (7 2) .
+
+{
+    :Let :param ?param .
+    ?param math:difference ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.9" id="equalTo①"><span class="secno">5.4.9. </span><span class="content">math:equalTo()</span><a class="self-link" href="#equalTo①"></a></h4>
-    Checks equality of numbers. 
-   <p><code>true</code> if and only if <code>$s</code> is equal to <code>$o</code>.</p>
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③②">
-    <a class="self-link" href="#example-7aa44587③②"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$s</code> is the same number as <code>$o</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/equalTo.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-e3bb493f">
+    <a class="self-link" href="#example-e3bb493f"></a> 
+    <p>Check if the numbers 42 and 42 are equal .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:equalTo ?Y .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.10" id="exponentiation"><span class="secno">5.4.10. </span><span class="content">math:exponentiation()</span><a class="self-link" href="#exponentiation"></a></h4>
-    The subject is a pair of numbers. The object
-is calculated by raising the first number of the power of the second. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③③">
-    <a class="self-link" href="#example-7aa44587③③"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only if <code>$o</code> is the result of raising <code>$s.1</code> to the power of <code>$s.2</code> 
    <h4 class="heading settled" data-level="5.4.11" id="greaterThan"><span class="secno">5.4.11. </span><span class="content">math:greaterThan()</span><a class="self-link" href="#greaterThan"></a></h4>
-    <code>true</code> if and only if the subject is a number which is greater than the object. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③④">
-    <a class="self-link" href="#example-7aa44587③④"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$s</code> is a number that is greater than <code>$o</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/greaterThan.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-f355475e">
+    <a class="self-link" href="#example-f355475e"></a> 
+    <p>Check if 42 is greater than 41 .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 41) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:greaterThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.12" id="lessThan"><span class="secno">5.4.12. </span><span class="content">math:lessThan()</span><a class="self-link" href="#lessThan"></a></h4>
-    <code>true</code> if and only if the subject is a number which is LESS than a object. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③⑤">
-    <a class="self-link" href="#example-7aa44587③⑤"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$s</code> is a number that is less than <code>$o</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/lessThan.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-914a2878">
+    <a class="self-link" href="#example-914a2878"></a> 
+    <p>Check if 41 is less than 42 .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (41 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:lessThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.13" id="negation"><span class="secno">5.4.13. </span><span class="content">math:negation()</span><a class="self-link" href="#negation"></a></h4>
-    The subject or object is calculated to be the negation of the other. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③⑥">
-    <a class="self-link" href="#example-7aa44587③⑥"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the negation of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/negation.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-24c1df22">
+    <a class="self-link" href="#example-24c1df22"></a> 
+    <p>Calculate the negation of the value 42 .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 42 .
+
+{
+    :Let :param ?param .
+    ?param math:negation ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.14" id="notEqualTo①"><span class="secno">5.4.14. </span><span class="content">math:notEqualTo()</span><a class="self-link" href="#notEqualTo①"></a></h4>
-    <code>true</code> if and only if the subject is a number which is NOT EQUAL to a object. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③⑦">
-    <a class="self-link" href="#example-7aa44587③⑦"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$s</code> is the not same number as <code>$o</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notEqualTo.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-b0eb1e44">
+    <a class="self-link" href="#example-b0eb1e44"></a> 
+    <p>Check if the numbers 41 and 42 are not equal .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (41 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:notEqualTo ?Y .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.15" id="notGreaterThan"><span class="secno">5.4.15. </span><span class="content">math:notGreaterThan()</span><a class="self-link" href="#notGreaterThan"></a></h4>
-    <code>true</code> if and only if the subject is a number which is NOT greater than the object. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③⑧">
-    <a class="self-link" href="#example-7aa44587③⑧"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$s</code> is a number that is not greater than <code>$o</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notGreaterThan.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-103456f9">
+    <a class="self-link" href="#example-103456f9"></a> 
+    <p>Check if 41 is not greater than 42 .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (41 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:notGreaterThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.16" id="notLessThan"><span class="secno">5.4.16. </span><span class="content">math:notLessThan()</span><a class="self-link" href="#notLessThan"></a></h4>
-    <code>true</code> if and only if the subject is a number which is NOT LESS than a object. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587③⑨">
-    <a class="self-link" href="#example-7aa44587③⑨"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$s</code> is a number that is not less than <code>$o</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notLessThan.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-1eafc08f">
+    <a class="self-link" href="#example-1eafc08f"></a> 
+    <p>Check if 42 is not less than 41 .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 41) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:notLessThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.17" id="product"><span class="secno">5.4.17. </span><span class="content">math:product()</span><a class="self-link" href="#product"></a></h4>
-    The subject is a list of numbers.
-The object is calculated as the arithmentic product of those numbers. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④⓪">
-    <a class="self-link" href="#example-7aa44587④⓪"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
-</pre>
-   </div>
+    <code>true</code> if and only if <code>$o</code> is the arithmetic product of all numbers <code>$s.i</code> 
    <h4 class="heading settled" data-level="5.4.18" id="quotient"><span class="secno">5.4.18. </span><span class="content">math:quotient()</span><a class="self-link" href="#quotient"></a></h4>
-    The subject is a pair of numbers. The object
-is calculated by dividing the first number of the pair by the second. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④①">
-    <a class="self-link" href="#example-7aa44587④①"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the result of dividing <code>$s.1</code> by <code>$s.2</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/quotient.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-65932306">
+    <a class="self-link" href="#example-65932306"></a> 
+    <p>Calculate the quotient of 42 and 2.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 2) .
+
+{
+    :Let :param ?param .
+    ?param math:quotient ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.19" id="remainder"><span class="secno">5.4.19. </span><span class="content">math:remainder()</span><a class="self-link" href="#remainder"></a></h4>
-    The subject is a pair of integers. The object
-is calculated by dividing the first number of the pair by the second and taking the remainder. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④②">
-    <a class="self-link" href="#example-7aa44587④②"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the remainder of dividing <code>$s.1</code> by <code>$s.2</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/remainder.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-c480bb4e">
+    <a class="self-link" href="#example-c480bb4e"></a> 
+    <p>Calculate the remainder of 10 divided by 3.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (10 3) .
+
+{
+    :Let :param ?param .
+    ?param math:remainder ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.20" id="rounded"><span class="secno">5.4.20. </span><span class="content">math:rounded()</span><a class="self-link" href="#rounded"></a></h4>
-    The object is calulated as the number with no fractional part that is closest to the subject.
-If there are two such numbers, then the one that is closest to positive infinity is returned. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④③">
-    <a class="self-link" href="#example-7aa44587④③"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the integer that is closest to <code>$s</code>.
+If there are two such numbers, then the one closest to positive infinity is returned. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/rounded.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-eaa6e695">
+    <a class="self-link" href="#example-eaa6e695"></a> 
+    <p>Calculate the rounded version of 3.3.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param "3.3"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:rounded ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.21" id="sin"><span class="secno">5.4.21. </span><span class="content">math:sin()</span><a class="self-link" href="#sin"></a></h4>
-    The subject is an angle expressed in radians.
-The object is calulated as the sine value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④④">
-    <a class="self-link" href="#example-7aa44587④④"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the sine value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sin.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-a843dfba">
+    <a class="self-link" href="#example-a843dfba"></a> 
+    <p>Calculate the sin of pi/2 (1.57079632679) .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param "1.57079632679"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:sin ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.22" id="sinh"><span class="secno">5.4.22. </span><span class="content">math:sinh()</span><a class="self-link" href="#sinh"></a></h4>
-    The subject is an angle expressed in radians.
-The object is calulated as the hyperbolic sine value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④⑤">
-    <a class="self-link" href="#example-7aa44587④⑤"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the hyperbolic sine value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sinh.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-2acd53f4">
+    <a class="self-link" href="#example-2acd53f4"></a> 
+    <p>Calculate the sinh of log(1 + sqrt(2)) (0.88137358701954302).</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param "0.88137358701954302"^^xsd:double.
+
+{
+    :Let :param ?param .
+    ?param math:sinh ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.23" id="sum"><span class="secno">5.4.23. </span><span class="content">math:sum()</span><a class="self-link" href="#sum"></a></h4>
-    Performs addition of numbers. <code>true</code> if and only if the arithmetic sum of <code>$s_1, .. $s_n</code> equals <code>$o</code>. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④⑥">
-    <a class="self-link" href="#example-7aa44587④⑥"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the arithmetic sum of all numbers <code>$s.i</code> 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sum.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-5caa18ea">
+    <a class="self-link" href="#example-5caa18ea"></a> 
+    <p>Calculate the sum of 1,2,3,4,5,6,7,8,9,10.</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (1 2 3 4 5 6 7 8 9 10) .
+
+{
+    :Let :param ?param .
+    ?param math:sum ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.24" id="tan"><span class="secno">5.4.24. </span><span class="content">math:tan()</span><a class="self-link" href="#tan"></a></h4>
-    The subject is an angle expressed in radians.
-The object is calulated as the tangent value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④⑦">
-    <a class="self-link" href="#example-7aa44587④⑦"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the tangent value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/tan.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-76093d61">
+    <a class="self-link" href="#example-76093d61"></a> 
+    <p>Calculate the tangent of the value 0.7853981633974483 .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param "0.7853981633974483"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:tan ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.4.25" id="tanh"><span class="secno">5.4.25. </span><span class="content">math:tanh()</span><a class="self-link" href="#tanh"></a></h4>
-    The subject is an angle expressed in radians.
-The object is calulated as the hyperbolic tangent value of the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④⑧">
-    <a class="self-link" href="#example-7aa44587④⑧"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the hyperbolic tangent value of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/tanh.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-2ea57ac8">
+    <a class="self-link" href="#example-2ea57ac8"></a> 
+    <p>Calculate the hyperbolic tanget of 0.549306 .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix math: &lt;http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param "0.549306"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:tanh ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h3 class="heading settled" data-level="5.5" id="string"><span class="secno">5.5. </span><span class="content">string</span><a class="self-link" href="#string"></a></h3>
    <h4 class="heading settled" data-level="5.5.1" id="concatenation"><span class="secno">5.5.1. </span><span class="content">string:concatenation()</span><a class="self-link" href="#concatenation"></a></h4>
-    Concatenates the given strings. 
-   <p><code>true</code> if and only if the string concatenation of <code>$s_1, .. $s_n</code> equals <code>$o</code>.</p>
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587④⑨">
-    <a class="self-link" href="#example-7aa44587④⑨"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if the string concatenation of <code>$s.i</code> equals <code>$o</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/concatenation.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-38dd65ff">
+    <a class="self-link" href="#example-38dd65ff"></a> 
+    <p>Concatenates the string "hello", " " and "world!".</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param ( "hello" " " "world!" ) .
+
+{
+    :Let :param ?param .
+    ?param string:concatenation ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.2" id="contains"><span class="secno">5.5.2. </span><span class="content">string:contains()</span><a class="self-link" href="#contains"></a></h4>
-    True iff the subject string contains the object string. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤⓪">
-    <a class="self-link" href="#example-7aa44587⑤⓪"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$s</code> contains <code>$o</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/contains.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-607f2483">
+    <a class="self-link" href="#example-607f2483"></a> 
+    <p>Checks whether the string "hello world!" contains the string "llo worl".</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "llo worl".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:contains ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.3" id="containsIgnoringCase"><span class="secno">5.5.3. </span><span class="content">string:containsIgnoringCase()</span><a class="self-link" href="#containsIgnoringCase"></a></h4>
-    True iff the subject string contains the object string,
-with the comparison done ignoring the difference between upper case and
-lower case characters. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤①">
-    <a class="self-link" href="#example-7aa44587⑤①"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$s</code> contains <code>$o</code> when ignoring case differences. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/containsIgnoringCase.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-a110964c">
+    <a class="self-link" href="#example-a110964c"></a> 
+    <p>Checks whether the string "hello world!" contains the string "lLO woRl".</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "lLO woRl".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:containsIgnoringCase ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.4" id="endsWith"><span class="secno">5.5.4. </span><span class="content">string:endsWith()</span><a class="self-link" href="#endsWith"></a></h4>
-    True iff the subject string ends with the object string. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤②">
-    <a class="self-link" href="#example-7aa44587⑤②"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$s</code> ends with <code>$o</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/endsWith.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-e8ae58d7">
+    <a class="self-link" href="#example-e8ae58d7"></a> 
+    <p>Checks whether the string "hello world!" ends with "orld!".</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "orld!".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:endsWith ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.5" id="equalIgnoringCase"><span class="secno">5.5.5. </span><span class="content">string:equalIgnoringCase()</span><a class="self-link" href="#equalIgnoringCase"></a></h4>
-    True iff the subject string is the same as object string
-ignoring differences between upper and lower case. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤③">
-    <a class="self-link" href="#example-7aa44587⑤③"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$s</code> is the same string as <code>$o</code> when ignoring case differences. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/equalIgnoringCase.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-180de588">
+    <a class="self-link" href="#example-180de588"></a> 
+    <p>Checks whether the string "hello world!" is equal to "hELLo wORld!" ignoring the case .</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "hELLo wORld!" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:equalIgnoringCase ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.6" id="format"><span class="secno">5.5.6. </span><span class="content">string:format()</span><a class="self-link" href="#format"></a></h4>
-    The subject is a list, whose first member is a format string,
-and whose remaining members are arguments to the format string.
-The formating string is in the style of python’s % operator,
-very similar to C’s sprintf().
-The object is calculated from the subject. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤④">
-    <a class="self-link" href="#example-7aa44587⑤④"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$o</code> is the result of replacing the tags found in <code>$s.1</code> with the strings <code>$s.i>1</code> 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/format.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-19fcaec5">
+    <a class="self-link" href="#example-19fcaec5"></a> 
+    <p>Calculate the result of applying the format "%s://%s/%s" to the strings "https", "w3c.github.io" and "N3/spec" .</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param ( "%s://%s/%s" "https" "w3c.github.io" "N3/spec/" ) .
+
+{
+    :Let :param ?param .
+    ?param string:format ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.7" id="greaterThan①"><span class="secno">5.5.7. </span><span class="content">string:greaterThan()</span><a class="self-link" href="#greaterThan①"></a></h4>
-    True iff the string is greater than the object
-when ordered according to Unicode(tm) code order. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤⑤">
-    <a class="self-link" href="#example-7aa44587⑤⑤"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$s</code> is greater than <code>$o</code> as per the Unicode code order. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/greaterThan.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-465476ef">
+    <a class="self-link" href="#example-465476ef"></a> 
+    <p>Checks whether the string "Pengiun" is greater than the string "Cat" .</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "Penguin" .
+:Let :param2 "Cat".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:greaterThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.8" id="lessThan①"><span class="secno">5.5.8. </span><span class="content">string:lessThan()</span><a class="self-link" href="#lessThan①"></a></h4>
-    True iff the string is less than the object
-when ordered according to Unicode(tm) code order. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤⑥">
-    <a class="self-link" href="#example-7aa44587⑤⑥"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$s</code> is less than <code>$o</code> as per the Unicode code order. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/lessThan.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-fbdd61d2">
+    <a class="self-link" href="#example-fbdd61d2"></a> 
+    <p>Checks whether the string "Cat" is less than the string "Penguin" .</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "Cat" .
+:Let :param2 "Penguin".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:lessThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.9" id="matches"><span class="secno">5.5.9. </span><span class="content">string:matches()</span><a class="self-link" href="#matches"></a></h4>
-    The subject is a string;
-the object is is a regular expression in the perl, python style.
-It is true iff the string matches the regexp. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤⑦">
-    <a class="self-link" href="#example-7aa44587⑤⑦"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if string <code>$s</code> matches the regular expression <code>$o</code> 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/matches.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-9fb43ed8">
+    <a class="self-link" href="#example-9fb43ed8"></a> 
+    <p>Checks whether the string "hello world!" matches the regular expression ".<em>(l)+o wo.</em>".</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 ".*(l)+o wo.*".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:matches ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.10" id="notEqualIgnoringCase"><span class="secno">5.5.10. </span><span class="content">string:notEqualIgnoringCase()</span><a class="self-link" href="#notEqualIgnoringCase"></a></h4>
-    True iff the subject string is the NOT same as object string
-ignoring differences between upper and lower case. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤⑧">
-    <a class="self-link" href="#example-7aa44587⑤⑧"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$s</code> is not the same string as <code>$o</code> when ignoring case differences. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notEqualIgnoringCase.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-d740b291">
+    <a class="self-link" href="#example-d740b291"></a> 
+    <p>Checks whether the string "hello world!" is not equal to "hELLo dunia!" ignorning the case .</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "hELLo dunia!" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notEqualIgnoringCase ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.11" id="notGreaterThan①"><span class="secno">5.5.11. </span><span class="content">string:notGreaterThan()</span><a class="self-link" href="#notGreaterThan①"></a></h4>
-    True iff the string is NOT greater than the object
-when ordered according to Unicode(tm) code order. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑤⑨">
-    <a class="self-link" href="#example-7aa44587⑤⑨"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$s</code> is not greater than <code>$o</code> as per the Unicode code order. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notGreaterThan.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-42ec41e3">
+    <a class="self-link" href="#example-42ec41e3"></a> 
+    <p>Checks whether the string "Cat" is not greater than the string "Penguin" .</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "Cat" .
+:Let :param2 "Penguin".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notGreaterThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.12" id="notLessThan①"><span class="secno">5.5.12. </span><span class="content">string:notLessThan()</span><a class="self-link" href="#notLessThan①"></a></h4>
-    True iff the string is NOT less than the object
-when ordered according to Unicode(tm) code order. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥⓪">
-    <a class="self-link" href="#example-7aa44587⑥⓪"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$s</code> is not less than <code>$o</code> as per the Unicode code order. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notLessThan.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-6adcf7de">
+    <a class="self-link" href="#example-6adcf7de"></a> 
+    <p>Checks whether the string "Penguin" is not less than the string "Cat" .</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "Penguin".
+:Let :param2 "Cat" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notLessThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.13" id="notMatches"><span class="secno">5.5.13. </span><span class="content">string:notMatches()</span><a class="self-link" href="#notMatches"></a></h4>
-    The subject string;
-the object is is a regular expression in the perl, python style.
-It is true iff the string does NOT match the regexp. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥①">
-    <a class="self-link" href="#example-7aa44587⑥①"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if string <code>$s</code> does not match the regular expression <code>$o</code> 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notMatches.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-1e6b21fb">
+    <a class="self-link" href="#example-1e6b21fb"></a> 
+    <p>Checks whether the string "hello world!" no matches the regular expression ".<em>(l)+o dunia.</em>".</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 ".*(l)+o dunia.*".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notMatches ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.14" id="replace"><span class="secno">5.5.14. </span><span class="content">string:replace()</span><a class="self-link" href="#replace"></a></h4>
-    A built-in for replacing characters or sub.
-takes a list of 3 strings; the first is the
-input data, the second the old and the third the new string.
-The object is calculated as the replaced string.
-For example, ("fofof bar", "of", "baz") string:replace "fbazbaz bar". 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥②">
-    <a class="self-link" href="#example-7aa44587⑥②"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$o</code> is the result of replacing all occurrences of <code>$s.2</code> in <code>$s.1</code> with <code>$s.3</code> 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/replace.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-c3f79701">
+    <a class="self-link" href="#example-c3f79701"></a> 
+    <p>Replace all "l"-s in the string "hello world!" with the bracket version "[l]" .</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :data "hello world!" .
+:Let :search "(l)" .
+:Let :replace "[$1]" .
+{
+    :Let :data ?data .
+    :Let :search ?search .
+    :Let :replace ?replace .
+    (?data ?search ?replace) string:replace ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.15" id="scrape"><span class="secno">5.5.15. </span><span class="content">string:scrape()</span><a class="self-link" href="#scrape"></a></h4>
-    The subject is a list of two strings. The second string is
-a regular expression in the perl, python style.
-It must contain one group (a part in parentheses).  If the first string in the list matches
-the regular expression, then the object is calculated as being the
-part of the first string which matches the group. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥③">
-    <a class="self-link" href="#example-7aa44587⑥③"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$o</code> is the first matching group when matching <code>$s.2</code> as a regular expression against <code>$s.1</code> 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/scrape.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-e6c0ed9f">
+    <a class="self-link" href="#example-e6c0ed9f"></a> 
+    <p>Extract from the string "https://w3c.github.io/N3/spec/" the last path element using a regular expression .</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "https://w3c.github.io/N3/spec/" . 
+:Let :param2 ".*/([^/]+/)$" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    (?param1 ?param2) string:scrape ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.5.16" id="startsWith"><span class="secno">5.5.16. </span><span class="content">string:startsWith()</span><a class="self-link" href="#startsWith"></a></h4>
-    True iff the subject string starts with the object string. 
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥④">
-    <a class="self-link" href="#example-7aa44587⑥④"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
+    <code>true</code> if and only if <code>$s</code> starts with <code>$o</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/startsWith.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-11384a63">
+    <a class="self-link" href="#example-11384a63"></a> 
+    <p>Checks whether the string "hello world!" starts with "hello" .</p>
+<pre>@prefix : &lt;http://example.org/>.
 @prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+
+:Let :param1 "hello world!" .
+:Let :param2 "hello".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:startsWith ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
 </pre>
    </div>
    <h3 class="heading settled" data-level="5.6" id="time"><span class="secno">5.6. </span><span class="content">time</span><a class="self-link" href="#time"></a></h3>
    <h4 class="heading settled" data-level="5.6.1" id="day"><span class="secno">5.6.1. </span><span class="content">time:day()</span><a class="self-link" href="#day"></a></h4>
-   <p><code>true</code> if and only if $s is a <code>xsd:dateTime</code> and $o is the integer day component of the dateTime.
-$o can be calculated as a function of $s.</p>
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥⑤">
-    <a class="self-link" href="#example-7aa44587⑥⑤"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the integer day component of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/day.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-876a3cd2">
+    <a class="self-link" href="#example-876a3cd2"></a> 
+    <p>Return the day component of the date "2023-04-01T18:06:04Z" .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#>.
+@prefix time: &lt;http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:day ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.6.2" id="minute"><span class="secno">5.6.2. </span><span class="content">time:minute()</span><a class="self-link" href="#minute"></a></h4>
-   <p><code>true</code> if and only if $s is a <code>xsd:dateTime</code> and $o is the integer minutes component of the dateTime.
-$o can be calculated as a function of $s.</p>
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥⑥">
-    <a class="self-link" href="#example-7aa44587⑥⑥"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the integer minutes component of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/minute.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-44ec62be">
+    <a class="self-link" href="#example-44ec62be"></a> 
+    <p>Return the minute component of the date "2023-04-01T18:06:04Z" .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#>.
+@prefix time: &lt;http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:minute ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.6.3" id="month"><span class="secno">5.6.3. </span><span class="content">time:month()</span><a class="self-link" href="#month"></a></h4>
-   <p><code>true</code> if and only if $s is a <code>xsd:dateTime</code> and $o is the integer month component of the dateTime.
-$o can be calculated as a function of $s.</p>
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥⑦">
-    <a class="self-link" href="#example-7aa44587⑥⑦"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the integer month component of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/month.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-0dfbb1dc">
+    <a class="self-link" href="#example-0dfbb1dc"></a> 
+    <p>Return the month component of the date "2023-04-01T18:06:04Z" .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#>.
+@prefix time: &lt;http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:month ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.6.4" id="second"><span class="secno">5.6.4. </span><span class="content">time:second()</span><a class="self-link" href="#second"></a></h4>
-   <p><code>true</code> if and only if $s is a <code>xsd:dateTime</code> and $o is the integer seconds component of the dateTime.
-$o can be calculated as a function of $s.</p>
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥⑧">
-    <a class="self-link" href="#example-7aa44587⑥⑧"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the integer seconds component of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/second.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-84a96063">
+    <a class="self-link" href="#example-84a96063"></a> 
+    <p>Return the seconds component of the date "2023-04-01T18:06:04Z" .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#>.
+@prefix time: &lt;http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:second ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.6.5" id="timeZone"><span class="secno">5.6.5. </span><span class="content">time:timeZone()</span><a class="self-link" href="#timeZone"></a></h4>
-   <p><code>true</code> if and only if $s is a <code>xsd:dateTime</code> and $o is the trailing timezone offset
-part, e.g.  "-05:00"..
-$o can be calculated as a function of $s.</p>
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑥⑨">
-    <a class="self-link" href="#example-7aa44587⑥⑨"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the timezone offset of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/timeZone.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-ab7cb215">
+    <a class="self-link" href="#example-ab7cb215"></a> 
+    <p>Return the time zone component of the date "2023-04-01T18:06:04Z" .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#>.
+@prefix time: &lt;http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:minute ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
    <h4 class="heading settled" data-level="5.6.6" id="year"><span class="secno">5.6.6. </span><span class="content">time:year()</span><a class="self-link" href="#year"></a></h4>
-   <p><code>true</code> if and only if $s is a <code>xsd:dateTime</code> and $o is the integer year component of the dateTime.
-$o can be calculated as a function of $s.</p>
-   <p><a href="http://ppr.cs.dal.ca:3002/n3/editor/?formula=%40prefix%20%3A%20%3C%3A%3E%20.%0A%40prefix%20string%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F10%2Fswap%2Fstring%23%3E%20.%0A%0A%3ALet%20%3Astring%20%22placeholder%22%20.%0A%0A%7B%20%3ALet%20%3Astring%20%3Fx%20.%20%7D%0A%3D%3E%0A%7B%20%3Aresult%20%3Ais%20%3Fx%20.%20%7D.%20">Try in Notation3 Editor 🚀</a></p>
-   <div class="example" id="example-7aa44587⑦⓪">
-    <a class="self-link" href="#example-7aa44587⑦⓪"></a> 
-    <p>This is an example for a built-in function.</p>
-<pre>@prefix : &lt;:> .
-@prefix string: &lt;http://www.w3.org/2000/10/swap/string#> .
-:Let :string "placeholder" .
-{ :Let :string ?x . } => { :result :is ?x . } .
+    <code>true</code> if and only if <code>$o</code> is the integer year component of <code>$s</code>. 
+   <p><a href="https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/year.n3">Try in Notation3 Editor 🚀</a></p>
+   <div class="example" id="example-bf124d23">
+    <a class="self-link" href="#example-bf124d23"></a> 
+    <p>Return the minute component of the date "2023-04-01T18:06:04Z" .</p>
+<pre>@prefix : &lt;http://example.org/>.
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#>.
+@prefix time: &lt;http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param "2023-04-01T18:06:04Z"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:year ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
 </pre>
    </div>
   </main>
