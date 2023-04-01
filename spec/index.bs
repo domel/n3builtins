@@ -418,8 +418,8 @@ N3 resource types include `log:Formula`, `log:Literal`, `log:List`, `log:Set` or
 
 <div class=example>
 
-Read the contents of the file <semantics.data> and parse it as Notation3.
-We assume <semantics.data> contains the text:
+Read the contents of the file `<semantics.data>` and parse it as Notation3.
+We assume `<semantics.data>` contains the text:
 
   @prefix : <http://example.org/>.
   :Socrates a :Human .
@@ -440,8 +440,8 @@ We assume <semantics.data> contains the text:
 
 <div class=example>
 
-Read the contents of the file <semantics.data> and parse it as Notation3.
-We assume <semantics.data> contains the text:
+Read the contents of the file `<semantics.data>` and parse it as Notation3.
+We assume `<semantics.data>` contains the text:
 
   @prefix : <http://example.org/>.
   :Socrates a :Human .
@@ -468,8 +468,8 @@ Related: see `log:parsedAsN3` and `log:content`.
 
 <div class=example>
 
-Read the contents of the file <semantics.data> and parse it as Notation3.
-We assume <semantics.data> contains the text:
+Read the contents of the file `<semantics.data>` and parse it as Notation3.
+We assume `<semantics.data>` contains the text:
 
   @prefix : <http://example.org/>.
   :Socrates a :Human .
@@ -496,8 +496,8 @@ Related: see `log:parsedAsN3` and `log:content`.
 
 <div class=example>
 
-Read the contents of the file <semantics.data> and parse it as Notation3.
-We assume <semantics.data> contains the text:
+Read the contents of the file `<semantics.data>` and parse it as Notation3.
+We assume `<semantics.data>` contains the text:
 
   @prefix : <http://example.org/>.
   :Socrates a :Human .
