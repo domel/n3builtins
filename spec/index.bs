@@ -125,7 +125,7 @@ Builtins {#Builtins}
 ### list:first() ### {#first}
 `true` if and only if `$` is a list and `$o` is the first member of that list.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/first.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/first.n3)
 
 
 <div class=example>
@@ -153,7 +153,7 @@ What is the first element of ( ("a") { :a :b :c } 42 )?
 ### list:length() ### {#length}
 `true` if and only if `$s` is a list and `$o` is the integer length of that list.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/length.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/length.n3)
 
 
 <div class=example>
@@ -177,7 +177,7 @@ Calculate the length of the list (1 2 3 4).
 ### list:remove() ### {#remove}
 `true` if and only if `$s.0` is a list, and `$o` is a list composed of the members of `$s.0` with member `$s.1` removed, if it was present.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/remove.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/list/remove.n3)
 
 
 <div class=example>
@@ -205,7 +205,7 @@ Remove "penguin" from the list ("dog" "penguin" "cat" "penguin").
 `true` if and only if `$o` is the set of conclusions which can be drawn from `$s` (deductive closure), 
 by applying any rules it contains to the data it contains.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/conclusion.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/conclusion.n3)
 
 
 <div class=example>
@@ -235,7 +235,7 @@ Draw all conclusions from the formula ":Felix a :Cat . { ?X a :Cat } => { ?X :sa
 ### log:conjunction() ### {#conjunction}
 `true` if and only if `$o` is a quoted graph that includes the contents of each of the quoted graphs `$s.i`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/conjunction.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/conjunction.n3)
 
 
 <div class=example>
@@ -262,7 +262,7 @@ Merge the formulas "{ :Felix a :Cat . }" , "{ :Pluto a :Dog . }", "{ :Pingu a :P
 ### log:content() ### {#content}
 `true` if and only if `$o` is a string that represents the online resource to which `$s` is dereferenced.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/content.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/content.n3)
 
 
 <div class=example>
@@ -291,7 +291,7 @@ Not to be confused with owl:sameAs.
 `true` if and only if, for each solution for which the first clause `$s.0` is true, the second clause `$s.1` is true as well. 
 This is a scoped universal quantification.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/forAllIn.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/forAllIn.n3)
 
 
 <div class=example>
@@ -325,7 +325,7 @@ creates a quoted graph `$o`' such that every statement in `$o`' is also in `$s`;
 whereby every variable, universally or existentially quantified in `$o`', is quantified in the same way in `$s`. 
 Variable substitution is applied recursively to nested compound terms such as quoted graphs ans lists.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/includes.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/includes.n3)
 
 
 <div class=example>
@@ -355,7 +355,7 @@ Check whether the formula { :Felix a :Cat } includes { ?X a :Cat }.
 ### log:outputString() ### {#outputString}
 The concrete semantics of this builtin (e.g., which N3 resource types are supported) will depend on the N3 reasoner.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/outputString.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/outputString.n3)
 
 
 <div class=example>
@@ -379,7 +379,7 @@ _:1 log:outputString "This is the first line
 `true` if and only if `$s`, when parsed as N3, gives `$o`.
 `$s` should be a syntactically valid string in N3 format.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/parsedAsN3.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/parsedAsN3.n3)
 
 
 <div class=example>
@@ -413,17 +413,17 @@ N3 resource types include `log:Formula`, `log:Literal`, `log:List`, `log:Set` or
 ### log:semantics() ### {#semantics}
 `true` if and only if `$o` is a quoted graph that results from parsing the string that results from dereferencing `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
 
 
 <div class=example>
 
 Read the contents of the file `<semantics.data>` and parse it as Notation3.
 We assume `<semantics.data>` contains the text:
-
+```
   @prefix : <http://example.org/>.
   :Socrates a :Human .
-            
+```       
 ```
 @prefix : <http://example.org/>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
@@ -435,17 +435,17 @@ We assume `<semantics.data>` contains the text:
 ### log:semantics() ### {#semantics}
 `true` if and only if `$o` is a quoted graph that results from parsing the string that results from dereferencing `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
 
 
 <div class=example>
 
 Read the contents of the file `<semantics.data>` and parse it as Notation3.
 We assume `<semantics.data>` contains the text:
-
+```
   @prefix : <http://example.org/>.
   :Socrates a :Human .
-            
+```            
 ```
 @prefix : <http://example.org/>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
@@ -463,17 +463,17 @@ Aside: Philosophers will be distracted here into worrying about the meaning of m
 In as much as N3 is used as an interlingua for interoperability for different systems, this for an N3 based system is the meaning expressed by a document.
 Related: see `log:parsedAsN3` and `log:content`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
 
 
 <div class=example>
 
 Read the contents of the file `<semantics.data>` and parse it as Notation3.
 We assume `<semantics.data>` contains the text:
-
+```
   @prefix : <http://example.org/>.
   :Socrates a :Human .
-            
+```         
 ```
 @prefix : <http://example.org/>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
@@ -491,17 +491,17 @@ Aside: Philosophers will be distracted here into worrying about the meaning of m
 In as much as N3 is used as an interlingua for interoperability for different systems, this for an N3 based system is the meaning expressed by a document.
 Related: see `log:parsedAsN3` and `log:content`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semantics.n3)
 
 
 <div class=example>
 
 Read the contents of the file `<semantics.data>` and parse it as Notation3.
 We assume `<semantics.data>` contains the text:
-
+```
   @prefix : <http://example.org/>.
   :Socrates a :Human .
-            
+```       
 ```
 @prefix : <http://example.org/>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#> .
@@ -513,12 +513,12 @@ We assume `<semantics.data>` contains the text:
 ### log:semanticsOrError() ### {#semanticsOrError}
 `true` if and only if (a) `$o` is a quoted graph that results from parsing the string that results from dereferencing `$s`; or (b) an error message explaining what went wrong.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semanticsOrError.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/semanticsOrError.n3)
 
 
 <div class=example>
 
-Read the contents a non existing <error.data> and parse it as Notation3 (which of course will fail).
+Read the contents a non existing `<error.data>` and parse it as Notation3 (which of course will fail).
             
 ```
 @prefix : <http://example.org/>.
@@ -531,7 +531,7 @@ Read the contents a non existing <error.data> and parse it as Notation3 (which o
 ### log:skolem() ### {#skolem}
 `true` if and only if `$o` is a skolem IRI that is a function of the subject.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/skolem.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/log/skolem.n3)
 
 
 <div class=example>
@@ -550,7 +550,7 @@ Generate a unique Skolem IRI from the list (:abc 77 "xyz") .
 ### math:absoluteValue() ### {#absoluteValue}
 `true` if and only if `$o` is the absolute value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/absoluteValue.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/absoluteValue.n3)
 
 
 <div class=example>
@@ -577,7 +577,7 @@ Calculate the absolute value of the value -2.
 ### math:acos() ### {#acos}
 `true` if and only if `$o` is the arc cosine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/acos.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/acos.n3)
 
 
 <div class=example>
@@ -604,7 +604,7 @@ Calculate the arc cosine of the value 1.
 ### math:asin() ### {#asin}
 `true` if and only if `$o` is the arc sine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/asin.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/asin.n3)
 
 
 <div class=example>
@@ -631,7 +631,7 @@ Calculate the arc sine of the value 1.
 ### math:atan() ### {#atan}
 `true` if and only if `$o` is the arc tangent value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/atan.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/atan.n3)
 
 
 <div class=example>
@@ -658,7 +658,7 @@ Calculate the arc tangent of the value 1.
 ### math:cos() ### {#cos}
 `true` if and only if `$o` is the cosine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/cos.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/cos.n3)
 
 
 <div class=example>
@@ -685,7 +685,7 @@ Calculate the cosine of the value 0.
 ### math:cosh() ### {#cosh}
 `true` if and only if `$o` is the hyperbolic cosine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/cosh.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/cosh.n3)
 
 
 <div class=example>
@@ -712,7 +712,7 @@ Calculate the hyperbolic cosine of the value 0.
 ### math:degrees() ### {#degrees}
 `true` if and only if `$o` is the value in degrees corresponding to the radians value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/degrees.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/degrees.n3)
 
 
 <div class=example>
@@ -739,7 +739,7 @@ Calculate the degrees of the radians value 1.57079632679.
 ### math:difference() ### {#difference}
 `true` if and only if `$o` is the result of subtracting `$s.2` from `$s.1`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/difference.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/difference.n3)
 
 
 <div class=example>
@@ -766,7 +766,7 @@ Calculate the value of 7 minus 2.
 ### math:equalTo() ### {#equalTo}
 `true` if and only if `$s` is the same number as `$o`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/equalTo.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/equalTo.n3)
 
 
 <div class=example>
@@ -796,7 +796,7 @@ Check if the numbers 42 and 42 are equal .
 ### math:greaterThan() ### {#greaterThan}
 `true` if and only if `$s` is a number that is greater than `$o`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/greaterThan.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/greaterThan.n3)
 
 
 <div class=example>
@@ -823,7 +823,7 @@ Check if 42 is greater than 41 .
 ### math:lessThan() ### {#lessThan}
 `true` if and only if `$s` is a number that is less than `$o`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/lessThan.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/lessThan.n3)
 
 
 <div class=example>
@@ -850,7 +850,7 @@ Check if 41 is less than 42 .
 ### math:negation() ### {#negation}
 `true` if and only if `$o` is the negation of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/negation.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/negation.n3)
 
 
 <div class=example>
@@ -877,7 +877,7 @@ Calculate the negation of the value 42 .
 ### math:notEqualTo() ### {#notEqualTo}
 `true` if and only if `$s` is the not same number as `$o`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notEqualTo.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notEqualTo.n3)
 
 
 <div class=example>
@@ -904,7 +904,7 @@ Check if the numbers 41 and 42 are not equal .
 ### math:notGreaterThan() ### {#notGreaterThan}
 `true` if and only if `$s` is a number that is not greater than `$o`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notGreaterThan.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notGreaterThan.n3)
 
 
 <div class=example>
@@ -931,7 +931,7 @@ Check if 41 is not greater than 42 .
 ### math:notLessThan() ### {#notLessThan}
 `true` if and only if `$s` is a number that is not less than `$o`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notLessThan.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/notLessThan.n3)
 
 
 <div class=example>
@@ -961,7 +961,7 @@ Check if 42 is not less than 41 .
 ### math:quotient() ### {#quotient}
 `true` if and only if `$o` is the result of dividing `$s.1` by `$s.2`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/quotient.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/quotient.n3)
 
 
 <div class=example>
@@ -988,7 +988,7 @@ Calculate the quotient of 42 and 2.
 ### math:remainder() ### {#remainder}
 `true` if and only if `$o` is the remainder of dividing `$s.1` by `$s.2`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/remainder.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/remainder.n3)
 
 
 <div class=example>
@@ -1017,7 +1017,7 @@ Calculate the remainder of 10 divided by 3.
 If there are two such numbers, then the one closest to positive infinity is returned.
 
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/rounded.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/rounded.n3)
 
 
 <div class=example>
@@ -1045,7 +1045,7 @@ Calculate the rounded version of 3.3.
 ### math:sin() ### {#sin}
 `true` if and only if `$o` is the sine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sin.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sin.n3)
 
 
 <div class=example>
@@ -1073,7 +1073,7 @@ Calculate the sin of pi/2 (1.57079632679) .
 ### math:sinh() ### {#sinh}
 `true` if and only if `$o` is the hyperbolic sine value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sinh.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sinh.n3)
 
 
 <div class=example>
@@ -1101,7 +1101,7 @@ Calculate the sinh of log(1 + sqrt(2)) (0.88137358701954302).
 ### math:sum() ### {#sum}
 `true` if and only if `$o` is the arithmetic sum of all numbers `$s.i`
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sum.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/sum.n3)
 
 
 <div class=example>
@@ -1128,7 +1128,7 @@ Calculate the sum of 1,2,3,4,5,6,7,8,9,10.
 ### math:tan() ### {#tan}
 `true` if and only if `$o` is the tangent value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/tan.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/tan.n3)
 
 
 <div class=example>
@@ -1156,7 +1156,7 @@ Calculate the tangent of the value 0.7853981633974483 .
 ### math:tanh() ### {#tanh}
 `true` if and only if `$o` is the hyperbolic tangent value of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/tanh.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/math/tanh.n3)
 
 
 <div class=example>
@@ -1185,7 +1185,7 @@ Calculate the hyperbolic tanget of 0.549306 .
 ### string:concatenation() ### {#concatenation}
 `true` if and only if the string concatenation of `$s.i` equals `$o`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/concatenation.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/concatenation.n3)
 
 
 <div class=example>
@@ -1212,7 +1212,7 @@ Concatenates the string "hello", " " and "world!".
 ### string:contains() ### {#contains}
 `true` if and only if `$s` contains `$o`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/contains.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/contains.n3)
 
 
 <div class=example>
@@ -1240,7 +1240,7 @@ Checks whether the string "hello world!" contains the string "llo worl".
 ### string:containsIgnoringCase() ### {#containsIgnoringCase}
 `true` if and only if `$s` contains `$o` when ignoring case differences.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/containsIgnoringCase.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/containsIgnoringCase.n3)
 
 
 <div class=example>
@@ -1268,7 +1268,7 @@ Checks whether the string "hello world!" contains the string "lLO woRl".
 ### string:endsWith() ### {#endsWith}
 `true` if and only if `$s` ends with `$o`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/endsWith.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/endsWith.n3)
 
 
 <div class=example>
@@ -1296,7 +1296,7 @@ Checks whether the string "hello world!" ends with "orld!".
 ### string:equalIgnoringCase() ### {#equalIgnoringCase}
 `true` if and only if `$s` is the same string as `$o` when ignoring case differences.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/equalIgnoringCase.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/equalIgnoringCase.n3)
 
 
 <div class=example>
@@ -1324,7 +1324,7 @@ Checks whether the string "hello world!" is equal to "hELLo wORld!" ignoring the
 ### string:format() ### {#format}
 `true` if and only if `$o` is the result of replacing the tags found in `$s.1` with the strings `$s.i>1`
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/format.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/format.n3)
 
 
 <div class=example>
@@ -1351,7 +1351,7 @@ Calculate the result of applying the format "%s://%s/%s" to the strings "https",
 ### string:greaterThan() ### {#greaterThan}
 `true` if and only if `$s` is greater than `$o` as per the Unicode code order.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/greaterThan.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/greaterThan.n3)
 
 
 <div class=example>
@@ -1379,7 +1379,7 @@ Checks whether the string "Pengiun" is greater than the string "Cat" .
 ### string:lessThan() ### {#lessThan}
 `true` if and only if `$s` is less than `$o` as per the Unicode code order.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/lessThan.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/lessThan.n3)
 
 
 <div class=example>
@@ -1407,7 +1407,7 @@ Checks whether the string "Cat" is less than the string "Penguin" .
 ### string:matches() ### {#matches}
 `true` if and only if string `$s` matches the regular expression `$o`
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/matches.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/matches.n3)
 
 
 <div class=example>
@@ -1435,7 +1435,7 @@ Checks whether the string "hello world!" matches the regular expression ".*(l)+o
 ### string:notEqualIgnoringCase() ### {#notEqualIgnoringCase}
 `true` if and only if `$s` is not the same string as `$o` when ignoring case differences.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notEqualIgnoringCase.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notEqualIgnoringCase.n3)
 
 
 <div class=example>
@@ -1463,7 +1463,7 @@ Checks whether the string "hello world!" is not equal to "hELLo dunia!" ignornin
 ### string:notGreaterThan() ### {#notGreaterThan}
 `true` if and only if `$s` is not greater than `$o` as per the Unicode code order.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notGreaterThan.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notGreaterThan.n3)
 
 
 <div class=example>
@@ -1491,7 +1491,7 @@ Checks whether the string "Cat" is not greater than the string "Penguin" .
 ### string:notLessThan() ### {#notLessThan}
 `true` if and only if `$s` is not less than `$o` as per the Unicode code order.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notLessThan.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notLessThan.n3)
 
 
 <div class=example>
@@ -1519,7 +1519,7 @@ Checks whether the string "Penguin" is not less than the string "Cat" .
 ### string:notMatches() ### {#notMatches}
 `true` if and only if string `$s` does not match the regular expression `$o`
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notMatches.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/notMatches.n3)
 
 
 <div class=example>
@@ -1547,7 +1547,7 @@ Checks whether the string "hello world!" no matches the regular expression ".*(l
 ### string:replace() ### {#replace}
 `true` if and only if `$o` is the result of replacing all occurrences of `$s.2` in `$s.1` with `$s.3`
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/replace.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/replace.n3)
 
 
 <div class=example>
@@ -1577,7 +1577,7 @@ Replace all "l"-s in the string "hello world!" with the bracket version "[l]" .
 ### string:scrape() ### {#scrape}
 `true` if and only if `$o` is the first matching group when matching `$s.2` as a regular expression against `$s.1`
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/scrape.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/scrape.n3)
 
 
 <div class=example>
@@ -1605,7 +1605,7 @@ Extract from the string "https://w3c.github.io/N3/spec/" the last path element u
 ### string:startsWith() ### {#startsWith}
 `true` if and only if `$s` starts with `$o`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/startsWith.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/string/startsWith.n3)
 
 
 <div class=example>
@@ -1634,7 +1634,7 @@ Checks whether the string "hello world!" starts with "hello" .
 ### time:day() ### {#day}
 `true` if and only if `$o` is the integer day component of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/day.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/day.n3)
 
 
 <div class=example>
@@ -1662,7 +1662,7 @@ Return the day component of the date "2023-04-01T18:06:04Z" .
 ### time:minute() ### {#minute}
 `true` if and only if `$o` is the integer minutes component of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/minute.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/minute.n3)
 
 
 <div class=example>
@@ -1690,7 +1690,7 @@ Return the minute component of the date "2023-04-01T18:06:04Z" .
 ### time:month() ### {#month}
 `true` if and only if `$o` is the integer month component of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/month.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/month.n3)
 
 
 <div class=example>
@@ -1718,7 +1718,7 @@ Return the month component of the date "2023-04-01T18:06:04Z" .
 ### time:second() ### {#second}
 `true` if and only if `$o` is the integer seconds component of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/second.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/second.n3)
 
 
 <div class=example>
@@ -1746,7 +1746,7 @@ Return the seconds component of the date "2023-04-01T18:06:04Z" .
 ### time:timeZone() ### {#timeZone}
 `true` if and only if `$o` is the timezone offset of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/timeZone.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/timeZone.n3)
 
 
 <div class=example>
@@ -1774,7 +1774,7 @@ Return the time zone component of the date "2023-04-01T18:06:04Z" .
 ### time:year() ### {#year}
 `true` if and only if `$o` is the integer year component of `$s`.
 
-[Try in Notation3 Editor &#128640;](file:///home/domel/buildin/N3/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/year.n3)
+[Try in Notation3 Editor &#128640;](https://github.com/w3c/N3/tree/feature-add-examples-core-builtins-fno/useOfBuiltins/core-specs/03-development/site/spec-builtins/src/time/year.n3)
 
 
 <div class=example>
