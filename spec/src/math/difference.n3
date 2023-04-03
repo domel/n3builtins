@@ -1,0 +1,73 @@
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+math:difference a fno:Function ;
+    vs:term_status  "testing" ;
+    vs:moreinfo "it is unclear for me why difference can't know the answer to (3 ?what) math:difference 1 @phochste" ;
+    fnon:tldr "Calculates the object by subtracting the second number from the first number given in the subject list." ;
+    dcterms:comment """`true` if and only if `$o` is the result of subtracting `$s.2` from `$s.1`.""" ;
+    fno:example ( [ a fno:Test ;
+                dcterms:description """
+Calculate the value of 7 minus 2.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (7 2) .
+
+{
+    :Let :param ?param .
+    ?param math:difference ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is 5.
+            """ ] ) ;
+    fno:name "difference" ;
+    fno:parameter ( 
+        [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject ;
+            fnon:listElements ( [
+                fno:predicate "$s.1" ;
+                fno:mode "+" ;
+                fno:type 
+                    [   rdf:type rdfs:Datatype ;
+                        owl:unionOf ( xsd:decimal xsd:double xsd:float )
+                    ]
+            ] [
+                fno:predicate "$s.2" ;
+                fno:mode "+" ;
+                fno:type 
+                    [   rdf:type rdfs:Datatype ;
+                        owl:unionOf ( xsd:decimal xsd:double xsd:float )
+                    ]
+            ] )
+
+        ] [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object ;
+            fno:type 
+                    [   rdf:type rdfs:Datatype ;
+                        owl:unionOf ( xsd:decimal xsd:double xsd:float )
+                    ]
+        ] ) .

@@ -1,0 +1,77 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+log:notIncludes a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Checks whether the subject quoted graph _does not_ include the object quoted graph (taking into account variables)" ;
+    dcterms:comment """`true` if and only if `$s log:includes $o` is `false`.""" ;
+    rdfs:seeAlso log:includes ;
+    fno:example ( 
+              [ a fno:Test ;
+                dcterms:description """
+Check whether the formula { :Felix a :Cat } does not include { ?X :eats ?Y }.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    { :Felix a :Cat } log:notIncludes { ?X :eats ?Y } .
+} 
+=>
+{
+    :result :is true .
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is true.
+            """ 
+           ] 
+           [ a fno:Test ;
+                dcterms:description """
+Check whether the formula { :a :b :c } does not include { :a :b :d }.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    # Dynamic evaluation of ?X and ?Y
+    ?X log:notIncludes ?Y .
+    ?X log:equalTo { :a :b :c }.
+    ?Y log:equalTo { :a :b :d }.
+} 
+=>              
+{
+    :result :is true .
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is true.
+            """ 
+          ] 
+    ) ;
+    fno:name "notIncludes" ;
+    fno:parameter (
+        [ a fno:Parameter ;
+            fno:predicate "$s" ;
+            fno:mode "+" ;
+            fnon:position fnon:subject ;
+            fno:type log:Formula
+
+        ] [ a fno:Parameter ;
+            fno:predicate "$o" ;
+            fno:mode "+" ;
+            fnon:position fnon:object ;
+            fno:type log:Formula
+        ] ) .

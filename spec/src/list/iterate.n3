@@ -1,0 +1,104 @@
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+list:iterate a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Iterates over each member of the subject list, getting their index/value pairs as the object." ;
+    dcterms:comment """`true` if and only if `$s` is a list and `$o` is a list with two elements: 
+`$o.1` is a valid index in list `$s` (index starts at 0), and `$o.2` is found at that index in list `$s`.""" ;
+    fno:example  (
+            [ a fno:Test ;
+                dcterms:description """
+Iterate over the list ("dog" "penguin" "cat").
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ ("dog" "penguin" "cat") list:iterate (?index ?member) . } => { :result :is (?index ?member) . } .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is (0 "dog") .
+:result :is (1 "penguin") .
+:result :is (2 "cat") .
+            """ ]
+
+            [ a fno:Test ;
+                dcterms:description """
+Is "cat" the third item in the list ("dog" "penguin" "cat")?
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param ("dog" "penguin" "cat") .
+{
+    :let :param ?param . 
+    ?param list:iterate (2 "cat") .  
+}
+=> 
+{ 
+    :result :is true . 
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """ ] 
+            [ a fno:Test ;
+                dcterms:description """
+What is the index of "cat" in the list ("dog" "penguin" "cat")?
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param ("dog" "penguin" "cat") .
+{
+    :let :param ?param . 
+    ?param list:iterate (?index "cat") .  
+}
+=> 
+{ 
+    :result :is ?index . 
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is 2 .
+            """ ] 
+    ) ;
+    fno:name "iterate" ;
+    fno:parameter  (
+        [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject ;
+
+        ] [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "?[*]" ;
+            fno:predicate "$o" ;
+            fno:type rdf:List ;
+            fnon:position fnon:object ;
+            fnon:listElements ( [
+                fno:predicate "$o.1" ;
+                fno:mode "?[*]" ;
+                fno:type xsd:int
+            ] [
+                fno:predicate "$o.2" ;
+                fno:mode "?[*]"
+            ] )
+        ] ) .

@@ -1,0 +1,65 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+log:conclusion a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Gets all possible conclusions from the subject quoted graph, including rule inferences (deductive closure), as the object quoted graph." ;
+    dcterms:comment """`true` if and only if `$o` is the set of conclusions which can be drawn from `$s` (deductive closure), 
+by applying any rules it contains to the data it contains.""" ;
+    vs:moreinfo "Example below not working in eye (works in jen3) (@william-vw)" ;
+    fno:example ( 
+            [ a fno:Test ;
+                dcterms:description """
+Draw all conclusions from the formula ":Felix a :Cat . { ?X a :Cat } => { ?X :says "Meow" . }".
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+:let :param { 
+    :Felix a :Cat . 
+    { ?X a :Cat . } => { ?X :says "Meow" . } .
+} .
+
+{ 
+    :let :param ?param .
+    ?param log:conclusion ?conclusion .
+} 
+=> 
+{ 
+    :result :is ?conclusion . 
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is {
+    :Felix a :Cat. 
+    :Felix :says "Meow". 
+    { ?S a :Cat . } => { ?S :says "Meow" . } .
+} .
+            """ 
+            ] 
+    ) ;
+    fno:name "conclusion" ;
+    fno:parameter ( [
+        a fno:Parameter ;
+        dcterms:description "" ;
+        fno:mode "+" ;
+        fno:predicate "$s" ;
+        fno:type log:Formula ;
+        fnon:position fnon:subject
+    ] [
+        a fno:Parameter ;
+        dcterms:description "" ;
+        fno:mode "?" ;
+        fno:predicate "$o" ;
+        fno:type log:Formula ;
+        fnon:position fnon:object
+    ] ) .

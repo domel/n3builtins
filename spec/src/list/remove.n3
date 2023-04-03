@@ -1,0 +1,64 @@
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+list:remove a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Removes the subject member from the subject list, and returns the resulting list as object." ;
+    vs:moreinfo """The dcterms:comment is wrong. Eye, jen3 nor cwm don't implement list:remove this way. (@phochste)
+Fixed the description and removed the non-functional example (@william-vw)""" ;
+    dcterms:comment """`true` if and only if `$s.1` is a list, and `$o` is a list composed of the members of `$s.1` with member `$s.2` removed (if it was present; else, `$o` will be the same list).""" ;
+    rdfs:seeAlso list:append ;
+    fno:example ( 
+            [ a fno:Test ;
+                dcterms:description """
+Remove "penguin" from the list ("dog" "penguin" "cat" "penguin").
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param ("dog" "penguin" "cat" "penguin") .
+{ 
+    :let :param ?param . 
+    ( ?param "penguin" ) list:remove ?list .
+} 
+=> 
+{ 
+    :result :is ?list . 
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is ("dog" "cat").
+            """ ] 
+    ) ;
+    fno:name "remove" ;
+    fno:parameter ( 
+        [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject ;
+            fnon:listElements ( [
+                fno:predicate "$s.1" ;
+                fno:mode "+" ;
+                fno:type rdf:List ;
+            ] [
+                fno:predicate "$s.2" ;
+                fno:mode "+"
+            ] )
+
+        ] [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ] ) .

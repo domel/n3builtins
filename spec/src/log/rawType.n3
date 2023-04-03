@@ -1,0 +1,105 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+log:rawType a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Gets the type of the N3 resource." ;
+    dcterms:comment """`true` if and only if the N3 resource type of `$s` is `$o`.
+N3 resource types include `log:Formula`, `log:Literal`, `log:List`, `log:Set` or `log:Other`.""" ;
+    fno:example ( 
+            [ a fno:Test ;
+                dcterms:description """
+Get the type of literal resources.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    "Hello" log:rawType ?stringType .
+    42 log:rawType ?integerType .
+    true log:rawType ?trueType .
+    false log:rawType ?falseType .
+}
+=>
+{
+    :result :is ( ?stringType ?integerType ?trueType ?falseType ) .
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+:result :is ( log:Literal log:Literal log:Literal log:Literal ) .
+            """ 
+            ]  
+
+            [ a fno:Test ;
+                dcterms:description """
+Get the type of resources.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    <http://www.w3c.org> log:rawType ?resourceType .
+}
+=>
+{
+    :result :is ?resourceType .
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+:result :is log:Other.
+            """ 
+            ] 
+
+            [ a fno:Test ;
+                dcterms:description """
+Get the type of lists and quoted graphs.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    (1 2 3 4) log:rawType ?listType .
+    { :s :p :o } log:rawType ?graphType .
+} 
+=>
+{
+    :result :is ( ?listType ?graphType ) .
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+:result :is ( rdf:List log:Formula ) .
+            """ 
+            ] 
+    ) ;
+    fno:name "rawType" ;
+    fno:parameter (
+        [ a fno:Parameter ;
+            fno:predicate "$s" ;
+            fno:mode "+" ;
+            fnon:position fnon:subject ;
+            
+        ] [ a fno:Parameter ;
+            fno:predicate "$o" ;
+            fno:mode "-" ;
+            fnon:position fnon:object ;
+            fno:type log:Uri
+        ] ) .

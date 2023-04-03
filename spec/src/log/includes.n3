@@ -1,0 +1,55 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+log:includes a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr """Checks whether the subject quoted graph includes the object quoted graph (taking into account variables). 
+Can also be used to bind variables to values within the graph contents (see examples).""" ;
+    dcterms:comment """`true` if and only if there exists some substitution which, when applied to `$o`, 
+creates a quoted graph `$o`' such that every statement in `$o`' is also in `$s`;
+whereby every variable, universally or existentially quantified in `$o`', is quantified in the same way in `$s`. 
+Variable substitution is applied recursively to nested compound terms such as quoted graphs ans lists.""" ;
+    rdfs:seeAlso log:notIncludes ;
+    fno:example ( 
+            [ a fno:Test ;
+                dcterms:description """
+Check whether the formula { :Felix a :Cat } includes { ?X a :Cat }.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    { :Felix a :Cat } log:includes { ?X a :Cat } .
+} 
+=>
+{
+    :result :is ?X .
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is :Felix .
+            """ 
+    ] ) ;
+    fno:name "includes" ;
+    fno:parameter (
+        [ a fno:Parameter ;
+            fno:predicate "$s" ;
+            fno:mode "+" ;
+            fnon:position fnon:subject ;
+            fno:type log:Formula
+
+        ] [ a fno:Parameter ;
+            fno:predicate "$o" ;
+            fno:mode "+" ;
+            fnon:position fnon:object ;
+            fno:type log:Formula
+        ] ) .

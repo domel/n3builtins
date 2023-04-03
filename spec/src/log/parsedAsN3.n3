@@ -1,0 +1,60 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+log:parsedAsN3 a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Parses the subject string into an object quoted graph." ;
+    dcterms:comment """`true` if and only if `$s`, when parsed as N3, gives `$o`.
+`$s` should be a syntactically valid string in N3 format.""" ;
+    fno:example ( 
+              [ a fno:Test ;
+                dcterms:description """
+Parse the string ':Socrates a :Human .' as N3.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+:Let :param \"\"\"
+@prefix : <urn:example:> .
+:Socrates a :Human .
+\"\"\" .
+
+{
+    :Let :param ?X .
+    ?X log:parsedAsN3 ?Y .
+}
+=>
+{
+    :result :is ?Y .
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is { <urn:example:Socrates> a <urn:example:Human> . } .
+            """ 
+            ] 
+    ) ;
+    fno:name "parsedAsN3" ;
+    rdfs:seeAlso log:semantics ;
+    fno:parameter (
+        [ a fno:Parameter ;
+            fno:predicate "$s" ;
+            fno:mode "+" ;
+            fnon:position fnon:subject ;
+            fno:type xsd:string ;
+            dcterms:description "should be a syntactically valid string in N3 format" ;
+            
+        ] [ a fno:Parameter ;
+            fno:predicate "$o" ;
+            fno:mode "-" ;
+            fnon:position fnon:object ;
+            fno:type log:Formula
+        ] ) .

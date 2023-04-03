@@ -1,0 +1,52 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+log:content a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Dereferences the subject IRI and retrieves the online resource as the object string." ;
+    dcterms:comment """`true` if and only if `$o` is a string that represents the online resource to which `$s` is dereferenced.""" ;
+    fno:example ( 
+            [ a fno:Test , fno:TestSkip ;
+                dcterms:description """
+Fetch the content of https://www.w3.org/People/Berners-Lee/card.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    <https://www.w3.org/People/Berners-Lee/card> log:content ?content .
+} 
+=> 
+{ 
+    :result :is ?content . 
+} .
+            """ ;
+                fno:result """
+:result :is "...the content of https://www.w3.org/People/Berners-Lee/card ...". 
+            """ 
+           ] 
+    ) ;
+    fno:name "content" ;
+    fno:parameter ( [
+        a fno:Parameter ;
+        dcterms:description "" ;
+        fno:mode "+" ;
+        fno:predicate "$s" ;
+        fno:type log:Uri ;
+        fnon:position fnon:subject
+    ] [
+        a fno:Parameter ;
+        dcterms:description "" ;
+        fno:mode "?" ;
+        fno:predicate "$o" ;
+        fno:type xsd:string ;
+        fnon:position fnon:object
+    ] ) .

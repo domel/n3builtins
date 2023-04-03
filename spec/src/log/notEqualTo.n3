@@ -1,0 +1,103 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+log:notEqualTo a fno:Function ;
+    vs:term_status  "testing" ;
+    vs:moreinfo "the results are surprising when using unbound variables (phochste)" ;
+    vs:moreinfo "?x log:notEqualTo 'Cat' is semantically not false, it has infinite amount of results (phochste)" ;
+    vs:moreinfo "we make it into false because in N3 there is no way, yet, to express a result with infinite results (phochste)" ;
+    vs:moreinfo "we need to document that unbound variables are automatic false. (phochste)" ;
+    vs:moreinfo "this makes notEqualTo not the exact complement of equalTo. (phochste)" ;
+    fnon:tldr "Checks whether the subject and object N3 resources are _not_ the same." ;
+    dcterms:comment """`true` if and only if `$s log:equalTo $o` is false.""" ;
+    rdfs:seeAlso log:equalTo ;
+    fno:example ( 
+            [ a fno:Test ;
+                dcterms:description """
+Determine if 1 is not equal to 2 and "Cat" is not equal to "CAT" and { :A :B :C . } is not equal to { :C :B :A }.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    1 log:notEqualTo 2 .
+    "Cat" log:notEqualTo "CAT" .
+    { :A :B :C . } log:notEqualTo { :C :B :A . } .
+}
+=>
+{
+    :result :is true .
+} . 
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """ 
+            ] 
+
+            [ a fno:Test ;
+                dcterms:description """
+Determine if "Cat" is not equal to "Cat"@en .
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    "Cat" log:notEqualTo "Cat"@en .
+}
+=>
+{
+    :result :is true .
+} . 
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """ 
+            ] 
+
+            [ a fno:Test ;
+                dcterms:description """
+Check if an existential or universal variable is not equal to a value.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    _:x log:notEqualTo 42 .
+    ?q  log:notEqualTo "Cat"@en .
+}
+=>
+{
+    :result :is true .
+} . 
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+# no result (the variables _:x and ?q are not bounded) 
+            """ 
+            ] 
+    ) ;
+    fno:name "notEqualTo" ;
+    fno:parameter (
+        [ a fno:Parameter ;
+            fno:predicate "$s" ;
+            fno:mode "+" ;
+            fnon:position fnon:subject ;
+        ] [ a fno:Parameter ;
+            fno:predicate "$o" ;
+            fno:mode "+" ;
+            fnon:position fnon:object ;
+        ] ) .

@@ -1,0 +1,60 @@
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+math:asin a fno:Function ;
+    fnon:tldr "Calculates the object as the arc sine value of the subject." ;
+    vs:moreinfo "is asin not just syntactic sugar for cos, eye, jen3 and cwm can use sin in both directions @phochste" ;
+    vs:term_status  "testing" ;
+    dcterms:comment "`true` if and only if `$o` is the arc sine value of `$s`." ;
+    rdfs:seeAlso math:sin , math:sinh ;
+    fno:example ( [ a fno:Test ;
+                dcterms:description """
+Calculate the arc sine of the value 1.
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1 .
+
+{
+    :Let :param ?param .
+    ?param math:asin ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is 1.5707963267948966 .
+            """ ] ) ;
+    fno:name "asin" ;
+    fno:parameter ( [
+        a fno:Parameter ;
+        fno:mode "?" ;
+        fno:predicate "$s" ;
+        fno:type 
+            [   rdf:type rdfs:Datatype ;
+                owl:unionOf ( xsd:decimal xsd:double xsd:float )
+            ] ;
+        fnon:position fnon:subject
+    ] [
+        a fno:Parameter ;
+        fno:mode "?" ;
+        fno:predicate "$o" ;
+        fno:type
+            [   rdf:type rdfs:Datatype ;
+                owl:unionOf ( xsd:decimal xsd:double xsd:float )
+            ] ;
+        fnon:position fnon:object
+    ] ) .

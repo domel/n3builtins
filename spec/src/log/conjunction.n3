@@ -1,0 +1,63 @@
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+log:conjunction a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Merges the quoted graphs from the subject list into a single quoted graph as object." ;
+    dcterms:comment """`true` if and only if `$o` is a quoted graph that includes the contents of each of the quoted graphs `$s.i`.""" ;
+    fno:example ( 
+            [ a fno:Test ;
+                dcterms:description """
+Merge the formulas "{ :Felix a :Cat . }" , "{ :Pluto a :Dog . }", "{ :Pingu a :Penguin . }" .
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    ( { :Felix a :Cat . }
+      { :Pluto a :Dog . }  
+      { :Pingu a :Penguin . }
+    ) log:conjunction ?merged .
+} 
+=> 
+{ 
+    :result :is ?merged . 
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is { 
+    :Felix a :Cat . 
+    :Pingu a :Penguin . 
+    :Pluto a :Dog . 
+} .
+            """ 
+           ] 
+    ) ;
+    fno:name "conjunction" ;
+    fno:parameter (
+        [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject ;
+            fnon:listElementType [
+                fno:predicate "$s.i" ;
+                fno:mode "+" ;
+                fno:type log:Formula
+            ]
+        ] [ a fno:Parameter ;
+            fno:predicate "$o" ;
+            fno:mode "?" ;
+            fnon:position fnon:object ;
+            fno:type log:Formula
+        ] ) .

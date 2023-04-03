@@ -1,0 +1,93 @@
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+list:memberAt a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Gets the member of the subject list at the given subject index as object (index starts at 0)." ;
+    vs:moreinfo """The dcterms:comment seems wrong. Jen, eye nor eye support the negative index. Only eye supports the s_2 variable (@phochste).
+Fixed the description (@william-vw).""" ;
+    dcterms:comment """`true` if and only if `$s.1` is a list, `$s.2` is a valid index in list `$s.1`, and `$o` is found at that index in the list.""" ;
+    fno:example ( 
+            [ a fno:Test ;
+                dcterms:description """
+Get the third member of the list ("dog" "penguin" "cat").
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param ("dog" "penguin" "cat").
+
+{
+    :let :param ?param .
+    ( ?param 2 ) list:memberAt ?third .
+} 
+=> 
+{ 
+    :result :is ?third . 
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is "cat" .
+            """ 
+           ] 
+
+            [ a fno:Test ;
+                dcterms:description """
+Find the index of "cat" in the list ("dog" "cat" "penguin" "cat").
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param ("dog" "cat" "penguin" "cat").
+
+{
+    :let :param ?param .
+    ( ?param ?index ) list:memberAt "cat" .
+} 
+=> 
+{ 
+    :result :is ?index . 
+} .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is 1 .
+:result :is 3 .
+            """ 
+          ] 
+    ) ;
+    fno:name "memberAt" ;
+    fno:parameter ( 
+        [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject ;
+            fnon:listElements ( [
+                fno:predicate "$s.1" ;
+                fno:mode "+" ;
+                fno:type rdf:List ;
+            ] [
+                fno:predicate "$s.2" ;
+                fno:mode "?[*]" ;
+                fno:type xsd:int
+            ] )
+
+        ] [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "?[*]" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ] ) .

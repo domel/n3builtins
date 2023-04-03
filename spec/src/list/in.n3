@@ -1,0 +1,62 @@
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+list:in a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Checks whether the subject is found in the object list." ;
+    dcterms:comment """`true` if and only if `$o` is a list and `$s` is a member of that list.""" ;
+    rdfs:seeAlso list:member ;
+    fno:example (
+            [ a fno:Test ;
+                dcterms:description """
+Does ( "dog" "penguin" "cat" ) contain a "cat"?
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ "cat" list:in ( "dog" "penguin" "cat" ) . } => { :result :is true . } .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is true. 
+            """ ] 
+
+            [ a fno:Test ;
+                dcterms:description """
+What are the members of ( "dog" "penguin" "cat" )?
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ ?what list:in ( "dog" "penguin" "cat" ) . } => { :result :is ?what . } .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is "dog" .
+:result :is "penguin" . 
+:result :is "cat" .
+            """ ] )
+     ;
+    fno:name "in" ;
+    fno:parameter (
+        [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "-[*]" ;
+            fno:predicate "$s" ;
+            fnon:position fnon:subject ;
+        ] [ a fno:Parameter ;
+            fno:predicate "$o" ;
+            fno:mode "+" ;
+            fno:type rdf:List ;
+            fnon:position fnon:object
+        ] ) .

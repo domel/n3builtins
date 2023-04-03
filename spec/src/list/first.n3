@@ -1,0 +1,44 @@
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+
+list:first a fno:Function ;
+    vs:term_status  "testing" ;
+    fnon:tldr "Gets the first element of the subject list as object." ;
+    dcterms:comment """`true` if and only if `$` is a list and `$o` is the first member of that list.""" ;
+    rdfs:seeAlso list:last ;
+    fno:example  (
+            [ a fno:Test ;
+                dcterms:description """
+What is the first element of ( ('a') { :a :b :c } 42 )?
+            """ ;
+                rdfs:seeAlso <> ;
+                fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ ( ('a') { :a :b :c } 42 ) list:first ?what . } => { :result :is ?what . } .
+            """ ;
+                fno:result """
+@prefix : <http://example.org/>.
+:result :is ('a'). 
+            """ ] 
+     ) ;
+    fno:name "first" ;
+    fno:parameter (
+        [ a fno:Parameter ;
+            dcterms:description "" ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject ;
+        ] [ a fno:Parameter ;
+            fno:predicate "$o" ;
+            fno:mode "-" ;
+            fnon:position fnon:object
+        ] ) .
