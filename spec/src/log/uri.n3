@@ -16,7 +16,7 @@ This is a level breaker, breaking the rule of not looking inside a URI.""" ;
     fno:example ( 
               [ a fno:Test ;
                 dcterms:description """
-Parse the URI <https://www.w3.org> into a string .
+Parse the URI `<https://www.w3.org>` into a string .
             """ ;
                 rdfs:seeAlso <> ;
                 fno:expression """
