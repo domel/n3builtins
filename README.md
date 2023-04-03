@@ -2,7 +2,7 @@
 
 This is the template for the https://w3c.github.io/N3 website (builtin function section).
 
-Current version: https://domel.github.io/n3buildins/specification/
+Current version: https://domel.github.io/n3builtins/specification/
 
 Requirements are written in [Markdown](https://daringfireball.net/projects/markdown/) and transformed to HTML using the [Bikeshed preprocessor](https://tabatkins.github.io/bikeshed/).
 
