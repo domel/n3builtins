@@ -18,7 +18,6 @@ jobs:
           SOURCE: spec/index.bs
           VALIDATE_LINKS: false
           VALIDATE_MARKUP: true
-          ACTIONS_STEP_DEBUG: true
           GH_PAGES_BRANCH: gh-pages
           DESTINATION: specification/index.html
           GH_PAGES_BUILD_OVERRIDE: |
