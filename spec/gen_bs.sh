@@ -1,6 +1,6 @@
 #!/bin/bash
-if command -v python3 &>/dev/null; then
-    python3 create-markdown.py > index.bs
-else
+if command -v python &>/dev/null; then
     python create-markdown.py > index.bs
+else
+    python3 create-markdown.py > index.bs
 fi
