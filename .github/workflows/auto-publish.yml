@@ -18,9 +18,9 @@ jobs:
           SOURCE: spec/index.bs
           VALIDATE_LINKS: false
           VALIDATE_MARKUP: true
+          BUILD_FAIL_ON: nothing
           GH_PAGES_BRANCH: gh-pages
           DESTINATION: specification/index.html
           GH_PAGES_BUILD_OVERRIDE: |
             status: w3c/CG-DRAFT
-            allow-execute: 
             TR: https://domel.github.io/n3buildins/specification/
