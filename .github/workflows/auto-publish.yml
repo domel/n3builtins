@@ -15,12 +15,12 @@ jobs:
       - uses: w3c/spec-prod@v2
         with:
           TOOLCHAIN: bikeshed
+          TOOLCHAIN_OPTIONS: --allow-execute
           SOURCE: spec/index.bs
           VALIDATE_LINKS: false
           VALIDATE_MARKUP: true
           GH_PAGES_BRANCH: gh-pages
           DESTINATION: specification/index.html
-          TOOLCHAIN_OPTIONS: --allow-execute
           GH_PAGES_BUILD_OVERRIDE: |
             status: w3c/CG-DRAFT
             TR: https://domel.github.io/n3buildins/specification/
