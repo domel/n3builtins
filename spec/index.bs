@@ -63,7 +63,7 @@ Status of this Document {#statusofdocument}
 Builtin namespaces {#builtinnamespaces}
 =====================
 
-N3</abbr> defines a core set of [builtins](#builtins):
+<abbr title="Notation3">N3</abbr> defines a core set of [builtins](#builtins):
 			Builtins are grouped into distinct vocabularies depending on the N3 triple elements they operate on
 			(e.g., string, list), or their particular topic (e.g., time, cryptography, log).
 			Builtins are denoted by a controlled IRI defined in one of the core builtin namespaces:</p>
