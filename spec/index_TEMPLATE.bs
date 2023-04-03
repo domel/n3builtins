@@ -3,13 +3,13 @@ Title: N3 Builtin Functions
 Shortname: functions
 Level: 1
 Status: LD
-URL: https://domel.github.io/n3buildins/specification/
-TR: https://domel.github.io/n3buildins/specification/
-Previous Version: https://domel.github.io/n3buildins/specification/0.1/
+URL: https://w3c.github.io/N3/spec/
+TR: https://w3c.github.io/N3/spec/
+Previous Version: https://w3c.github.io/N3/spec/builtins/0.1/
 Editor: William Van Woensel, [University of Ottawa](https://www.uottawa.ca/), william.van.woensel@gmail.com 
 Editor: Patrick Hochstenbach, [IDLab - Ghent University](https://knows.idlab.ugent.be/), Patrick.Hochstenbach@ugent.be
 !Contributors: Tim Duval, [UnifyLogic](http://unifylogic.ai), tim.duval@unifylogic.ai
-!Contributors: Dominik Tomaszuk, [University of Bialystok](https://uwb.edu.pl/en/), d.tomaszuk@uwb.edu.pl
+!Contributors: Dominik Tomaszuk, [University of Bialystok](https://uwb.edu.pl/), dominik.tomaszuk@gmail.com
 
 Abstract: This document defines the Notation 3 builtins. These are predicates with pre-defined semantics for querying, manipulating and reasoning over N3 documents.
 Markup Shorthands: markdown yes 
@@ -48,10 +48,16 @@ table th.last {
 }
 .schema_where {
 	margin-top: -15px;
-	font-size: 0.9em;
 }
 .schema_datatypes {
 	margin-left: 25px;
+}
+.schema_param_descr {
+	font-size: 0.9em
+}
+.schema_param_datatype {
+	font-size: 0.95em;
+	font-style: italic;
 }
 </style>
 
@@ -63,7 +69,7 @@ Status of this Document {#statusofdocument}
 Builtin namespaces {#builtinnamespaces}
 =====================
 
-<abbr title="Notation3">N3</abbr> defines a core set of [builtins](#builtins):
+N3</abbr> defines a core set of [builtins](#builtins):
 			Builtins are grouped into distinct vocabularies depending on the N3 triple elements they operate on
 			(e.g., string, list), or their particular topic (e.g., time, cryptography, log).
 			Builtins are denoted by a controlled IRI defined in one of the core builtin namespaces:</p>
@@ -263,11 +269,6 @@ Builtin Evaluation {#builtinevaluation}
 				In case these constraints are not met, the <a>builtin statement</a> will evaluate to false.
 			</p>
 
-
-
-Online Tutorial for Semantic Web Reasoning With N3 {#OnlineTutorial}
-=====================
-[Online Tutorial for Semantic Web Reasoning With N3](https://n3.restdesc.org/n3/)
 
 Builtins {#builtins}
 =====================
