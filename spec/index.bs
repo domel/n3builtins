@@ -1,4 +1,4 @@
-<pre class='metadata'> 
+<pre class='metadata'>
 Title: N3 Builtin Functions
 Shortname: functions
 Level: 1
