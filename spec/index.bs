@@ -9,7 +9,7 @@ Previous Version: https://w3c.github.io/N3/spec/builtins/0.1/
 Editor: William Van Woensel, [University of Ottawa](https://www.uottawa.ca/), william.van.woensel@gmail.com 
 Editor: Patrick Hochstenbach, [IDLab - Ghent University](https://knows.idlab.ugent.be/), Patrick.Hochstenbach@ugent.be
 !Contributors: Tim Duval, [UnifyLogic](http://unifylogic.ai), tim.duval@unifylogic.ai
-!Contributors: Dominik Tomaszuk, [University of Bialystok](https://uwb.edu.pl/), dominik.tomaszuk@gmail.com
+!Contributors: Dominik Tomaszuk, [University of Bialystok](https://uwb.edu.pl/en/), d.tomaszuk@uwb.edu.plil.com
 
 Abstract: This document defines the Notation 3 builtins. These are predicates with pre-defined semantics for querying, manipulating and reasoning over N3 documents.
 Markup Shorthands: markdown yes 
@@ -69,7 +69,7 @@ Status of this Document {#statusofdocument}
 Builtin namespaces {#builtinnamespaces}
 =====================
 
-N3</abbr> defines a core set of [builtins](#builtins):
+<abbr title="Notation3">N3</abbr> defines a core set of [builtins](#builtins):
 			Builtins are grouped into distinct vocabularies depending on the N3 triple elements they operate on
 			(e.g., string, list), or their particular topic (e.g., time, cryptography, log).
 			Builtins are denoted by a controlled IRI defined in one of the core builtin namespaces:</p>
@@ -115,12 +115,12 @@ Builtin arguments {#builtinarguments}
 				Note that these modes are mostly based on [Prolog argument modes](https://www.swi-prolog.org/pldoc/man?section=argmode).
 			</p>
 			<ul>
-				<li><dfn lt="mod_pp">`++`</dfn>: input argument (bound, fully grounded)</li>
-				<li><dfn lt="="mod_p">`+`</dfn>: input argument (bound, possibly not fully grounded)</li>
-				<li><dfn lt="="mod_m">`-`</dfn>: output argument (bounded or not bounded)</li>
-				<li><dfn lt="="mod_mm">`--`</dfn>: output argument (not bounded)</li>
-				<li><dfn lt="="mod_qm">`?`</dfn>: either providing input or accepting output, or both.</li>
-				<li><dfn lt="="mod_a">`[*]`</dfn>: modifier indicating that an argument can have multiple solutions.</li>
+				<li>`++`: input argument (bound, fully grounded)</li>
+				<li>`+`: input argument (bound, possibly not fully grounded)</li>
+				<li>`-`: output argument (bounded or not bounded)</li>
+				<li>`--`: output argument (not bounded)</li>
+				<li>`?`: either providing input or accepting output, or both.</li>
+				<li>`[*]`: modifier indicating that an argument can have multiple solutions.</li>
 			</ul>
 
 ## Argument domains ## {#arg_domains}
