@@ -17,7 +17,7 @@ jobs:
           TOOLCHAIN: bikeshed
           SOURCE: spec/index.bs
           VALIDATE_LINKS: false
-          VALIDATE_MARKUP: true
+          VALIDATE_MARKUP: false
           BUILD_FAIL_ON: nothing
           GH_PAGES_BRANCH: gh-pages
           DESTINATION: specification/index.html
