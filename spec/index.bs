@@ -2174,7 +2174,7 @@ Fetch the content of https://www.w3.org/People/Berners-Lee/card.
     
 
 ### log:langlit ### {#langlit}
-Creates a language-tagged literal as object, based on the string value and language tag (see [BCP47](https://tools.ietf.org/html/bcp47)) in the subject list.
+Creates a language-tagged literal as object, based on the string value and language tag in the subject list.
 
 
 `true` if and only if `$o` is a language-tagged literal with string value corresponding to `$s.1` and language tag corresponding to `$s.2`.
