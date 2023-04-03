@@ -3,7 +3,8 @@ help:
 	@echo " [builtins.n3]"
 	@echo
 	@echo "  make builtins Generate builtins.n3 from src/ input files"
-	@echo "  make valid    Validate builtin examples in src/"
+	@echo "  make valid    Validate builtin examples in src/ (optional)"
+	@echo "  make tidy     Generate builtins.tidy.n3 that is human-readable (optional)"
 	@echo
 	@echo " [index.html]"
 	@echo
@@ -17,6 +18,9 @@ help:
 
 index:
 	@ ./gen_bs.sh
+
+tidy:
+	@ rapper -g builtins.n3 -o turtle > builtins.tidy.n3
 	
 spec:
 	@ docker run --rm --platform linux/amd64 -v "`pwd`:/spec" -w /spec netwerkdigitaalerfgoed/bikeshed:1.7.0

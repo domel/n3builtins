@@ -18,6 +18,7 @@ These tools are required for testing and development of the documentation:
   - sparql_dataframe
   - urlib3
 - [EYE](https://github.com/eyereasoner/eye)
+- [rapper](https://librdf.org/raptor/rapper.html)
 
 Note: when editing the `create-markdown.ipynb` Jupyter notebook, be sure to convert it to a Python file afterwards:
 
@@ -33,8 +34,9 @@ See : `spec/` folder.
 
 ### builtins.n3
 
-- `make valid` : validate all `src/` input files
 - `make builtins` : generate a N3 `builtins.n3` file from `src/` input files
+- `make valid` : validate all `src/` input files
+- `make tidy` : generate builtins.tidy.n3 that is human-readable
 
 ### index.html
 

@@ -1,0 +1,4640 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix crypto: <http://www.w3.org/2000/10/swap/crypto#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix fnon: <https://w3id.org/function/ontology/n3#> .
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+crypto:sha
+    dcterms:description "`true` if and only if `$o` is the SHA-1 hash of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the SHA-1 of the string \"hello world\".
+            """ ;
+            a fno:Test ;
+            fno:expression """
+@prefix : <http://example.org/> .
+@prefix crypto: <http://www.w3.org/2000/10/swap/crypto#> .
+
+{ \"hello world\" crypto:sha ?sha . } => { :result :is ?sha . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"2aae6c35c94fcfb415dbe95f408b9ce91ee846ed\" .
+            """
+        ]
+    ) ;
+    fno:name "SHA-1 hash" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets as object the SHA-1 hash of the subject." .
+
+list:append
+    dcterms:description "`true` if and only if `$o` is the concatenation of all lists `$s.i`." ;
+    a fno:Function ;
+    rdfs:seeAlso list:remove ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Append (3 4) to the list (1 2).
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/append.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ ( (1 2) (3 4) ) list:append ?list . } => { :result :is ?list . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is (1 2 3 4). 
+            """
+        ]
+        [
+            dcterms:description """
+What do we need to prepend to (3 4) to get (1 2 3 4)?
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/append.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ ( ?what (3 4) ) list:append (1 2 3 4) . } => { :result :is ?what . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is (1 2). 
+            """
+        ]
+        [
+            dcterms:description """
+What do we need to append to (1 2) to get (1 2 3 4)?
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/append.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ ( (1 2) ?what ) list:append (1 2 3 4) . } => { :result :is ?what . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is (3 4). 
+            """
+        ]
+        [
+            dcterms:description """
+Is the list (1 2 3 4) equal to appending (1), (2 3) , (4)?
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/append.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ ( (1) (2 3) (4) ) list:append (1 2 3 4) . } => { :result :is true . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true. 
+            """
+        ]
+    ) ;
+    fno:name "append" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElementType [
+                fno:mode "?[*]" ;
+                fno:predicate "$s.i" ;
+                fno:type rdf:List
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type rdf:List ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Appends the lists from the subject list into a single list as object." .
+
+list:first
+    dcterms:description "`true` if and only if `$` is a list and `$o` is the first member of that list." ;
+    a fno:Function ;
+    rdfs:seeAlso list:last ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+What is the first element of ( ('a') { :a :b :c } 42 )?
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/first.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ ( ('a') { :a :b :c } 42 ) list:first ?what . } => { :result :is ?what . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is ('a'). 
+            """
+        ]
+    ) ;
+    fno:name "first" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets the first element of the subject list as object." .
+
+list:in
+    dcterms:description "`true` if and only if `$o` is a list and `$s` is a member of that list." ;
+    a fno:Function ;
+    rdfs:seeAlso list:member ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Does ( \"dog\" \"penguin\" \"cat\" ) contain a \"cat\"?
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/in.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ \"cat\" list:in ( \"dog\" \"penguin\" \"cat\" ) . } => { :result :is true . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true. 
+            """
+        ]
+        [
+            dcterms:description """
+What are the members of ( \"dog\" \"penguin\" \"cat\" )?
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/in.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ ?what list:in ( \"dog\" \"penguin\" \"cat\" ) . } => { :result :is ?what . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"dog\" .
+:result :is \"penguin\" . 
+:result :is \"cat\" .
+            """
+        ]
+    ) ;
+    fno:name "in" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "-[*]" ;
+            fno:predicate "$s" ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type rdf:List ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject is found in the object list." .
+
+list:iterate
+    dcterms:description """`true` if and only if `$s` is a list and `$o` is a list with two elements: 
+`$o.1` is a valid index in list `$s` (index starts at 0), and `$o.2` is found at that index in list `$s`.""" ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Iterate over the list (\"dog\" \"penguin\" \"cat\").
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/iterate.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ (\"dog\" \"penguin\" \"cat\") list:iterate (?index ?member) . } => { :result :is (?index ?member) . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is (0 \"dog\") .
+:result :is (1 \"penguin\") .
+:result :is (2 \"cat\") .
+            """
+        ]
+        [
+            dcterms:description """
+Is \"cat\" the third item in the list (\"dog\" \"penguin\" \"cat\")?
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/iterate.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param (\"dog\" \"penguin\" \"cat\") .
+{
+    :let :param ?param . 
+    ?param list:iterate (2 \"cat\") .  
+}
+=> 
+{ 
+    :result :is true . 
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """
+        ]
+        [
+            dcterms:description """
+What is the index of \"cat\" in the list (\"dog\" \"penguin\" \"cat\")?
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/iterate.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param (\"dog\" \"penguin\" \"cat\") .
+{
+    :let :param ?param . 
+    ?param list:iterate (?index \"cat\") .  
+}
+=> 
+{ 
+    :result :is ?index . 
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 2 .
+            """
+        ]
+    ) ;
+    fno:name "iterate" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "?[*]" ;
+            fno:predicate "$o" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "?[*]" ;
+                    fno:predicate "$o.1" ;
+                    fno:type xsd:integer
+                ]
+                [
+                    fno:mode "?[*]" ;
+                    fno:predicate "$o.2"
+                ]
+            ) ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Iterates over each member of the subject list, getting their index/value pairs as the object." .
+
+list:last
+    dcterms:description "`true` if and only if `$` is a list and `$o` is the last member of that list." ;
+    a fno:Function ;
+    rdfs:seeAlso list:first ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Extract the last element of the list (1 2 3 4).
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/last.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ (1 2 3 4) list:last ?last . } => { :result :is ?last . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 4. 
+            """
+        ]
+        [
+            dcterms:description """
+Test if the last element of the list (1 2 3 4) is 4.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/last.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param (1 2 3 4).
+
+{ 
+    :let :param ?param .
+    ?param list:last 4 . 
+} 
+=> 
+{ 
+    :result :is true . 
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true. 
+            """
+        ]
+    ) ;
+    fno:name "last" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets the last element of the subject list as object." .
+
+list:length
+    dcterms:description "`true` if and only if `$s` is a list and `$o` is the integer length of that list." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the length of the list (1 2 3 4).
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/length.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ (1 2 3 4) list:length ?length . } => { :result :is ?length . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 4. 
+            """
+        ]
+    ) ;
+    fno:name "length" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets the length of the subject list as object." .
+
+list:member
+    dcterms:description "`true` if and only `$s` is a list and `o` is a member of that list." ;
+    a fno:Function ;
+    rdfs:seeAlso list:in, list:memberAt ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Determine the members of the list (\"dog\" \"penguin\" \"cat\").
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/member.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+{ (\"dog\" \"penguin\" \"cat\") list:member ?member . } => { :result :is ?member . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"dog\".
+:result :is \"penguin\".
+:result :is \"cat\".
+            """
+        ]
+        [
+            dcterms:description """
+Is \"cat\" a member of the list (\"dog\" \"penguin\" \"cat\")?
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/member.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param (\"dog\" \"penguin\" \"cat\") .
+
+{ 
+    :let :param ?param .
+    ?param list:member \"cat\" . 
+} 
+=> 
+{ 
+    :result :is true . 
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true.
+            """
+        ]
+    ) ;
+    fno:name "member" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-[*]" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject list contains the object." .
+
+list:memberAt
+    dcterms:description "`true` if and only if `$s.1` is a list, `$s.2` is a valid index in list `$s.1`, and `$o` is found at that index in the list." ;
+    a fno:Function ;
+    vs:moreinfo """The dcterms:description seems wrong. Jen, eye nor eye support the negative index. Only eye supports the s_2 variable (@phochste).
+Fixed the description (@william-vw).""" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Get the third member of the list (\"dog\" \"penguin\" \"cat\").
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/memberAt.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param (\"dog\" \"penguin\" \"cat\").
+
+{
+    :let :param ?param .
+    ( ?param 2 ) list:memberAt ?third .
+} 
+=> 
+{ 
+    :result :is ?third . 
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"cat\" .
+            """
+        ]
+        [
+            dcterms:description """
+Find the index of \"cat\" in the list (\"dog\" \"cat\" \"penguin\" \"cat\").
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/memberAt.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param (\"dog\" \"cat\" \"penguin\" \"cat\").
+
+{
+    :let :param ?param .
+    ( ?param ?index ) list:memberAt \"cat\" .
+} 
+=> 
+{ 
+    :result :is ?index . 
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 1 .
+:result :is 3 .
+            """
+        ]
+    ) ;
+    fno:name "memberAt" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "+" ;
+                    fno:predicate "$s.1" ;
+                    fno:type rdf:List
+                ]
+                [
+                    fno:mode "?[*]" ;
+                    fno:predicate "$s.2" ;
+                    fno:type xsd:integer
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "?[*]" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets the member of the subject list at the given subject index as object (index starts at 0)." .
+
+list:remove
+    dcterms:description "`true` if and only if `$s.1` is a list, and `$o` is a list composed of the members of `$s.1` with member `$s.2` removed (if it was present; else, `$o` will be the same list)." ;
+    a fno:Function ;
+    rdfs:seeAlso list:append ;
+    vs:moreinfo """The dcterms:description is wrong. Eye, jen3 nor cwm don't implement list:remove this way. (@phochste)
+Fixed the description and removed the non-functional example (@william-vw)""" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Remove \"penguin\" from the list (\"dog\" \"penguin\" \"cat\" \"penguin\").
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/list/remove.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix list: <http://www.w3.org/2000/10/swap/list#> .
+
+:let :param (\"dog\" \"penguin\" \"cat\" \"penguin\") .
+{ 
+    :let :param ?param . 
+    ( ?param \"penguin\" ) list:remove ?list .
+} 
+=> 
+{ 
+    :result :is ?list . 
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is (\"dog\" \"cat\").
+            """
+        ]
+    ) ;
+    fno:name "remove" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "+" ;
+                    fno:predicate "$s.1" ;
+                    fno:type rdf:List
+                ]
+                [
+                    fno:mode "+" ;
+                    fno:predicate "$s.2"
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Removes the subject member from the subject list, and returns the resulting list as object." .
+
+log:conclusion
+    dcterms:description """`true` if and only if `$o` is the set of conclusions which can be drawn from `$s` (deductive closure), 
+by applying any rules it contains to the data it contains.""" ;
+    a fno:Function ;
+    vs:moreinfo "Example below not working in eye (works in jen3) (@william-vw)" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Draw all conclusions from the formula \":Felix a :Cat . { ?X a :Cat } => { ?X :says \"Meow\" . }\".
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/conclusion.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+:let :param { 
+    :Felix a :Cat . 
+    { ?X a :Cat . } => { ?X :says \"Meow\" . } .
+} .
+
+{ 
+    :let :param ?param .
+    ?param log:conclusion ?conclusion .
+} 
+=> 
+{ 
+    :result :is ?conclusion . 
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is {
+    :Felix a :Cat. 
+    :Felix :says \"Meow\". 
+    { ?S a :Cat . } => { ?S :says \"Meow\" . } .
+} .
+            """
+        ]
+    ) ;
+    fno:name "conclusion" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type log:Formula ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type log:Formula ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets all possible conclusions from the subject quoted graph, including rule inferences (deductive closure), as the object quoted graph." .
+
+log:conjunction
+    dcterms:description "`true` if and only if `$o` is a quoted graph that includes the contents of each of the quoted graphs `$s.i`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Merge the formulas \"{ :Felix a :Cat . }\" , \"{ :Pluto a :Dog . }\", \"{ :Pingu a :Penguin . }\" .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/conjunction.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    ( { :Felix a :Cat . }
+      { :Pluto a :Dog . }  
+      { :Pingu a :Penguin . }
+    ) log:conjunction ?merged .
+} 
+=> 
+{ 
+    :result :is ?merged . 
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is { 
+    :Felix a :Cat . 
+    :Pingu a :Penguin . 
+    :Pluto a :Dog . 
+} .
+            """
+        ]
+    ) ;
+    fno:name "conjunction" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElementType [
+                fno:mode "+" ;
+                fno:predicate "$s.i" ;
+                fno:type log:Formula
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type log:Formula ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Merges the quoted graphs from the subject list into a single quoted graph as object." .
+
+log:content
+    dcterms:description "`true` if and only if `$o` is a string that represents the online resource to which `$s` is dereferenced." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Fetch the content of https://www.w3.org/People/Berners-Lee/card.
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/content.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    <https://www.w3.org/People/Berners-Lee/card> log:content ?content .
+} 
+=> 
+{ 
+    :result :is ?content . 
+} .
+            """ ;
+            fno:result """
+:result :is \"...the content of https://www.w3.org/People/Berners-Lee/card ...\". 
+            """
+        ]
+    ) ;
+    fno:name "content" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type log:Uri ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Dereferences the subject IRI and retrieves the online resource as the object string." .
+
+log:dtlit
+    dcterms:description "`true` if and only if `$o` is a datatyped literal with string value corresponding to `$s.1` and datatype IRI corresponding to `$s.2`." ;
+    a fno:Function ;
+    rdfs:seeAlso log:langlit ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Create a datatyped literal from the string \"1971-05-05\" and the type xsd:date.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/dtlit.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ ( \"1971-05-05\" xsd:date ) log:dtlit ?typed } => { :result :is ?typed . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+:result :is \"1971-05-05\"^^xsd:date.
+            """
+        ]
+        [
+            dcterms:description """
+Parse the datatyped literal \"1971-05-05\"^^xsd:date into a string and data type IRI.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/dtlit.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    ( ?string ?type ) log:dtlit \"1971-05-05\"^^xsd:date .
+} 
+=> 
+{ 
+    :result :is ( ?string ?type ) . 
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+:result :is (\"1971-05-05\" xsd:date).
+            """
+        ]
+    ) ;
+    fno:name "dtlit" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "?" ;
+                    fno:predicate "$s.1" ;
+                    fno:type xsd:string
+                ]
+                [
+                    fno:mode "?" ;
+                    fno:predicate "$s.2" ;
+                    fno:type log:Uri
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type log:Literal ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Creates a datatyped literal as object, based on the string value and datatype IRI in the subject list." .
+
+log:equalTo
+    dcterms:description """`true` if and only if `$s` and `$o` are the same N3 resource.
+Not to be confused with owl:sameAs.""" ;
+    a fno:Function ;
+    rdfs:seeAlso log:notEqualTo ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Determine if 1 is equal to 1 and \"Cat\" is equal to \"Cat\" and { :A :B :C . :D :E :F } is equal to { :D :E :F . :A :B :C }.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/equalTo.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    1 log:equalTo 1 .
+    \"Cat\" log:equalTo \"Cat\" .
+    { :A :B :C . :D :E :F . } log:equalTo { :D :E :F . :A :B :C . } .
+}
+=>
+{
+    :result :is true .
+} . 
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true. 
+            """
+        ]
+        [
+            dcterms:description """
+Determine if \"Cat\" is equal to \"Cat\"@en .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/equalTo.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    # This will fail
+    \"Cat\" log:equalTo \"Cat\"@en .
+}
+=>
+{
+    :result :is true .
+} . 
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+# no results
+            """
+        ]
+        [
+            dcterms:description """
+Assign a value to an existential or universal variable.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/equalTo.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    _:x log:equalTo 42 .
+    ?q  log:equalTo \"Cat\"@en .
+
+    # This will fail because _:x is already assigned to 42 .
+    # _:x log:equalTo 17 .
+}
+=>
+{
+    :result :is ?q .
+} . 
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"Cat\"@en .
+            """
+        ]
+        [
+            dcterms:description """
+Assign values from the object list to universal variables given in the subject list. 
+This can be compared to \"destructuring\" or \"unpacking\" in programming languages such as JavaScript or Python.
+In contrast to those languages, however, it works in either direction in N3.
+In general, this works because an effort is made to ensure the truth of builtin statements in N3.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/equalTo.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    ( ?x ?y ?z ) log:equalTo ( 1 2 3 )
+}
+=>
+{
+    :result :is ?x , ?y , ?z .
+} . 
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 1 , 2 , 3 . # objects can be in any order
+            """
+        ]
+        [
+            dcterms:description """
+Assign values from the object list to universal variables given in the subject list. 
+This can be compared to \"destructuring\" or \"unpacking\" in programming languages such as JavaScript or Python.
+In contrast to those languages, however, it works in either direction in N3.
+In general, this works because an effort is made to ensure the truthfulness of builtin statements in N3.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/equalTo.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    ( \"War and Peace\" \"Leo Tolstoy\" 1225 ) log:equalTo ( ?title ?author ?numPages ) .
+}
+=>
+{
+    :result :is ?title , ?author , ?numPages .
+} . 
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"War and Peace\" , \"Leo Tolstoy\" , 1225 . # objects can be in any order
+            """
+        ]
+    ) ;
+    fno:name "equalTo" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr """Checks whether the subject and object N3 resources are the same. 
+Can also be used to bind values to variables (see examples).""" .
+
+log:forAllIn
+    dcterms:description """`true` if and only if, for each solution for which the first clause `$s.1` is true, the second clause `$s.2` is true as well. 
+This is a scoped universal quantification.""" ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+For each subtask of a composite task, check whether the subtask is completed. 
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/forAllIn.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+:c a :CompositeTask ;
+    :subTask :s1 , :s2 , :s3 .
+:s1 :state :Completed .
+:s2 :state :Completed . 
+:s3 :state :Completed .
+
+{
+    ?c a :CompositeTask .
+    ( { ?c :subTask ?s } { ?s :state :Completed } ) log:forAllIn _:t .
+}
+=>
+{
+    :result :is true .
+} . 
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true. 
+            """
+        ]
+    ) ;
+    fno:name "forAllIn" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "+" ;
+                    fno:predicate "$s.1" ;
+                    fno:type log:Formula
+                ]
+                [
+                    fno:mode "+" ;
+                    fno:predicate "$s.2" ;
+                    fno:type log:Formula
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "Scope of the universal quantification. Leave as a variable to use current N3 document as scope." ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Two clauses are given in the subject list: for each result of the first clause, the builtin checks whether the second clause also holds for the result." .
+
+log:includes
+    dcterms:description """`true` if and only if there exists some substitution which, when applied to `$o`, 
+creates a quoted graph `$o`' such that every statement in `$o`' is also in `$s`;
+whereby every variable, universally or existentially quantified in `$o`', is quantified in the same way in `$s`. 
+Variable substitution is applied recursively to nested compound terms such as quoted graphs ans lists.""" ;
+    a fno:Function ;
+    rdfs:seeAlso log:notIncludes ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Check whether the formula { :Felix a :Cat } includes { ?X a :Cat }.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/includes.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    { :Felix a :Cat } log:includes { ?X a :Cat } .
+} 
+=>
+{
+    :result :is ?X .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is :Felix .
+            """
+        ]
+    ) ;
+    fno:name "includes" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type log:Formula ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type log:Formula ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr """Checks whether the subject quoted graph includes the object quoted graph (taking into account variables). 
+Can also be used to bind variables to values within the graph contents (see examples).""" .
+
+log:langlit
+    dcterms:description """
+`true` if and only if `$o` is a language-tagged literal with string value corresponding to `$s.1` and language tag corresponding to `$s.2`.
+`$s.2` should be a string in the form of a BCP47 language tag.""" ;
+    a fno:Function ;
+    rdfs:seeAlso log:dtlit ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Create a language-tagged literal from the string \"hello\" and language tag \"en\".
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/langlit.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+{ (\"hello\" \"en\") log:langlit ?X } => { ?X a :Result } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+\"hello\"@en a :Result .
+            """
+        ]
+    ) ;
+    fno:name "langlit" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "?" ;
+                    fno:predicate "$s.1" ;
+                    fno:type xsd:string
+                ]
+                [
+                    fno:mode "?" ;
+                    fno:predicate "$s.2" ;
+                    fno:type xsd:string
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type log:Literal ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Creates a language-tagged literal as object, based on the string value and language tag (see BCP47) in the subject list." .
+
+log:notEqualTo
+    dcterms:description "`true` if and only if `$s log:equalTo $o` is false." ;
+    a fno:Function ;
+    rdfs:seeAlso log:equalTo ;
+    vs:moreinfo "?x log:notEqualTo 'Cat' is semantically not false, it has infinite amount of results (phochste)", "the results are surprising when using unbound variables (phochste)", "this makes notEqualTo not the exact complement of equalTo. (phochste)", "we make it into false because in N3 there is no way, yet, to express a result with infinite results (phochste)", "we need to document that unbound variables are automatic false. (phochste)" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Determine if 1 is not equal to 2 and \"Cat\" is not equal to \"CAT\" and { :A :B :C . } is not equal to { :C :B :A }.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/notEqualTo.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    1 log:notEqualTo 2 .
+    \"Cat\" log:notEqualTo \"CAT\" .
+    { :A :B :C . } log:notEqualTo { :C :B :A . } .
+}
+=>
+{
+    :result :is true .
+} . 
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """
+        ]
+        [
+            dcterms:description """
+Determine if \"Cat\" is not equal to \"Cat\"@en .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/notEqualTo.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    \"Cat\" log:notEqualTo \"Cat\"@en .
+}
+=>
+{
+    :result :is true .
+} . 
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """
+        ]
+        [
+            dcterms:description """
+Check if an existential or universal variable is not equal to a value.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/notEqualTo.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    _:x log:notEqualTo 42 .
+    ?q  log:notEqualTo \"Cat\"@en .
+}
+=>
+{
+    :result :is true .
+} . 
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+# no result (the variables _:x and ?q are not bounded) 
+            """
+        ]
+    ) ;
+    fno:name "notEqualTo" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject and object N3 resources are _not_ the same." .
+
+log:notIncludes
+    dcterms:description "`true` if and only if `$s log:includes $o` is `false`." ;
+    a fno:Function ;
+    rdfs:seeAlso log:includes ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Check whether the formula { :Felix a :Cat } does not include { ?X :eats ?Y }.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/notIncludes.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    { :Felix a :Cat } log:notIncludes { ?X :eats ?Y } .
+} 
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true.
+            """
+        ]
+        [
+            dcterms:description """
+Check whether the formula { :a :b :c } does not include { :a :b :d }.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/notIncludes.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ 
+    # Dynamic evaluation of ?X and ?Y
+    ?X log:notIncludes ?Y .
+    ?X log:equalTo { :a :b :c }.
+    ?Y log:equalTo { :a :b :d }.
+} 
+=>              
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true.
+            """
+        ]
+    ) ;
+    fno:name "notIncludes" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type log:Formula ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type log:Formula ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject quoted graph _does not_ include the object quoted graph (taking into account variables)" .
+
+log:outputString
+    dcterms:description "The concrete semantics of this builtin (e.g., which N3 resource types are supported) will depend on the N3 reasoner." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Print the two string \"This is the first line
+\" , \"This is the second line
+\" to the output.
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/outputString.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+_:2 log:outputString \"This is the second line
+\" .
+_:1 log:outputString \"This is the first line
+\" .
+            """ ;
+            fno:result """
+# If the reasoner support the outputString options
+This is the first line
+This is the second line
+            """
+        ]
+    ) ;
+    fno:name "outputString" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "The N3 reasoner will print the object strings in the order of the subject keys, instead of printing the derivations or deductive closure. This may require a reasoner flag to be set." .
+
+log:parsedAsN3
+    dcterms:description """`true` if and only if `$s`, when parsed as N3, gives `$o`.
+`$s` should be a syntactically valid string in N3 format.""" ;
+    a fno:Function ;
+    rdfs:seeAlso log:semantics ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Parse the string ':Socrates a :Human .' as N3.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/parsedAsN3.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+:Let :param \"\"\"
+@prefix : <urn:example:> .
+:Socrates a :Human .
+\"\"\" .
+
+{
+    :Let :param ?X .
+    ?X log:parsedAsN3 ?Y .
+}
+=>
+{
+    :result :is ?Y .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is { <urn:example:Socrates> a <urn:example:Human> . } .
+            """
+        ]
+    ) ;
+    fno:name "parsedAsN3" ;
+    fno:parameter ([
+            dcterms:description "should be a syntactically valid string in N3 format" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type log:Formula ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Parses the subject string into an object quoted graph." .
+
+log:rawType
+    dcterms:description """`true` if and only if the N3 resource type of `$s` is `$o`.
+N3 resource types include `log:Formula`, `log:Literal`, `log:List`, `log:Set` or `log:Other`.""" ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Get the type of literal resources.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/rawType.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    \"Hello\" log:rawType ?stringType .
+    42 log:rawType ?integerType .
+    true log:rawType ?trueType .
+    false log:rawType ?falseType .
+}
+=>
+{
+    :result :is ( ?stringType ?integerType ?trueType ?falseType ) .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+:result :is ( log:Literal log:Literal log:Literal log:Literal ) .
+            """
+        ]
+        [
+            dcterms:description """
+Get the type of resources.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/rawType.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    <http://www.w3c.org> log:rawType ?resourceType .
+}
+=>
+{
+    :result :is ?resourceType .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+:result :is log:Other.
+            """
+        ]
+        [
+            dcterms:description """
+Get the type of lists and quoted graphs.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/rawType.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{
+    (1 2 3 4) log:rawType ?listType .
+    { :s :p :o } log:rawType ?graphType .
+} 
+=>
+{
+    :result :is ( ?listType ?graphType ) .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+:result :is ( rdf:List log:Formula ) .
+            """
+        ]
+    ) ;
+    fno:name "rawType" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type log:Uri ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets the type of the N3 resource." .
+
+log:semantics
+    dcterms:description "`true` if and only if `$o` is a quoted graph that results from parsing the string that results from dereferencing `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Read the contents of the file `<semantics.data>` and parse it as Notation3.
+We assume `<semantics.data>` contains the text:
+```       
+  @prefix : <http://example.org/>.
+  :Socrates a :Human .
+```       
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/semantics.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ <semantics.data> log:semantics ?semantics . } => { :result :is ?semantics } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is { :Socrates a :Human . } .
+            """
+        ]
+    ) ;
+    fno:name "semantics" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type log:Uri ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type log:Formula ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:details """The log:semantics of a document is the formula achieved by parsing the representation of the document.
+For a document in Notation3, `log:semantics` is the `log:parsedAsN3` of the `log:content` of the document.
+For a document in another RDF syntax, it is parsed according to the appropriate specification to yield an RDF formula (a subclass of N3 `log:Formula`).
+Evaluates to `false` if an unrecognized document format is retrieved.
+Aside: Philosophers will be distracted here into worrying about the meaning of meaning. At least we didn't call this function \"meaning\"! 
+In as much as N3 is used as an interlingua for interoperability for different systems, this for an N3 based system is the meaning expressed by a document.
+Related: see `log:parsedAsN3` and `log:content`.""" ;
+    fnon:tldr "Gets as object the quoted graph that results from parsing an online (N3) string, found by dereferencing the subject IRI." .
+
+log:semanticsOrError
+    dcterms:description "`true` if and only if (a) `$o` is a quoted graph that results from parsing the string that results from dereferencing `$s`; or (b) an error message explaining what went wrong." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Read the contents a non existing `<error.data>` and parse it as Notation3 (which of course will fail).
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/semanticsOrError.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ <error.data> log:semantics ?semantics . } => { :result :is ?semantics } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"\"\"Unable to access document <file:////tmp/error.data>, because:
+    <urlopen error [Errno 2] No such file or directory: '//tmp/error.data'>\"\"\" .
+            """
+        ]
+    ) ;
+    fno:name "semanticsOrError" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type log:Uri ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "either a log:Formula or xsd:string" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Either gets as object the quoted graph that results from parsing an online (N3) string, found by dereferencing the subject IRI; or an error message that explains what went wrong." .
+
+log:skolem
+    dcterms:description "`true` if and only if `$o` is a skolem IRI that is a function of the subject." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Generate a unique Skolem IRI from the list (:abc 77 \"xyz\") .
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/skolem.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ (:abc 77 \"xyz\") log:skolem ?skolem . } => { :result :is ?skolem } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is <http://www.w3.org/2000/10/swap/genid#zmgk3Vt_z_u7FQlk1NmqIw> . 
+            """
+        ]
+    ) ;
+    fno:name "skolem" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets as object a skolem IRI that is a function of the subject (commonly a list); the same subject will always result in the same skolem IRI." .
+
+log:uri
+    dcterms:description "`true` if and only if `$o` is the string representation of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Parse the URI `<https://www.w3.org>` into a string .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/log/uri.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+
+{ <https://www.w3.org> log:uri ?uri . } => { :result :is ?uri . } .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"https://www.w3.org\" .
+            """
+        ]
+    ) ;
+    fno:name "uri" ;
+    fno:parameter ([
+            dcterms:description "a URI" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:details """This allows one to look at the actual string of the URI which identifies this.
+This is a level breaker, breaking the rule of not looking inside a URI.""" ;
+    fnon:tldr "Gets as object the string representation of the subject URI." .
+
+math:absoluteValue
+    dcterms:description "`true` if and only if `$o` is the absolute value of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the absolute value of the value -2.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/absoluteValue.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param -2 .
+
+{
+    :Let :param ?param .
+    ?param math:absoluteValue ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 2. 
+            """
+        ]
+    ) ;
+    fno:name "absoluteValue" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates as object the absolute value of the subject." .
+
+math:acos
+    dcterms:description "`true` if and only if `$o` is the arc cosine value of `$s`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:cos, math:cosh ;
+    vs:moreinfo "is acos not just syntactic sugar for cos, eye, jen3 and cwm can use cos in both directions @phochste" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the arc cosine of the value 1.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/acos.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1 .
+
+{
+    :Let :param ?param .
+    ?param math:acos ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 0.0 .
+            """
+        ]
+    ) ;
+    fno:name "acos" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the arc cosine value of the subject." .
+
+math:asin
+    dcterms:description "`true` if and only if `$o` is the arc sine value of `$s`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:sin, math:sinh ;
+    vs:moreinfo "is asin not just syntactic sugar for cos, eye, jen3 and cwm can use sin in both directions @phochste" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the arc sine of the value 1.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/asin.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1 .
+
+{
+    :Let :param ?param .
+    ?param math:asin ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 1.5707963267948966 .
+            """
+        ]
+    ) ;
+    fno:name "asin" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the arc sine value of the subject." .
+
+math:atan
+    dcterms:description "`true` if and only if `$o` is the arc tangent value of `$s`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:tan, math:tanh ;
+    vs:moreinfo "is atan not just syntactic sugar for tan, eye, jen3 and cwm can use sin in both directions @phochste" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the arc tangent of the value 1.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/atan.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1 .
+
+{
+    :Let :param ?param .
+    ?param math:atan ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 0.7853981633974483 .
+            """
+        ]
+    ) ;
+    fno:name "atan" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the arc tangent value of the subject." .
+
+math:cos
+    dcterms:description "`true` if and only if `$o` is the cosine value of `$s`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:acos, math:cosh ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the cosine of the value 0.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/cos.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 0 .
+
+{
+    :Let :param ?param .
+    ?param math:cos ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 1.0 .
+            """
+        ]
+    ) ;
+    fno:name "cos" ;
+    fno:parameter ([
+            dcterms:description "angle expressed in radians" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the cosine value of the subject." .
+
+math:cosh
+    dcterms:description "`true` if and only if `$o` is the hyperbolic cosine value of `$s`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:acos, math:cos ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the hyperbolic cosine of the value 0.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/cosh.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 0 .
+
+{
+    :Let :param ?param .
+    ?param math:cosh ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 1.0 .
+            """
+        ]
+    ) ;
+    fno:name "cosh" ;
+    fno:parameter ([
+            dcterms:description "angle expressed in radians" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the hyperbolic cosine value of the subject." .
+
+math:degrees
+    dcterms:description "`true` if and only if `$o` is the value in degrees corresponding to the radians value of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the degrees of the radians value 1.57079632679.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/degrees.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 1.57079632679 .
+
+{
+    :Let :param ?param .
+    ?param math:degrees ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 89.99999999971946 .
+            """
+        ]
+    ) ;
+    fno:name "degrees" ;
+    fno:parameter ([
+            dcterms:description "angle expressed in radians" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "angle expressed in degrees" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the value in degrees corresponding to the radians value of the subject." .
+
+math:difference
+    dcterms:description "`true` if and only if `$o` is the result of subtracting `$s.2` from `$s.1`." ;
+    a fno:Function ;
+    vs:moreinfo "it is unclear for me why difference can't know the answer to (3 ?what) math:difference 1 @phochste" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the value of 7 minus 2.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/difference.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (7 2) .
+
+{
+    :Let :param ?param .
+    ?param math:difference ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 5.
+            """
+        ]
+    ) ;
+    fno:name "difference" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "+" ;
+                    fno:predicate "$s.1" ;
+                    fno:type [
+                        a rdfs:Datatype ;
+                        owl:unionOf (xsd:decimal
+                            xsd:double
+                            xsd:float
+                        )
+                    ]
+                ]
+                [
+                    fno:mode "+" ;
+                    fno:predicate "$s.2" ;
+                    fno:type [
+                        a rdfs:Datatype ;
+                        owl:unionOf (xsd:decimal
+                            xsd:double
+                            xsd:float
+                        )
+                    ]
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object by subtracting the second number from the first number given in the subject list." .
+
+math:equalTo
+    dcterms:description "`true` if and only if `$s` is the same number as `$o`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:notEqualTo ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Check if the numbers 42 and 42 are equal .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/equalTo.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:equalTo ?Y .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "equalTo" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject and object are the same number." .
+
+math:exponentiation
+    dcterms:description "`true` if and only if `$o` is the result of raising `$s.1` to the power of `$s.2`" ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the value of 7 raised to the power of 2 .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/exponentiation.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (7 2) .
+
+{
+    :Let :param ?param .
+    ?param math:exponentiation ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 49 .
+            """
+        ]
+        [
+            dcterms:description """
+Calculate the logarithm of 49 base 2 .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/exponentiation.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+{
+    (7 ?result) math:exponentiation 49 .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 2.0 .
+            """
+        ]
+    ) ;
+    fno:name "exponentiation" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "+" ;
+                    fno:predicate "$s.1" ;
+                    fno:type [
+                        a rdfs:Datatype ;
+                        owl:unionOf (xsd:decimal
+                            xsd:double
+                            xsd:float
+                        )
+                    ]
+                ]
+                [
+                    fno:mode "?" ;
+                    fno:predicate "$s.2" ;
+                    fno:type [
+                        a rdfs:Datatype ;
+                        owl:unionOf (xsd:decimal
+                            xsd:double
+                            xsd:float
+                        )
+                    ]
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr """Calculates the object as the result of raising the first number to the power of the second number in the subject list. 
+You can also use this to calculate the logarithm of the object, with as base the first number of the subject list (see examples).""" .
+
+math:greaterThan
+    dcterms:description "`true` if and only if `$s` is a number that is greater than `$o`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:notGreaterThan ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Check if 42 is greater than 41 .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/greaterThan.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 41) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:greaterThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """
+        ]
+    ) ;
+    fno:name "greaterThan" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject is a number that is greater than the object." .
+
+math:lessThan
+    dcterms:description "`true` if and only if `$s` is a number that is less than `$o`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:notLessThan ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Check if 41 is less than 42 .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/lessThan.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (41 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:lessThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """
+        ]
+    ) ;
+    fno:name "lessThan" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject is a number that is less than the object." .
+
+math:negation
+    dcterms:description "`true` if and only if `$o` is the negation of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the negation of the value 42 .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/negation.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param 42 .
+
+{
+    :Let :param ?param .
+    ?param math:negation ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is -42 .
+            """
+        ]
+    ) ;
+    fno:name "negation" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the negation of the subject." .
+
+math:notEqualTo
+    dcterms:description "`true` if and only if `$s` is the not same number as `$o`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:equalTo ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Check if the numbers 41 and 42 are not equal .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/notEqualTo.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (41 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:notEqualTo ?Y .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """
+        ]
+    ) ;
+    fno:name "notEqualTo" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject and object are not the same number." .
+
+math:notGreaterThan
+    dcterms:description "`true` if and only if `$s` is a number that is not greater than `$o`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:greaterThan ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Check if 41 is not greater than 42 .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/notGreaterThan.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (41 42) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:notGreaterThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """
+        ]
+    ) ;
+    fno:name "notGreaterThan" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr """Checks whether the subject is a number that is not greater than the object.
+You can use this as an equivalent of a lessThanOrEqual operator.""" .
+
+math:notLessThan
+    dcterms:description "`true` if and only if `$s` is a number that is not less than `$o`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:lessThan ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Check if 42 is not less than 41 .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/notLessThan.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 41) .
+
+{
+    :Let :param (?X ?Y) .
+    ?X math:notLessThan ?Y .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true .
+            """
+        ]
+    ) ;
+    fno:name "notlessThan" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr """Checks whether the subject is a number that is not less than the object.
+You can use this as an equivalent of a greaterThanOrEqual operator.""" .
+
+math:product
+    dcterms:description "`true` if and only if `$o` is the arithmetic product of all numbers `$s.i`" ;
+    a fno:Function ;
+    vs:moreinfo "it is unclear for me why exponentiation can work in reverse, but product can't be used to calculate quotients @phochste" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the product of 2 and 21.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/product.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (2 21) .
+
+{
+    :Let :param ?param .
+    ?param math:product ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 42.
+            """
+        ]
+        [
+            dcterms:description """
+Calculate the product of 2,4,6, and 8 .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/product.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (2 4 6 8) .
+
+{
+    :Let :param ?param .
+    ?param math:product ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 384.
+            """
+        ]
+    ) ;
+    fno:name "product" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElementType [
+                fno:mode "+" ;
+                fno:predicate "$s.i" ;
+                fno:type [
+                    a rdfs:Datatype ;
+                    owl:unionOf (xsd:decimal
+                        xsd:double
+                        xsd:float
+                    )
+                ]
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the product of the numbers given in the subject list." .
+
+math:quotient
+    dcterms:description "`true` if and only if `$o` is the result of dividing `$s.1` by `$s.2`." ;
+    a fno:Function ;
+    vs:moreinfo "it is unclear for me why exponentiation can work in reverse, but quotient can't be used to calculate products @phochste" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the quotient of 42 and 2.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/quotient.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (42 2) .
+
+{
+    :Let :param ?param .
+    ?param math:quotient ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 21. 
+            """
+        ]
+    ) ;
+    fno:name "quotient" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "+" ;
+                    fno:predicate "$s.1" ;
+                    fno:type [
+                        a rdfs:Datatype ;
+                        owl:unionOf (xsd:decimal
+                            xsd:double
+                            xsd:float
+                        )
+                    ]
+                ]
+                [
+                    fno:mode "+" ;
+                    fno:predicate "$s.2" ;
+                    fno:type [
+                        a rdfs:Datatype ;
+                        owl:unionOf (xsd:decimal
+                            xsd:double
+                            xsd:float
+                        )
+                    ]
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object by dividing the first number by the second number given in the subject list." .
+
+math:remainder
+    dcterms:description "`true` if and only if `$o` is the remainder of dividing `$s.1` by `$s.2`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the remainder of 10 divided by 3.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/remainder.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (10 3) .
+
+{
+    :Let :param ?param .
+    ?param math:remainder ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 1.
+            """
+        ]
+    ) ;
+    fno:name "remainder" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "+" ;
+                    fno:predicate "$s.1" ;
+                    fno:type xsd:integer
+                ]
+                [
+                    fno:mode "+" ;
+                    fno:predicate "$s.2" ;
+                    fno:type xsd:integer
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:integer ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the remainder of the division of the first integer by the second integer given in the subject list." .
+
+math:rounded
+    dcterms:description """`true` if and only if `$o` is the integer that is closest to `$s`.
+If there are two such numbers, then the one closest to positive infinity is returned.
+""" ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the rounded version of 3.3.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/rounded.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param \"3.3\"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:rounded ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 3. 
+            """
+        ]
+    ) ;
+    fno:name "rounded" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:integer ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the integer that is closest to the subject number." .
+
+math:sin
+    dcterms:description "`true` if and only if `$o` is the sine value of `$s`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:asin, math:sinh ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the sin of pi/2 (1.57079632679) .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/sin.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param \"1.57079632679\"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:sin ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+:result :is \"1.0\"^^xsd:double . 
+            """
+        ]
+    ) ;
+    fno:name "sin" ;
+    fno:parameter ([
+            dcterms:description "angle expressed in radians" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the sine value of the subject." .
+
+math:sinh
+    dcterms:description "`true` if and only if `$o` is the hyperbolic sine value of `$s`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:asin, math:sin ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the sinh of log(1 + sqrt(2)) (0.88137358701954302).
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/sinh.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param \"0.88137358701954302\"^^xsd:double.
+
+{
+    :Let :param ?param .
+    ?param math:sinh ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 1.0.
+            """
+        ]
+    ) ;
+    fno:name "sinh" ;
+    fno:parameter ([
+            dcterms:description "angle expressed in radians" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the hyperbolic sine value of the subject." .
+
+math:sum
+    dcterms:description "`true` if and only if `$o` is the arithmetic sum of all numbers `$s.i`" ;
+    a fno:Function ;
+    vs:moreinfo "it is unclear for me why sum can't know the answer to (1 ?what) math:sum 2 @phochste" ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the sum of 1,2,3,4,5,6,7,8,9,10.
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/sum.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+
+:Let :param (1 2 3 4 5 6 7 8 9 10) .
+
+{
+    :Let :param ?param .
+    ?param math:sum ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 55.
+            """
+        ]
+    ) ;
+    fno:name "sum" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElementType [
+                fno:mode "+" ;
+                fno:predicate "$s.i" ;
+                fno:type [
+                    a rdfs:Datatype ;
+                    owl:unionOf (xsd:decimal
+                        xsd:double
+                        xsd:float
+                    )
+                ]
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the sum of the numbers given in the subject list." .
+
+math:tan
+    dcterms:description "`true` if and only if `$o` is the tangent value of `$s`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:atan, math:tanh ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the tangent of the value 0.7853981633974483 .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/tan.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param \"0.7853981633974483\"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:tan ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+:result :is \"0.9999999999999999\"^^xsd:double. 
+            """
+        ]
+    ) ;
+    fno:name "tan" ;
+    fno:parameter ([
+            dcterms:description "angle expressed in radians" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the tangent value of the subject." .
+
+math:tanh
+    dcterms:description "`true` if and only if `$o` is the hyperbolic tangent value of `$s`." ;
+    a fno:Function ;
+    rdfs:seeAlso math:atan, math:tan ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the hyperbolic tanget of 0.549306 .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/math/tanh.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Let :param \"0.549306\"^^xsd:double .
+
+{
+    :Let :param ?param .
+    ?param math:tanh ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+:result :is \"0.49999989174945103\"^^xsd:double. 
+            """
+        ]
+    ) ;
+    fno:name "tanh" ;
+    fno:parameter ([
+            dcterms:description "angle expressed in radians" ;
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$s" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "?" ;
+            fno:predicate "$o" ;
+            fno:type [
+                a rdfs:Datatype ;
+                owl:unionOf (xsd:decimal
+                    xsd:double
+                    xsd:float
+                )
+            ] ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the hyperbolic tangent value of the subject." .
+
+string:concatenation
+    dcterms:description "`true` if and only if the string concatenation of `$s.i` equals `$o`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Concatenates the string \"hello\", \" \" and \"world!\".
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/concatenation.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param ( \"hello\" \" \" \"world!\" ) .
+
+{
+    :Let :param ?param .
+    ?param string:concatenation ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"hello world!\". 
+            """
+        ]
+    ) ;
+    fno:name "concatenation" ;
+    fno:parameter ([
+            dcterms:description "" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElementType [
+                fno:mode "+" ;
+                fno:predicate "$s.i" ;
+                fno:type xsd:string
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Concatenates the strings from the subject list into a single string as object." .
+
+string:contains
+    dcterms:description "`true` if and only if `$s` contains `$o`." ;
+    a fno:Function ;
+    rdfs:seeAlso string:containsIgnoringCase ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"hello world!\" contains the string \"llo worl\".
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/contains.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"hello world!\" .
+:Let :param2 \"llo worl\".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:contains ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "contains" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject string contains the object string." .
+
+string:containsIgnoringCase
+    dcterms:description "`true` if and only if `$s` contains `$o` when ignoring case differences." ;
+    a fno:Function ;
+    rdfs:seeAlso string:contains ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"hello world!\" contains the string \"lLO woRl\".
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/containsIgnoringCase.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"hello world!\" .
+:Let :param2 \"lLO woRl\".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:containsIgnoringCase ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "containsIgnoringCase" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject string contains the object string, ignoring differences between lowercase and uppercase." .
+
+string:endsWith
+    dcterms:description "`true` if and only if `$s` ends with `$o`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"hello world!\" ends with \"orld!\".
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/endsWith.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"hello world!\" .
+:Let :param2 \"orld!\".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:endsWith ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "endsWith" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject string ends with the object string." .
+
+string:equalIgnoringCase
+    dcterms:description "`true` if and only if `$s` is the same string as `$o` when ignoring case differences." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"hello world!\" is equal to \"hELLo wORld!\" ignoring the case .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/equalIgnoringCase.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"hello world!\" .
+:Let :param2 \"hELLo wORld!\" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:equalIgnoringCase ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "equalIgnoringCase" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject string is the same as the object string, ignoring differences between lowercase and uppercase." .
+
+string:format
+    dcterms:description "`true` if and only if `$o` is the result of replacing the tags found in `$s.(i=1)` with the strings `$s.(i>1)`" ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Calculate the result of applying the format \"%s://%s/%s\" to the strings \"https\", \"w3c.github.io\" and \"N3/spec\" .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/format.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param ( \"%s://%s/%s\" \"https\" \"w3c.github.io\" \"N3/spec/\" ) .
+
+{
+    :Let :param ?param .
+    ?param string:format ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"https://w3c.github.io/N3/spec/\". 
+            """
+        ]
+    ) ;
+    fno:name "format" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElementType [
+                dcterms:description "`$s.(i=1)` is a format string including tags. `$s.(i>1)` are strings to replace these tags. See C's sprintf function for details." ;
+                fno:mode "+" ;
+                fno:predicate "$s.i" ;
+                fno:type xsd:string
+            ] ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr """Calculates the object as the result of replacing the tags in the first string from the subject list with the remaining strings from the subject list.
+See C's sprintf function for details on these tags.""" .
+
+string:greaterThan
+    dcterms:description "`true` if and only if `$s` is greater than `$o` as per the Unicode code order." ;
+    a fno:Function ;
+    rdfs:seeAlso string:notGreaterThan ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"Pengiun\" is greater than the string \"Cat\" .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/greaterThan.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"Penguin\" .
+:Let :param2 \"Cat\".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:greaterThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "greaterThan" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject string is greater than the object string, according to Unicode code order." .
+
+string:lessThan
+    dcterms:description "`true` if and only if `$s` is less than `$o` as per the Unicode code order." ;
+    a fno:Function ;
+    rdfs:seeAlso string:notLessThan ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"Cat\" is less than the string \"Penguin\" .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/lessThan.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"Cat\" .
+:Let :param2 \"Penguin\".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:lessThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "lessThan" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject string is less than the object string, according to Unicode code order." .
+
+string:matches
+    dcterms:description "`true` if and only if string `$s` matches the regular expression `$o`" ;
+    a fno:Function ;
+    rdfs:seeAlso string:notMatches ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"hello world!\" matches the regular expression \".*(l)+o wo.*\".
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/matches.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"hello world!\" .
+:Let :param2 \".*(l)+o wo.*\".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:matches ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "matches" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "regular expression in perl, python style" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr """Checks whether the subject string matches the object regular expression.
+The regular expression follows the perl, python style.""" .
+
+string:notEqualIgnoringCase
+    dcterms:description "`true` if and only if `$s` is not the same string as `$o` when ignoring case differences." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"hello world!\" is not equal to \"hELLo dunia!\" ignorning the case .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/notEqualIgnoringCase.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"hello world!\" .
+:Let :param2 \"hELLo dunia!\" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notEqualIgnoringCase ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "notEqualIgnoringCase" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject string is not the same as the object string, ignoring differences between lowercase and uppercase." .
+
+string:notGreaterThan
+    dcterms:description "`true` if and only if `$s` is not greater than `$o` as per the Unicode code order." ;
+    a fno:Function ;
+    rdfs:seeAlso string:greaterThan ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"Cat\" is not greater than the string \"Penguin\" .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/notGreaterThan.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"Cat\" .
+:Let :param2 \"Penguin\".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notGreaterThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "notGreaterThan" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr """Checks whether the subject string is not greater than the object string, according to Unicode code order.
+You can use this as an equivalent of a lessThanOrEqual operator.""" .
+
+string:notLessThan
+    dcterms:description "`true` if and only if `$s` is not less than `$o` as per the Unicode code order." ;
+    a fno:Function ;
+    rdfs:seeAlso string:lessThan ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"Penguin\" is not less than the string \"Cat\" .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/notLessThan.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"Penguin\".
+:Let :param2 \"Cat\" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notLessThan ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "notLessThan" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr """Checks whether the subject string is not less than the object string, according to Unicode code order.
+You can use this as an equivalent of a greaterThanOrEqual operator.""" .
+
+string:notMatches
+    dcterms:description "`true` if and only if string `$s` does not match the regular expression `$o`" ;
+    a fno:Function ;
+    rdfs:seeAlso string:matches ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"hello world!\" no matches the regular expression \".*(l)+o dunia.*\".
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/notMatches.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"hello world!\" .
+:Let :param2 \".*(l)+o dunia.*\".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:notMatches ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "notMatches" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            dcterms:description "regular expression in perl, python style" ;
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr """Checks whether the subject string does not match the object regular expression.
+The regular expression follows the perl, python style.""" .
+
+string:replace
+    dcterms:description "`true` if and only if `$o` is the result of replacing all occurrences of `$s.2` in `$s.1` with `$s.3`" ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Replace all \"l\"-s in the string \"hello world!\" with the bracket version \"[l]\" .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/replace.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :data \"hello world!\" .
+:Let :search \"(l)\" .
+:Let :replace \"[$1]\" .
+{
+    :Let :data ?data .
+    :Let :search ?search .
+    :Let :replace ?replace .
+    (?data ?search ?replace) string:replace ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"he[l][l]o wor[l]d!\". 
+            """
+        ]
+    ) ;
+    fno:name "replace" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "+" ;
+                    fno:predicate "$s.1" ;
+                    fno:type xsd:string
+                ]
+                [
+                    fno:mode "+" ;
+                    fno:predicate "$s.2" ;
+                    fno:type xsd:string
+                ]
+                [
+                    fno:mode "+" ;
+                    fno:predicate "$s.3" ;
+                    fno:type xsd:string
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the result of, given the strings in the subject list, replacing all occurrences of the second string in the first string with the third string." .
+
+string:scrape
+    dcterms:description "`true` if and only if `$o` is the first matching group when matching `$s.2` as a regular expression against `$s.1`" ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Extract from the string \"https://w3c.github.io/N3/spec/\" the last path element using a regular expression .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/scrape.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"https://w3c.github.io/N3/spec/\" . 
+:Let :param2 \".*/([^/]+/)$\" .
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    (?param1 ?param2) string:scrape ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"spec/\". 
+            """
+        ]
+    ) ;
+    fno:name "scrape" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type rdf:List ;
+            fnon:listElements ([
+                    fno:mode "+" ;
+                    fno:predicate "$s.1" ;
+                    fno:type xsd:string
+                ]
+                [
+                    dcterms:description "regular expression with 1 group" ;
+                    fno:mode "+" ;
+                    fno:predicate "$s.2" ;
+                    fno:type xsd:string
+                ]
+            ) ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Calculates the object as the first matching group when, given the subject list, matching the second string as regular expression (with exactly 1 group) against the first string." .
+
+string:startsWith
+    dcterms:description "`true` if and only if `$s` starts with `$o`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Checks whether the string \"hello world!\" starts with \"hello\" .
+            """ ;
+            a fno:Test ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/string/startsWith.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#> .
+
+:Let :param1 \"hello world!\" .
+:Let :param2 \"hello\".
+{
+    :Let :param1 ?param1 .
+    :Let :param2 ?param2 .
+    ?param1 string:startsWith ?param2 .
+}
+=>
+{
+    :result :is true .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is true . 
+            """
+        ]
+    ) ;
+    fno:name "startsWith" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:string ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Checks whether the subject string starts with the object string." .
+
+time:day
+    dcterms:description "`true` if and only if `$o` is the integer day component of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Return the day component of the date \"2023-04-01T18:06:04Z\" .
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/time/day.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param \"2023-04-01T18:06:04Z\"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:day ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 1. 
+            """
+        ]
+    ) ;
+    fno:name "day" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:dateTime ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:integer ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets as object the integer day component of the subject xsd:dateTime." .
+
+time:minute
+    dcterms:description "`true` if and only if `$o` is the integer minutes component of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Return the minute component of the date \"2023-04-01T18:06:04Z\" .
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/time/minute.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param \"2023-04-01T18:06:04Z\"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:minute ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 6. 
+            """
+        ]
+    ) ;
+    fno:name "minute" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:dateTime ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:integer ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets as object the integer minutes component of the subject xsd:dateTime." .
+
+time:month
+    dcterms:description "`true` if and only if `$o` is the integer month component of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Return the month component of the date \"2023-04-01T18:06:04Z\" .
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/time/month.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param \"2023-04-01T18:06:04Z\"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:month ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 4. 
+            """
+        ]
+    ) ;
+    fno:name "month" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:dateTime ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:integer ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets as object the integer month component of the subject xsd:dateTime." .
+
+time:second
+    dcterms:description "`true` if and only if `$o` is the integer seconds component of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Return the seconds component of the date \"2023-04-01T18:06:04Z\" .
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/time/second.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param \"2023-04-01T18:06:04Z\"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:second ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 4. 
+            """
+        ]
+    ) ;
+    fno:name "second" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:dateTime ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:integer ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets as object the integer seconds component of the subject xsd:dateTime." .
+
+time:timeZone
+    dcterms:description "`true` if and only if `$o` is the timezone offset of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Return the time zone component of the date \"2023-04-01T18:06:04Z\" .
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/time/timeZone.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param \"2023-04-01T18:06:04Z\"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:minute ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is \"Z\". 
+            """
+        ]
+    ) ;
+    fno:name "timeZone" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:dateTime ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:string ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets as object the trailing timezone offset of the subject xsd:dateTime (e.g., \"-05:00\")." .
+
+time:year
+    dcterms:description "`true` if and only if `$o` is the integer year component of `$s`." ;
+    a fno:Function ;
+    vs:term_status "testing" ;
+    fno:example ([
+            dcterms:description """
+Return the minute component of the date \"2023-04-01T18:06:04Z\" .
+            """ ;
+            a fno:Test, fno:TestSkip ;
+            rdfs:seeAlso <file:///home/domel/n3builtins/n3buildins/spec/src/time/year.n3> ;
+            fno:expression """
+@prefix : <http://example.org/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix time: <http://www.w3.org/2000/10/swap/time#> .
+
+:Let :param \"2023-04-01T18:06:04Z\"^^xsd:dateTime .
+
+{
+    :Let :param ?param .
+    ?param time:year ?result .
+}
+=>
+{
+    :result :is ?result .
+} .
+            """ ;
+            fno:result """
+@prefix : <http://example.org/>.
+:result :is 2023. 
+            """
+        ]
+    ) ;
+    fno:name "year" ;
+    fno:parameter ([
+            a fno:Parameter ;
+            fno:mode "+" ;
+            fno:predicate "$s" ;
+            fno:type xsd:dateTime ;
+            fnon:position fnon:subject
+        ]
+        [
+            a fno:Parameter ;
+            fno:mode "-" ;
+            fno:predicate "$o" ;
+            fno:type xsd:integer ;
+            fnon:position fnon:object
+        ]
+    ) ;
+    fnon:tldr "Gets as object the integer year component of the subject xsd:dateTime." .
+
