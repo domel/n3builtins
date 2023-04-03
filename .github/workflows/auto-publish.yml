@@ -20,6 +20,7 @@ jobs:
           VALIDATE_MARKUP: true
           GH_PAGES_BRANCH: gh-pages
           DESTINATION: specification/index.html
+          TOOLCHAIN_OPTIONS: --allow-execute
           GH_PAGES_BUILD_OVERRIDE: |
             status: w3c/CG-DRAFT
             TR: https://domel.github.io/n3buildins/specification/
