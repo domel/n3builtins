@@ -8,7 +8,7 @@
   <link href="https://www.w3.org/2008/site/images/favicon.ico" rel="icon">
   <meta content="Bikeshed version d9bd89757, updated Thu Mar 23 10:06:53 2023 -0700" name="generator">
   <link href="https://domel.github.io/n3buildins/specification/" rel="canonical">
-  <meta content="c1971dc9b02d11c6561601c8566752029c24f622" name="document-revision">
+  <meta content="d5eac5180ac8c8bf72077dc6b4d6c7a7b4fc2e6c" name="document-revision">
 <style>
 table {
   margin: 25px auto;
@@ -477,7 +477,7 @@ dfn > a.self-link::before      { content: "#"; }
       <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:Patrick.Hochstenbach@ugent.be">Patrick Hochstenbach</a> (<span class="p-org org"><a href="https://knows.idlab.ugent.be/">IDLab - Ghent University</a></span>)
       <dt>Contributors:
       <dd>Tim Duval, <a href="http://unifylogic.ai">UnifyLogic</a>, tim.duval@unifylogic.ai
-      <dd>Dominik Tomaszuk, <a href="https://uwb.edu.pl/">University of Bialystok</a>, dominik.tomaszuk@gmail.com
+      <dd>Dominik Tomaszuk, <a href="https://uwb.edu.pl/en/">University of Bialystok</a>, d.tomaszuk@uwb.edu.plil.com
      </dl>
     </div>
    </details>
@@ -623,7 +623,7 @@ dfn > a.self-link::before      { content: "#"; }
   <main>
    <h2 class="heading settled" data-level="1" id="statusofdocument"><span class="secno">1. </span><span class="content">Status of this Document</span><a class="self-link" href="#statusofdocument"></a></h2>
    <h2 class="heading settled" data-level="2" id="builtinnamespaces"><span class="secno">2. </span><span class="content">Builtin namespaces</span><a class="self-link" href="#builtinnamespaces"></a></h2>
-   <p>N3 defines a core set of <a href="#builtins">builtins</a>:
+   <p><abbr title="Notation3">N3</abbr> defines a core set of <a href="#builtins">builtins</a>:
 			Builtins are grouped into distinct vocabularies depending on the N3 triple elements they operate on
 			(e.g., string, list), or their particular topic (e.g., time, cryptography, log).
 			Builtins are denoted by a controlled IRI defined in one of the core builtin namespaces:</p>
@@ -650,12 +650,12 @@ dfn > a.self-link::before      { content: "#"; }
 				This binding requirement determines whether the argument can serve as builtin input, output, or both.
 				Note that these modes are mostly based on <a href="https://www.swi-prolog.org/pldoc/man?section=argmode">Prolog argument modes</a>. </p>
    <ul>
-    <li><dfn data-dfn-type="dfn" data-lt="mod_pp" data-noexport id="mod_pp"><code>++</code><a class="self-link" href="#mod_pp"></a></dfn>: input argument (bound, fully grounded)
-    <li><dfn data-dfn-type="dfn" data-lt="=" data-noexport id mod_pU00022><code>+</code></dfn>: input argument (bound, possibly not fully grounded)
-    <li><dfn data-dfn-type="dfn" data-lt="=" data-noexport id="①" mod_mU00022><code>-</code><a class="self-link" href="#①"></a></dfn>: output argument (bounded or not bounded)
-    <li><dfn data-dfn-type="dfn" data-lt="=" data-noexport id="②" mod_mmU00022><code>--</code><a class="self-link" href="#②"></a></dfn>: output argument (not bounded)
-    <li><dfn data-dfn-type="dfn" data-lt="=" data-noexport id="③" mod_qmU00022><code>?</code><a class="self-link" href="#③"></a></dfn>: either providing input or accepting output, or both.
-    <li><dfn data-dfn-type="dfn" data-lt="=" data-noexport id="④" mod_aU00022><code>[*]</code><a class="self-link" href="#④"></a></dfn>: modifier indicating that an argument can have multiple solutions.
+    <li><code>++</code>: input argument (bound, fully grounded)
+    <li><code>+</code>: input argument (bound, possibly not fully grounded)
+    <li><code>-</code>: output argument (bounded or not bounded)
+    <li><code>--</code>: output argument (not bounded)
+    <li><code>?</code>: either providing input or accepting output, or both.
+    <li><code>[*]</code>: modifier indicating that an argument can have multiple solutions.
    </ul>
    <h3 class="heading settled" data-level="3.2" id="arg_domains"><span class="secno">3.2. </span><span class="content">Argument domains</span><a class="self-link" href="#arg_domains"></a></h3>
    <p>An N3 builtin often has an expected datatype for its arguments, called the <a href>domain datatype</a>. If
