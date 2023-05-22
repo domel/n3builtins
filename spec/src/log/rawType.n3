@@ -66,7 +66,7 @@ Get the type of resources.
 
             [ a fno:Test ;
                 dcterms:description """
-Get the type of lists and quoted graphs.
+Get the type of lists and graph terms.
             """ ;
                 rdfs:seeAlso <> ;
                 fno:expression """

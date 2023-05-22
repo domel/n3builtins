@@ -9,12 +9,12 @@
 
 log:includes a fno:Function ;
     vs:term_status  "testing" ;
-    fnon:tldr """Checks whether the subject quoted graph includes the object quoted graph (taking into account variables). 
+    fnon:tldr """Checks whether the subject graph term includes the object graph term (taking into account variables). 
 Can also be used to bind variables to values within the graph contents (see examples).""" ;
     dcterms:description """`true` if and only if there exists some substitution which, when applied to `$o`, 
-creates a quoted graph `$o`' such that every statement in `$o`' is also in `$s`;
+creates a graph term `$o`' such that every statement in `$o`' is also in `$s`;
 whereby every variable, universally or existentially quantified in `$o`', is quantified in the same way in `$s`. 
-Variable substitution is applied recursively to nested compound terms such as quoted graphs ans lists.""" ;
+Variable substitution is applied recursively to nested compound terms such as graph terms ans lists.""" ;
     rdfs:seeAlso log:notIncludes ;
     fno:example ( 
             [ a fno:Test ;
